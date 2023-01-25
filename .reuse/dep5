@@ -1,0 +1,31 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: iot-platform
+Upstream-Contact: Curious Community Labs <iot-platform@curious.bio>
+Source: https://code.curious.bio/curious.bio/iot-platform
+
+Files: hardware/*
+Copyright: (C) 2023 Curious Community Labs e. V.
+License: CERN-OHL-S-2.0
+
+Files:
+  .github
+  .vscode
+  .dockerignore
+  .editorconfig
+  .envrc
+  .gitignore
+  flake.*
+  nix/*
+  Dockerfile
+  pyproject.toml
+  okh.toml
+  mkdocs.yml
+  software/*
+Copyright: (C) 2023 Curious Community Labs e. V.
+License: GPL-3.0-or-later
+
+Files:
+  docs/*
+  README.md
+Copyright: (C) 2023 Curious Community Labs e. V.
+License: CC-BY-SA-4.0

@@ -1,0 +1,31 @@
+# General
+*.dll
+*.log
+*.so
+*.swp
+export
+img
+tmp
+
+# Nix
+.direnv
+.pre-commit-config.yaml
+result
+
+# Python
+/*.py[cod]
+/__pycache__
+/.benchmark
+/.coverage*
+/.pytest_cache
+
+# Node-Red
+/.main.json.backup
+/flow_backup.json
+
+# Mkdocs
+dist
+docs/_*
+site
+
+TODOS.md

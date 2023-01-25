@@ -1,0 +1,48 @@
+okhv = "OKH-LOSHv1.0"
+
+name = "iot-platform"
+function = "IoT platform for analyzing open lab resource consumption and machine status"
+image = ""
+
+version = "0.1"
+repo = "https://code.curious.bio/curious.bio/iot-platform"
+release = "https://code.curious.bio/curious.bio/iot-platform/releases"
+
+license = "CERN-OHL-S-2.0"
+licensor = "Curious Community Labs e. V."
+
+readme = "/README.md"
+user-manual = "/docs/documents/usage/getting-started.md"
+manufacturing-instructions = "/docs/documents/hardware/manufacturing.md"
+contribution-guide = "/docs/documents/contribute/development.md"
+
+documentation-language = "en"
+technology-readiness-level = "OTRL-5"
+documentation-readiness-level = "ODRL-3*"
+
+bom = "/hardware/BOM.csv"
+source = ["/hardware/case/iot-platform-case.csg"]
+
+tsdc = ["3DP", "PCB", "STD"]
+
+[[software]]
+release = "0.1"
+installation-guide = "/docs/documents/usage/getting_started.md"
+
+[[part]]
+name = "Case"
+image = ""
+tsdc = "3DP"
+source = "/hardware/case/iot-platform-case.csg"
+export = ["/hardware/case/iot-platform-case.stl"]
+outer-dimension-dim = "mm"
+outer-dimension = "cube(size = [350,150,150])"
+
+[[part]]
+name = "Board"
+image = ""
+tsdc = "PCB"
+source = "/hardware/board/iot-platform-board.kicad_pro"
+export = ["/hardware/board/iot-platform-board.pdf"]
+outer-dimension-dim = "mm"
+outer-dimension = "cube(size = [100,65,10])"

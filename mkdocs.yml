@@ -1,0 +1,81 @@
+---
+site_name: iot-platform
+site_description: IoT platform for analyzing open lab resource consumption and machine status
+site_url: https://iot-platform.curious.bio/
+repo_name: iot-platform
+repo_url: https://code.curious.bio/curious.bio/iot-platform
+
+nav:
+  - Home: documents/index.md
+
+theme:
+  logo: images/logos/iot-platform.svg
+  language: en
+  name: material
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - content.code.annotate
+    - navigation.sections
+    - navigation.expand
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.instant
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+
+plugins:
+  - glightbox
+  - minify:
+      minify_html: true
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+      options:
+        custom_icons:
+          - overrides/.icons
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+extra:
+  homepage: https://iot-platform.curious.bio/
+  social:
+    - icon: fontawesome/brands/comments-alt
+      link: https://matrix.to/#/#iot-platform:curious.bio
+    - icon: fontawesome/brands/mastodon
+      link: https://social.curious.bio/@iot-platform
+  generator: false
+
+extra_css:
+  - stylesheets/extra.css
+
+copyright: >
+  Copyright &copy; 2023
