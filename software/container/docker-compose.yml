@@ -1,0 +1,43 @@
+version: '3'
+services:
+  mosquitto:
+    # https://hub.docker.com/_/eclipse-mosquitto
+    image: eclipse-mosquitto:2.0
+    restart: always
+    ports:
+      - 1883:1883
+
+  influxdb:
+    # https://hub.docker.com/_/influxdb
+    image: influxdb:2.6
+    restart: always
+    ports:
+      - 8086:8086
+
+  grafana:
+    # https://hub.docker.com/r/grafana/grafana
+    image: grafana/grafana:9.3.6
+    depends_on:
+      - influxdb
+    restart: always
+    ports:
+      - 3000:3000
+    volumes:
+      - ${DATA_DIR}/grafana:/var/lib/grafana
+      - ../dashboard/flows.json:/data/flows.json
+
+  nodered:
+    # https://hub.docker.com/r/grafana/grafana
+    # https://nodered.org/docs/getting-started/docker
+    image: nodered/node-red:3.0.2
+    depends_on:
+      - influxdb
+    restart: always
+    ports:
+      - 1880:1880
+    environment:
+      - TZ=Europe/Berlin
+      - NODE_RED_ENABLE_PROJECTS=true
+      - FLOWS=flows.json
+    volumes:
+      - ../flow/flows.json:/data/flows.json

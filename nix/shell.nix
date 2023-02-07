@@ -6,13 +6,16 @@ with self.pkgs.${system};
       [
         # Development
         editorconfig-checker
-        pre-commit
-        python310Full
-        yaml-language-server
+        esptool
+        micropython
         nodePackages.node-red
         openscad
-        micropython
-        esptool
+        pre-commit
+        python310Full
+        python310Packages.mkdocs
+        python310Packages.mkdocs-material
+        python310Packages.mkdocs-material-extensions
+        yaml-language-server
       ]
       ++ lib.optionals (pkgs.hostPlatform.system == "x86_64-linux") [
         vscodium-fhs
