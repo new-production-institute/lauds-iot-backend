@@ -26,9 +26,15 @@ NodeRed is running here: http://localhost:1880/
 ### Arduino IDE
 We are using HelTec Automation Wirelsess Sticks ESP32 Dev-Boards. Their GitHub repo can be found here: https://github.com/HelTecAutomation/Heltec_ESP32
 
-If you are using _Arduino IDE_ (just to try them out) you can add their Repo to the library managers URLs: https://github.com/HelTecAutomation/Heltec_ESP32/blob/master/library.json and/or find them in the IDE (Sketch -> Include Library -> Manage Libraries... Search for "heltec esp32").
 
-### Find the port
+I had to install VCP Drivers, first: https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers?tab=downloads
+
+You can add their Board Manager to the boards managers URLs: https://github.com/HelTecAutomation/Heltec_ESP32/blob/master/library.json and find their libraries in the IDE (Sketch -> Include Library -> Manage Libraries... Search for "heltec esp32").
+
+
+### Find the port 
+
+Usually you can find the used port using `esptool.py`, but that's not working for me, atm (continue here)....
 
 ```sh
 esptool.py write_flash_status --non-volatile 0
