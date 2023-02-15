@@ -3,14 +3,22 @@
 ## Docker
 
 First install DockerDesktop and `docker-compose`:
-* https://www.docker.com/products/docker-desktop/
-* https://docs.docker.com/compose/install/
+
+- https://www.docker.com/products/docker-desktop/
+- https://docs.docker.com/compose/install/
 
 Then you can export a path to mount as a volume and spin up the containers:
 
 ```sh
 export DATA_DIR = /some/path/to/mount
 docker-compose --file software/container/docker-compose.yml up
+```
+
+### Mosquitto
+
+```sh
+mosquitto_sub -h localhost -t '#' -p 1883
+mosquitto_pub -h localhost -p 1883 -t '/' -m $(date --utc +%s)
 ```
 
 ### Grafana
@@ -24,21 +32,17 @@ NodeRed is running here: http://localhost:1880/
 ## Hardware
 
 ### Arduino IDE
-We are using HelTec Automation Wirelsess Sticks ESP32 Dev-Boards. Their GitHub repo can be found here: https://github.com/HelTecAutomation/Heltec_ESP32
 
+We are using HelTec Automation Wirelsess Sticks ESP32 Dev-Boards. Their GitHub repo can be found here: https://github.com/HelTecAutomation/Heltec_ESP32
 
 I had to install VCP Drivers, first: https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers?tab=downloads
 
 You can add their Board Manager to the boards managers URLs: https://github.com/HelTecAutomation/Heltec_ESP32/blob/master/library.json and find their libraries in the IDE (Sketch -> Include Library -> Manage Libraries... Search for "heltec esp32").
 
-
-### Find the port 
+### Find the port
 
 Usually you can find the used port using `esptool.py`, but that's not working for me, atm (continue here)....
 
 ```sh
 esptool.py write_flash_status --non-volatile 0
 ```
-
-
-
