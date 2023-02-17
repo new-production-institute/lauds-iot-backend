@@ -65,7 +65,7 @@ esptool.py write_flash_status --non-volatile 0
 
 #### Using MicroPython
 
-Download the firmware:
+Download the firmware: https://micropython.org/download/
 
 Flash it using `esptool`: https://micropython.org/download/GENERIC_S3/
 
