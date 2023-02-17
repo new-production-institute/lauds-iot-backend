@@ -44,6 +44,14 @@ These boards are already *V3* boards, so be careful selecting the right board an
 ![Arduino IDE](docs/images/flash-with-arduino.png "select the right board and port")
 
 
+### Install esptool
+
+Esptool is a Pyhton program to flash ESP32. As it's a Pyhton tool you can install it using `pip`:
+
+```sh
+pip install esptool
+```
+
 ### Find the port 
 
 Usually you can find the used port using `esptool.py`, but that's not working for me, atm (continue here)....
