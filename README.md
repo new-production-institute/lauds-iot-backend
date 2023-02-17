@@ -31,6 +31,10 @@ NodeRed is running here: http://localhost:1880/
 
 ## Hardware
 
+### USB-C
+
+Our HelTec Automation Wirelsess Sticks ESP32 Dev-Boards already have USB-C. But they do not support Power Deliver (PD). If your computer tries to do PD, just plug a cheap USB hub between the board and your computer.
+
 ### Arduino IDE
 
 We are using HelTec Automation Wirelsess Sticks ESP32 Dev-Boards. Their GitHub repo can be found here: https://github.com/HelTecAutomation/Heltec_ESP32
@@ -39,10 +43,9 @@ I had to install VCP Drivers, first: https://www.silabs.com/developers/usb-to-ua
 
 You can add their Board Manager to the boards managers URLs: https://github.com/HelTecAutomation/Heltec_ESP32/blob/master/library.json and find their libraries in the IDE (Sketch -> Include Library -> Manage Libraries... Search for "heltec esp32").
 
-These boards are already *V3* boards, so be careful selecting the right board and port (VCP).
+> These boards are already *V3* boards, so be careful selecting the right board and port (VCP).
 
 ![Arduino IDE](docs/images/flash-with-arduino.png "select the right board and port")
-
 
 ### Install esptool
 
