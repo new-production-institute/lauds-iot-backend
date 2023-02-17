@@ -54,7 +54,7 @@ pip install esptool
 
 ### Find the port 
 
-Usually you can find the used port using `esptool.py`, but that's not working for me, atm (continue here)....
+Usually you can find the used port using `esptool.py`:
 
 ```sh
 esptool.py write_flash_status --non-volatile 0
