@@ -74,3 +74,6 @@ Flash it using `esptool`: https://micropython.org/download/GENERIC_S3/
 esptool.py --chip esp32s3  write_flash -z 0  ~/Desktop/GENERIC_S3-20220117-v1.18.bin
 ```
 
+## Hardware sensors
+
+* [Energy Monitor](./software/firmware/energy-montior/README.md)
