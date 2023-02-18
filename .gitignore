@@ -28,4 +28,8 @@ dist
 docs/_*
 site
 
+# macOS
+.DS_Store
+
+# Misc
 TODOS.md
