@@ -35,6 +35,9 @@ Make sure the clamp is *always positioned towards the consumer*, otherwise it do
 
 ![point the clamp](./docs/images/clamp2.jpeg "point the clamp")
 
+Attention: I could not measure any meaningful values on the "cable". I had to go to the wire.
+![cable](./docs/images/clamp3.jpeg "use the clamp on the wire, not on the cable")
+
 ### Breadboard
 
 Let's start with a simple breadboard layout.
