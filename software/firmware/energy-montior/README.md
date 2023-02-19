@@ -63,6 +63,8 @@ See the Fritzing file for [details](./energy-monitor/energy-monitor.fzz).
 
 Start with a simple code that just prints the values. The code is quite simple, as we can use the existing *[EmonLib libary V1.1.0 by OpenEnergyMonitor](https://docs.openenergymonitor.org/electricity-monitoring/ct-sensors/)*.
 
+[code](https://code.curious.bio/curious.bio/iot-platform/src/commit/ecf0b3ee63c9d3d49bcf32a7da9bde64a6a62c28/software/firmware/energy-montior/energy-monitor/energy-monitor.ino)
+
 The only interesting part is this line:
 
 ```C
