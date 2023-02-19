@@ -31,13 +31,21 @@ NodeRed is running here: http://localhost:1880/
 
 ## Hardware
 
-### USB-C
+We are using HelTec Automation Wirelsess Sticks ESP32 Dev-Boards.
 
+### PinOut
+
+The PinOut of our version 3 modules can be found here:  https://docs.heltec.org/en/node/esp32/dev-board/hardware_update_log.html#wifi-lora-32-hardware-update-logs
+
+![PinOut](https://resource.heltec.cn/download/Wireless_Stick_V3/HTIT-WS_V3.png "PinOut")
+
+
+### USB-C
 Our HelTec Automation Wirelsess Sticks ESP32 Dev-Boards already have USB-C. But they do not support Power Deliver (PD). If your computer tries to do PD, just plug a cheap USB hub between the board and your computer.
 
 ### Arduino IDE
 
-We are using HelTec Automation Wirelsess Sticks ESP32 Dev-Boards. Their GitHub repo can be found here: https://github.com/HelTecAutomation/Heltec_ESP32
+HelTecs GitHub repo can be found here: https://github.com/HelTecAutomation/Heltec_ESP32
 
 I had to install VCP Drivers, first: https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers?tab=downloads
 
