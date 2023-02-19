@@ -39,6 +39,9 @@ The PinOut of our version 3 modules can be found here:  https://docs.heltec.org/
 
 ![PinOut](https://resource.heltec.cn/download/Wireless_Stick_V3/HTIT-WS_V3.png "PinOut")
 
+### License
+
+For some parts of the Heltec board you need a ["license"](https://docs.heltec.org/general/view_limited_technical_data.html#esp32-lora-series).
 
 ### USB-C
 Our HelTec Automation Wirelsess Sticks ESP32 Dev-Boards already have USB-C. But they do not support Power Deliver (PD). If your computer tries to do PD, just plug a cheap USB hub between the board and your computer.
