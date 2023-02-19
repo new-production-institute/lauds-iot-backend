@@ -76,7 +76,7 @@ The only interesting part is this line:
   emon1.current(current1Pin, 8);  // Pin and Calibration
 ```
 
-The calibration value "8" was done with a Fluke multimeter (and maybe a not so ideal burden resistor).
+The [calibration](https://docs.openenergymonitor.org/electricity-monitoring/ctac/calibration.html) value "8" was done with a Fluke multimeter (and maybe a not so ideal burden resistor).
 
 The code just prints the current power consumption to serial out:
 
