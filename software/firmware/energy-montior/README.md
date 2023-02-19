@@ -91,3 +91,11 @@ The code just prints the current power consumption to serial out:
 #### Post to MQTT
 
 // TODO: Continue here
+
+
+## Links
+
+* A very comprehensive project to build an energy monitor can be found in the [ESP32 + ESPHome Open Source Energy Monitor project by Daniel BP](https://github.com/danpeig/ESP32EnergyMonitor).
+* A nice [video tutorial can be found at Eddie's Techlab](https://edistechlab.com/sct013-sensor-zum-wechselstrom-messen/).
+* Have a look at the [complete documentation of the Open Energy Monitor project](https://docs.openenergymonitor.org/).
+* There is also a German [example project](http://www.technik-fan.de/index.php/Open_Energy_Monitor_mit_dem_ESP32) (that currently cannot be reached over TLS, so be careful before clicking this link).
