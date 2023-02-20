@@ -90,16 +90,51 @@ The code just prints the current power consumption to serial out:
 ```
 #### Post to MQTT
 
+##### Boot up MQTT
+
+First, boot your local server infrastructure:
+
+```sh
+docker-compose --file software/container/docker-compose.yml up
+```
+
 ##### Credentials
 
-To connect to your wifi and access your MQTT server you have to add this to an `environment` header file:
+To connect to your wifi and access your MQTT server you have to add this to an `environment` [header file](./02-energy-monitor-mqtt/environment.h):
 
 ```C
-#define secrect_ssid "your_ssid"
-#define secret_password "your_password"
-#define mqttServer = "m16.cloudmqtt.com"
-#define mqttPort = 12595
+// Replace with your network credentials
+#define secrect_ssid "Guest"
+#define secret_password "guestguest"
+#define mqtt_server "192.168.2.103"
+#define mqtt_port 1883
+#define mqtt_prefix "/iot-platform/engergy-montitor/test-device"
 ```
+
+The `mqtt_server` in tis example posts to my local IP adress. The Wifi network is a `Guest` network I just created for this test.
+
+The `mqtt_prefix` should be different per device, as this is the topic prefix used to identify the device.
+
+#### Testing
+
+You can subscribe to your local MQTT server and subscribe to all or just the interesting topics:
+
+```sh
+mosquitto_sub -h localhost -t '#' -p 1883 #all
+mosquitto_sub -h localhost -t '/iot-platform/engergy-montitor/test-device/ampere' -p 1883 #power
+mosquitto_sub -h localhost -t '/iot-platform/engergy-montitor/test-device/watt' -p 1883 #current
+```
+
+##### Interesting code blocks
+
+Posting to MQTT is quite simple. After setting up Wifi and connection to the MQTT server, it's just a few lines of code:
+
+```C
+  client.publish(concat(mqttPrefix, "/watt"), powerArray);
+  client.publish(concat(mqttPrefix, "/ampere"), irmsArray);
+```
+
+Have a look at the complete [exampe](./02-energy-monitor-mqtt/).
 
 ## Links
 
