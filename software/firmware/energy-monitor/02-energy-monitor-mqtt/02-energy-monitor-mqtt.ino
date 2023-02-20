@@ -2,11 +2,10 @@
 Required libraries (Tools -> manage libraries)
  - EmonLib@1.1.0
  - PubSubClient@2.8.0
- - Wifi
+ - WiFi.h - esp32 Wifi support
 */
 #include <stdlib.h>
-#include <string.h>
-#include "EmonLib.h"
+#include <EmonLib.h>
 #include <WiFi.h>
 #include <PubSubClient.h>
 #include "environment.h" // put your credentials and configuration in, here
