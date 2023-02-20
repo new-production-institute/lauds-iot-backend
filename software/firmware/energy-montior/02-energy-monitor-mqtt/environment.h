@@ -1,5 +1,5 @@
 // Replace with your network credentials
-#define secrect_ssid "your_ssid"
-#define secret_password "your_password"
-#define mqttServer = "m16.cloudmqtt.com"
-#define mqttPort = 12595
+#define secrect_ssid "Guest"
+#define secret_password "guestguest"
+#define mqtt_server "192.168.2.103"
+#define mqtt_port 1883
