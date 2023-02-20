@@ -108,7 +108,7 @@ To connect to your Wifi and access your MQTT server you have to add this to an `
 #define secret_password "guestguest"
 #define mqtt_server "192.168.2.103"
 #define mqtt_port 1883
-#define mqtt_prefix "/iot-platform/engergy-montitor/test-device"
+#define mqtt_prefix "/iot-platform/energy-monitor/test-device"
 ```
 
 The `mqtt_server` in tis example posts to my local IP adress. The Wifi network is a `Guest` network I just created for this test.
@@ -121,8 +121,8 @@ You can subscribe to your local MQTT server and subscribe to all or just the int
 
 ```sh
 mosquitto_sub -h localhost -t '#' -p 1883 #all
-mosquitto_sub -h localhost -t '/iot-platform/engergy-montitor/test-device/ampere' -p 1883 #power
-mosquitto_sub -h localhost -t '/iot-platform/engergy-montitor/test-device/watt' -p 1883 #current
+mosquitto_sub -h localhost -t '/iot-platform/energy-monitor/test-device/ampere' -p 1883 #power
+mosquitto_sub -h localhost -t '/iot-platform/energy-monitor/test-device/watt' -p 1883 #current
 ```
 
 ##### Interesting code blocks
