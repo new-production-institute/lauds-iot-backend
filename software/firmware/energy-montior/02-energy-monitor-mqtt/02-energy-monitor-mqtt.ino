@@ -33,8 +33,7 @@ void setup() {
   Serial.setTimeout(500);
   setup_energy_sensor();
   setup_wifi();
-  client.setServer(mqttServer, mqttPort);
-  reconnect();
+  setup_mqtt();
 }
 
 void setup_energy_sensor() {
@@ -59,7 +58,8 @@ void setup_wifi() {
     Serial.println(WiFi.localIP());
 }
 
-void reconnect() {
+void setup_mqtt() {
+  client.setServer(mqttServer, mqttPort);
   // Loop until we're reconnected
   while (!client.connected()) {
     Serial.print("Attempting MQTT connection...");

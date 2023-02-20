@@ -100,7 +100,7 @@ docker-compose --file software/container/docker-compose.yml up
 
 ##### Credentials
 
-To connect to your wifi and access your MQTT server you have to add this to an `environment` [header file](./02-energy-monitor-mqtt/environment.h):
+To connect to your Wifi and access your MQTT server you have to add this to an `environment` [header file](./02-energy-monitor-mqtt/environment.h):
 
 ```C
 // Replace with your network credentials
@@ -134,7 +134,7 @@ Posting to MQTT is quite simple. After setting up Wifi and connection to the MQT
   client.publish(concat(mqttPrefix, "/ampere"), irmsArray);
 ```
 
-Have a look at the complete [exampe](./02-energy-monitor-mqtt/).
+Have a look at the complete [example](./02-energy-monitor-mqtt/).
 
 ## Links
 
