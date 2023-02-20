@@ -1,7 +1,7 @@
 {self, ...}: system:
 with self.pkgs.${system};
   mkShell {
-    name = "iot-platform";
+    name = "FabNet";
     nativeBuildInputs =
       [
         # Development
@@ -27,9 +27,9 @@ with self.pkgs.${system};
         yamllint
 
         # Nix
+        deploy-rs
         alejandra
-        nix
-        nix-linter
+        nixUnstable
         rnix-lsp
 
         # Service
@@ -37,8 +37,12 @@ with self.pkgs.${system};
 
         # Misc
         reuse
+        zstd
+        wget
+        raspberrypi-eeprom
       ];
     shellHook = ''
       ${self.checks.${system}.pre-commit-check.shellHook}
     '';
+    allowUnsupportedSystem = true;
   }
