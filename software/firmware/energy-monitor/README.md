@@ -121,8 +121,8 @@ You can subscribe to your local MQTT server and subscribe to all or just the int
 
 ```sh
 mosquitto_sub -h localhost -t '#' -p 1883 #all
-mosquitto_sub -h localhost -t '/iot-platform/energy-monitor/test-device/ampere' -p 1883 #power
-mosquitto_sub -h localhost -t '/iot-platform/energy-monitor/test-device/watt' -p 1883 #current
+mosquitto_sub -h localhost -t '/iot-platform/energy-monitor/test-device/ampere' -p 1883 #current
+mosquitto_sub -h localhost -t '/iot-platform/energy-monitor/test-device/watt' -p 1883 #power
 ```
 
 ##### Interesting code blocks
