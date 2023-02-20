@@ -4,6 +4,8 @@ Required libraries (Tools -> manage libraries)
  - PubSubClient@2.8.0
  - Wifi
 */
+#include <stdlib.h>
+#include <string.h>
 #include "EmonLib.h"
 #include <WiFi.h>
 #include <PubSubClient.h>
@@ -19,6 +21,7 @@ const char* ssid = secrect_ssid;
 const char* password = secret_password;
 const char* mqttServer = mqtt_server;
 const int mqttPort = mqtt_port;
+const char* mqttPrefix = mqtt_prefix;
 
 // wifi and MQTT
 WiFiClient wifiClient;
@@ -67,7 +70,7 @@ void reconnect() {
     if (client.connect(clientId.c_str())) {
       Serial.println("connected");
       //Once connected, publish an announcement...
-      client.publish("/iot-platform/engergy-montitor/test-device/status", "online");
+      client.publish(concat(mqttPrefix, "/status"), "online");
       // ... and resubscribe
     } else {
       Serial.print("failed, rc=");
@@ -79,11 +82,17 @@ void reconnect() {
   }
 }
 
+
+char* concat(const char* str1, const char* str2) {
+    char* result;
+    asprintf(&result, "%s%s", str1, str2);
+    return result;
+}
+
 void loop() {
+  // get values
   double irms = emon1.calcIrms(1480);
   double power = irms * voltage;
-
-
 
   // debug, print out on serial
   Serial.print(power);
@@ -91,19 +100,17 @@ void loop() {
   Serial.print(irms);
   Serial.println(" Ampere");
 
-
   // convert double to char array for MQTT
-
   char powerArray[10];
   snprintf(powerArray, 10, "%f", power);
-
   char irmsArray[10];
   snprintf(irmsArray, 10, "%f", irms);
-  printf("%s", irmsArray);
+
 
   // publish values
-  client.publish("/iot-platform/engergy-montitor/test-device/watt", powerArray);
-  client.publish("/iot-platform/engergy-montitor/test-device/ampere", irmsArray);
+  client.publish(concat(mqttPrefix, "/watt"), powerArray);
+  client.publish(concat(mqttPrefix, "/ampere"), irmsArray);
+ 
   // wait a second
   delay(1000);
 }
