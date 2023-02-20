@@ -88,3 +88,4 @@ esptool.py --chip esp32s3  write_flash -z 0  ~/Desktop/GENERIC_S3-20220117-v1.18
 ## Hardware sensors
 
 * [Energy Monitor](./software/firmware/energy-monitor/README.md)
+* [Shelly Example](./software/firmware/shelly-monitor/README.md)
