@@ -19,7 +19,7 @@ Power Measurement is done by a SCT013 clamp (100A:50mA).
 
 ![PinOut](https://resource.heltec.cn/download/Wireless_Stick_V3/HTIT-WS_V3.png "PinOut")
 
-We use A1, A2 and A3 because the are free (most ADCs are already used on the HelTec Board)
+We use A1, A2 and A3 because they are free (most ADCs are already used on the HelTec Board)
 
 ### Sensors 
 
