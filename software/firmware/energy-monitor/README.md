@@ -142,3 +142,4 @@ Have a look at the complete [example](./02-energy-monitor-mqtt/).
 * A nice (German) [video tutorial can be found at Eddie's Techlab](https://edistechlab.com/sct013-sensor-zum-wechselstrom-messen/).
 * Have a look at the [complete documentation of the Open Energy Monitor project](https://docs.openenergymonitor.org/).
 * There is also a German [example project](http://www.technik-fan.de/index.php/Open_Energy_Monitor_mit_dem_ESP32) (that currently cannot be reached over TLS, so be careful before clicking this link).
+* MQTT and ESP32 is described in this article ["How to Connect ESP32 to MQTT Broker"](https://iotdesignpro.com/projects/how-to-connect-esp32-mqtt-broker).
