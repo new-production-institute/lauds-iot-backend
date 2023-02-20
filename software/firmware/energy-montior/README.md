@@ -68,7 +68,7 @@ See the Fritzing file for [details](./energy-monitor/energy-monitor.fzz).
 
 Start with a simple code that just prints the values. The code is quite simple, as we can use the existing *[EmonLib libary V1.1.0 by OpenEnergyMonitor](https://docs.openenergymonitor.org/electricity-monitoring/ct-sensors/)*.
 
-[Check out the small amount of code to print the values to serial out.](https://code.curious.bio/curious.bio/iot-platform/src/commit/ecf0b3ee63c9d3d49bcf32a7da9bde64a6a62c28/software/firmware/energy-montior/energy-monitor/energy-monitor.ino) This piece of code is based on on Thomas Edlinger's code for [Edi's Tech Lab](https://www.edistechlab.com).
+[Check out the small amount of code to print the values to serial out.](./01-energy-monitor-serial-out/) This piece of code is based on on Thomas Edlinger's code for [Edi's Tech Lab](https://www.edistechlab.com).
 
 The only interesting part is this line:
 
@@ -90,8 +90,16 @@ The code just prints the current power consumption to serial out:
 ```
 #### Post to MQTT
 
-// TODO: Continue here
+##### Credentials
 
+To connect to your wifi and access your MQTT server you have to add this to an `environment` header file:
+
+```C
+#define secrect_ssid "your_ssid"
+#define secret_password "your_password"
+#define mqttServer = "m16.cloudmqtt.com"
+#define mqttPort = 12595
+```
 
 ## Links
 
