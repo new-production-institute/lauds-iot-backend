@@ -81,3 +81,4 @@ Then it will post a message on boot to your MQTT server:
 
 You an use shelly script to update this status periodically.
 
+A documentation on how to do this can be found on [Shellie's documentation](https://shelly-api-docs.shelly.cloud/gen2/ComponentsAndServices/Mqtt/).
