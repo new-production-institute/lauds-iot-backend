@@ -28,3 +28,5 @@ In Node-RED you can add a MQQT node to receive values from the power monitor, ho
 The dashboard looks like that.
 
 ![Mobile view](./docs/images/5-dashboard.png)
+
+You can see this flow also in [this repository](./00-dashboard-example/dashboard.json).
