@@ -23,10 +23,17 @@ The dashboard should be visible on the righmost menu item in Node-RED.
 In Node-RED you can add a MQQT node to receive values from the power monitor, hook it up to a gauge and display it on a dasboard.
 
 ![Overview](./docs/images/1-overview.png)
-![MQTT Node](./docs/images/2-mqtt-node.png) ![Gauge NOde](./docs/images/3-gauge-node.png) ![Dashboard Settings](./docs/images/4-dashboard-node.png)
+![MQTT Node](./docs/images/2-mqtt-node.png) ![Gauge Node](./docs/images/3-gauge-node.png) 
 
-The dashboard looks like that.
+In the dasboard section you have to create a tab. Inside this tab you have to create a group. 
+
+![Dashboard Settings](./docs/images/4-dashboard-node.png)
+
+The tricky part is putting the gauges in the group. This is also done in the gauge's settings.
+![Gauge Node](./docs/images/3-gauge-node.png) 
+
+You can view the dashboard in an (also mobile) web browser.
 
 ![Mobile view](./docs/images/5-dashboard.png)
 
-You can see this flow also in [this repository](./00-dashboard-example/dashboard.json).
+Have a look at the flow also in [this repository](./00-dashboard-example/dashboard.json).
