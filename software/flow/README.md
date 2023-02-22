@@ -8,7 +8,7 @@ If you boot up our tech stack using `docker-compose` you already have a Node-RED
 
 ## First steps
 
-For debuging I allready Node-RED's own dashboard (sure, we are going to use Grafana, later).
+For debuging I already Node-RED's own dashboard (sure, we are going to use Grafana, later).
 
 ![Overview](./docs/images/1-overview.png)
 
