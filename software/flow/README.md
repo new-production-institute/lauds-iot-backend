@@ -6,12 +6,11 @@ If you boot up our tech stack using `docker-compose` you already have a Node-RED
 
 For debuging I allready Node-RED's own dashboard (sure, we are going to use Grafana, later).
 
+![Overview](./docs/images/1-overview.png)
+
 The dashboard should be visible on the righmost menu item in Node-RED.
 
 ![Dashboard item](./docs/images/dashboard.png)
-
-
-![Overview](./docs/images/1-overview.png)
 
 In Node-RED you can add a MQQT node to receive values from the power monitor.
 
