@@ -1,10 +1,16 @@
 # Node-RED
 
-If you boot up our tech stack using `docker-compose` you already have a Node-RED instance running on[your local machine](http://localhost:1880/).
+If you boot up our tech stack using `docker-compose` you already have a Node-RED instance running on [your local machine](http://localhost:1880/).
 
-## first steps
+## First steps
 
-For debuging shell into your Docker container and install the Node-RED Dashboard (we will switch to Grafana, soon):
+For debuging I am going to install Node-RED's own dashboard.
+
+Shell into your Docker container.
+
+![Lame, I know, using Docker Desktop](./docs/images/shell-into-with-the-desktop-app.png)
+
+Inside the container you can install the Node-RED Dashboard (we will switch to Grafana, soon):
 
 ```sh
 npm install node-red-dashboard
