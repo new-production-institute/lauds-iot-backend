@@ -6,7 +6,9 @@ It uses our HelTec Wireless Stick. This - of course - can be replaced by a cheap
 
 Power Measurement is done by a SCT013 clamp (100A:50mA).
 
-## Used materials
+## Build the hardware
+
+### Used materials
 
 * ESP32 module (e.g. Heltec Wireless Stick)
 * 3 x SCT-013-100 (100 A), see: http://openenergymonitor.org/emon/node/156
@@ -62,9 +64,9 @@ R3 is the burden resistor. Ideal burden would be 19 Ω. As this is not a common 
 
 See the Fritzing file for [details](./energy-monitor/energy-monitor.fzz).
 
-### Code
+## Code
 
-#### Print to serial out
+### Print to serial out
 
 Start with a simple code that just prints the values. The code is quite simple, as we can use the existing *[EmonLib libary V1.1.0 by OpenEnergyMonitor](https://docs.openenergymonitor.org/electricity-monitoring/ct-sensors/)*.
 
@@ -88,9 +90,9 @@ The code just prints the current power consumption to serial out:
 16:28:23.289 -> 400.62 Watt  -  1.74 Ampere
 16:28:24.367 -> 94.42 Watt  -  0.41 Ampere
 ```
-#### Post to MQTT
+### Post to MQTT
 
-##### Boot up MQTT
+#### Boot up MQTT
 
 First, boot your local server infrastructure:
 
@@ -98,7 +100,7 @@ First, boot your local server infrastructure:
 docker-compose --file software/container/docker-compose.yml up
 ```
 
-##### Credentials
+#### Credentials
 
 To connect to your Wifi and access your MQTT server you have to add this to an `environment` [header file](./02-energy-monitor-mqtt/environment.h):
 
@@ -115,7 +117,7 @@ The `mqtt_server` in tis example posts to my local IP adress. The Wifi network i
 
 The `mqtt_prefix` should be different per device, as this is the topic prefix used to identify the device.
 
-#### Testing
+### Testing
 
 You can subscribe to your local MQTT server and subscribe to all or just the interesting topics:
 
@@ -125,7 +127,7 @@ mosquitto_sub -h localhost -t '/iot-platform/energy-monitor/test-device/ampere' 
 mosquitto_sub -h localhost -t '/iot-platform/energy-monitor/test-device/watt' -p 1883 #power
 ```
 
-##### Interesting code blocks
+### Interesting code blocks
 
 Posting to MQTT is quite simple. After setting up Wifi and connection to the MQTT server, it's just a few lines of code:
 
@@ -135,6 +137,10 @@ Posting to MQTT is quite simple. After setting up Wifi and connection to the MQT
 ```
 
 Have a look at the complete [example](./02-energy-monitor-mqtt/).
+
+## Simulator
+
+If you just need random inputs (without using the actual hardware), you can simply modify my short [shell script](./00-simulator/).
 
 ## Links
 
