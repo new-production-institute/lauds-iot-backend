@@ -1,3 +1,7 @@
+# About
+
+> This folder will be mounted into the Node-RED runtime. So be careful.
+
 # Node-RED
 
 If you boot up our tech stack using `docker-compose` you already have a Node-RED instance running on [your local machine](http://localhost:1880/).
@@ -14,7 +18,7 @@ The dashboard should be visible on the righmost menu item in Node-RED.
 
 In Node-RED you can add a MQQT node to receive values from the power monitor. As we run in `docker-compose`you don't have to use the IP address of our Eclipse Mosquitto sever, but you can simplay use `mosquitto` as the host nome.
 
-![MQTT Node](./docs/images/2-mqtt-node.png)
+![MQTT Node](./docs/images/2-mqtt-node.png)git a
 
 To simply display the values in a gauge (or chart) you can hook it up to a gauge node.
 
