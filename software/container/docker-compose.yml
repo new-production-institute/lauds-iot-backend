@@ -42,4 +42,4 @@ services:
       - NODE_RED_ENABLE_PROJECTS=true
       - FLOWS=flows.json
     volumes:
-      - ../flow/flows.json:/data/flows.json
+      - ../flow:/data

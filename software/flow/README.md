@@ -4,17 +4,7 @@ If you boot up our tech stack using `docker-compose` you already have a Node-RED
 
 ## First steps
 
-For debuging I am going to install Node-RED's own dashboard.
-
-Shell into your Docker container.
-
-![Lame, I know, using Docker Desktop](./docs/images/shell-into-with-the-desktop-app.png)
-
-Inside the container you can install the Node-RED Dashboard (we will switch to Grafana, soon):
-
-```sh
-npm install node-red-dashboard
-```
+For debuging I allready Node-RED's own dashboard (sure, we are going to use Grafana, later).
 
 The dashboard should be visible on the righmost menu item in Node-RED.
 
