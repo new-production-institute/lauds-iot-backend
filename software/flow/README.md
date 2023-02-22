@@ -12,7 +12,7 @@ The dashboard should be visible on the righmost menu item in Node-RED.
 
 ![Dashboard item](./docs/images/dashboard.png)
 
-In Node-RED you can add a MQQT node to receive values from the power monitor.
+In Node-RED you can add a MQQT node to receive values from the power monitor. As we run in `docker-compose`you don't have to use the IP address of our Eclipse Mosquitto sever, but you can simplay use `mosquitto` as the host nome.
 
 ![MQTT Node](./docs/images/2-mqtt-node.png)
 
