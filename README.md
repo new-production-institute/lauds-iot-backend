@@ -29,7 +29,7 @@ You can login to Grafana: http://localhost:3000/login (admin:admin)
 
 NodeRed is running here: http://localhost:1880/
 
-> A simple introduction to Node-RED can be found - along with the nodes -  in [this repository](./software/flow/README.md). 
+A simple introduction to Node-RED can be found - along with the nodes / the code -  in [this repository, please have a look](./software/flow/README.md)! 
 
 ## Hardware
 
