@@ -78,6 +78,10 @@ You can forward this message to InfluxDB.
 
 The `URL`of our InfluxDB is `http://influxdb:8086`. In InfluxDB you have to create a `token` to connect: [Load Data -> API Tokens](http://localhost:8086/orgs/721027680173bf2f/load-data/tokens).
 
+![Influx Create Token](./docs/images/influx-create-token.png)
+
+You can use this `token` to create a connection in Node-RED.
+
 ![Influx Connection](./docs/images/influx-connection.png)
 
 Then the measurements should be visible in [Influx Data Explorer](http://localhost:8086/orgs/721027680173bf2f/data-explorer?bucket=test).
