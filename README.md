@@ -27,9 +27,9 @@ NodeRed is running here: http://localhost:1880/
 
 A simple introduction to Node-RED can be found - along with the nodes / the code -  in [this repository, please have a look](./software/flow/README.md)! 
 
-### Node-RED
+### InfluxDB
 
-Flux-Db is running here: http://localhost:8086/
+InfluxDb is running here: http://localhost:8086/
 
 ### Grafana
 
