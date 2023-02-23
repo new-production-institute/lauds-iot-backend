@@ -91,7 +91,3 @@ esptool.py --chip esp32s3  write_flash -z 0  ~/Desktop/GENERIC_S3-20220117-v1.18
 
 * [Energy Monitor](./software/firmware/energy-monitor/README.md)
 * [Shelly Example](./software/firmware/shelly-monitor/README.md)
-
-## Tutorials
-
-* A great tutorial can be found at [microcontrollerlab.com](https://microcontrollerslab.com/esp32-mqtt-publish-multiple-sensor-readings-node-red/)

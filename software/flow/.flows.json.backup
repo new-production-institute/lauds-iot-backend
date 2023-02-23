@@ -193,6 +193,20 @@
         "verifyservercert": false
     },
     {
+        "id": "d61a7da6caeb26aa",
+        "type": "influxdb",
+        "hostname": "influxdb",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "influx",
+        "usetls": false,
+        "tls": "d50d0c9f.31e858",
+        "influxdbVersion": "2.0",
+        "url": "http://influxdb:8086",
+        "rejectUnauthorized": true
+    },
+    {
         "id": "3cc11d24.ff01a2",
         "type": "comment",
         "z": "f6f2187d.f17ca8",
@@ -255,6 +269,64 @@
         "wires": [
             [
                 "262a3923.e7b216"
+            ]
+        ]
+    },
+    {
+        "id": "00a750cdfb54579e",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "/iot-platform/energy-monitor/test-device/watt",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 270,
+        "y": 480,
+        "wires": [
+            [
+                "16687c90623bdb9b"
+            ]
+        ]
+    },
+    {
+        "id": "7e53d20583f56487",
+        "type": "influxdb out",
+        "z": "f6f2187d.f17ca8",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "Influx watt",
+        "measurement": "msg",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "test",
+        "x": 730,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "16687c90623bdb9b",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "toNumber",
+        "func": "\nmsg.payload = Number(msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 480,
+        "wires": [
+            [
+                "7e53d20583f56487"
             ]
         ]
     },
