@@ -61,7 +61,7 @@ In Node-RED we will be passing the power consumption number through MQTT.
 
 ![Overview](./docs/images/influx-flow.png)
 
-By default this will be passed as a string, so we need to create a function to convert it into an integer before storing it with InfluxDB. 
+By default this will be passed as a string, so we need to create a function to convert it into an integer before storing it in InfluxDB. 
 
 Add a function node to the page and put the following code into the node:
 
@@ -76,7 +76,7 @@ You can forward this message to InfluxDB.
 
 ![Influx Node](./docs/images/influx-node.png) 
 
-The `URL`of our InfluxDB is `http://influxdb:8086`. In InfluxDB you have to create a `token` to connect: Load Data -> API Tokens.
+The `URL`of our InfluxDB is `http://influxdb:8086`. In InfluxDB you have to create a `token` to connect: [Load Data -> API Tokens](http://localhost:8086/orgs/721027680173bf2f/load-data/tokens).
 
 ![Influx Connection](./docs/images/influx-connection.png)
 
