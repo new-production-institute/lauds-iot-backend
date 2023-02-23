@@ -21,17 +21,19 @@ mosquitto_sub -h localhost -t '#' -p 1883
 mosquitto_pub -h localhost -p 1883 -t '/' -m $(date --utc +%s)
 ```
 
+### Node-RED
+
+NodeRed is running here: http://localhost:1880/
+
+A simple introduction to Node-RED can be found - along with the nodes / the code -  in [this repository, please have a look](./software/flow/README.md)! 
+
+
 ### Grafana
 
 You can login to Grafana: http://localhost:3000/login (admin:admin)
 
 Have a look at the [HowTo in this repository](./software/dashboard/README.md).
 
-### Node-RED
-
-NodeRed is running here: http://localhost:1880/
-
-A simple introduction to Node-RED can be found - along with the nodes / the code -  in [this repository, please have a look](./software/flow/README.md)! 
 
 ## Hardware
 
