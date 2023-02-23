@@ -18,7 +18,7 @@ You can use this token to [create a connection from Grafana to Influx-DB](http:/
 
 After having a connection to a database you can easily create an own dashboard in Grafana.
 
-Here's the demo snippet (directly copyied from Influx Data Explorer) and the screen shot
+Here's the demo snippet (directly copyied from Influx Data Explorer) and the screen shot.
 
 ```
 from(bucket: "test")
