@@ -166,6 +166,47 @@
         }
     },
     {
+        "id": "eeb221fb.ab27f",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "test",
+        "name": "test",
+        "usetls": true,
+        "tls": "d50d0c9f.31e858",
+        "influxdbVersion": "1.x",
+        "url": "http://localhost:8086",
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "d50d0c9f.31e858",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": false
+    },
+    {
+        "id": "d61a7da6caeb26aa",
+        "type": "influxdb",
+        "hostname": "influxdb",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "influx",
+        "usetls": false,
+        "tls": "d50d0c9f.31e858",
+        "influxdbVersion": "2.0",
+        "url": "http://influx:8086",
+        "rejectUnauthorized": true
+    },
+    {
         "id": "3cc11d24.ff01a2",
         "type": "comment",
         "z": "f6f2187d.f17ca8",
@@ -173,6 +214,101 @@
         "info": "\nTo start docker with a bind mount volume (-v option), for example:\n\n```\ndocker run -it -p 1880:1880 -v /home/user/node_red_data:/data --name mynodered nodered/node-red\n```\n\nwhere `/home/user/node_red_data` is a directory on your host machine where you want to store your flows.\n\nIf you do not do this then you can experiment and redploy flows, but if you restart or upgrade the container the flows will be disconnected and lost. \n\nThey will still exist in a hidden data volume, which can be recovered using standard docker techniques, but that is much more complex than just starting with a named volume as described above.",
         "x": 330,
         "y": 100,
+        "wires": []
+    },
+    {
+        "id": "39aa2ca9.804da4",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "262a3923.e7b216",
+        "type": "influxdb in",
+        "z": "f6f2187d.f17ca8",
+        "influxdb": "eeb221fb.ab27f",
+        "name": "",
+        "query": "SELECT * from test",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "my-org",
+        "x": 450,
+        "y": 360,
+        "wires": [
+            [
+                "39aa2ca9.804da4"
+            ]
+        ]
+    },
+    {
+        "id": "803d82f.ff80f8",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 360,
+        "wires": [
+            [
+                "262a3923.e7b216"
+            ]
+        ]
+    },
+    {
+        "id": "00a750cdfb54579e",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "/iot-platform/energy-monitor/test-device/watt",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 270,
+        "y": 480,
+        "wires": [
+            [
+                "7e53d20583f56487"
+            ]
+        ]
+    },
+    {
+        "id": "7e53d20583f56487",
+        "type": "influxdb out",
+        "z": "f6f2187d.f17ca8",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "Influx watt",
+        "measurement": "",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "ccl",
+        "bucket": "test",
+        "x": 610,
+        "y": 480,
         "wires": []
     },
     {
