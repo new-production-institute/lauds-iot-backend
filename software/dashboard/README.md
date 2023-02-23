@@ -12,7 +12,7 @@ To connect Grafana to our Influx-DB, you have to create a `token`in Influx-DB.
 You can use this token to create a connection from Grafana to Influx-DB.
 ![Connection](./docs/images/database-connection.png)
 
-After having a conneciton to a database you can easily create an own dashboard in Grafana.
+After having a connection to a database you can easily create an own dashboard in Grafana.
 
 Here's the demo snippet (directly copyied from Influx Data Explorer) and the screen shot
 
