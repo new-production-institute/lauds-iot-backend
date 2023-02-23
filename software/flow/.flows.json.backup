@@ -307,8 +307,8 @@
         "retentionPolicyV18Flux": "",
         "org": "Curious Community Labs",
         "bucket": "test",
-        "x": 730,
-        "y": 480,
+        "x": 810,
+        "y": 500,
         "wires": []
     },
     {
@@ -326,9 +326,26 @@
         "y": 480,
         "wires": [
             [
-                "7e53d20583f56487"
+                "7e53d20583f56487",
+                "499e0f3651d818db"
             ]
         ]
+    },
+    {
+        "id": "499e0f3651d818db",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 420,
+        "wires": []
     },
     {
         "id": "e0977f2582bfaaa6",

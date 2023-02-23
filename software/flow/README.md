@@ -88,6 +88,8 @@ Then the measurements should be visible in [Influx Data Explorer](http://localho
 
 ![Influx Data Explorer](./docs/images/influx-data-explorer.png)
 
+As the data is now stored in Influx, [let's create a dashboard in Grafana](../dashboard/README.md).
+
 # Links
 
 * [IoT Made Easy with Node-RED and InfluxDB](https://www.influxdata.com/blog/iot-easy-node-red-influxdb/)
