@@ -25,6 +25,8 @@ mosquitto_pub -h localhost -p 1883 -t '/' -m $(date --utc +%s)
 
 You can login to Grafana: http://localhost:3000/login (admin:admin)
 
+Have a look at the [HowTo in this repository](./software/dashboard/README.md).
+
 ### Node-RED
 
 NodeRed is running here: http://localhost:1880/
