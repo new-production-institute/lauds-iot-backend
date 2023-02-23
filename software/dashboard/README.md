@@ -1,6 +1,6 @@
 # Grafana
 
-Grafana is amn open source analytics and interactive visualization toll. It provides charts, graphs, and alerts for the web when connected to supported data sources. 
+Grafana is an open source analytics and interactive visualization toll. It provides charts, graphs, and alerts for the web when connected to supported data sources. 
 
 As a visualization tool, Grafana is a popular component in monitoring stacks, often used in combination with time series databases such as InfluxDB.
 
