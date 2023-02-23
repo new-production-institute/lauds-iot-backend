@@ -61,7 +61,7 @@ In Node-RED we will be passing the power consumption number through MQTT.
 
 ![Overview](./docs/images/influx-flow.png)
 
-By default this will be passed as a string, so we need to create a function to convert it into an integer before storing it in InfluxDB. 
+By default this will be passed as a string, so we need to create a function to convert it into a Number before storing it in InfluxDB. 
 
 Add a function node to the page and put the following code into the node:
 
