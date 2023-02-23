@@ -12,7 +12,8 @@ The `URL`of our InfluxDB is `http://influxdb:8086`. In InfluxDB you have to crea
 
 ![Influx Create Token](../flow/docs/images/influx-create-token.png)
 
-You can use this token to create a connection from Grafana to Influx-DB.
+You can use this token to [create a connection from Grafana to Influx-DB](http://localhost:3000/datasources/).
+
 ![Connection](./docs/images/database-connection.png)
 
 After having a connection to a database you can easily create an own dashboard in Grafana.
