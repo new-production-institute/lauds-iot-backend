@@ -8,7 +8,9 @@ As a visualization tool, Grafana is a popular component in monitoring stacks, of
 
 To connect Grafana to our Influx-DB, you have to create a data source.
 
-The `URL`of our InfluxDB is `http://influxdb:8086`. In InfluxDB you have to create a `token` to connect: [Load Data -> API Tokens](http://localhost:8086/orgs/721027680173bf2f/load-data/tokens).
+The `URL`of our InfluxDB is `http://influxdb:8086`. 
+
+In InfluxDB you have to create a `token` to connect: [Load Data -> API Tokens](http://localhost:8086/orgs/721027680173bf2f/load-data/tokens).
 
 ![Influx Create Token](../flow/docs/images/influx-create-token.png)
 
@@ -31,4 +33,6 @@ from(bucket: "test")
 
 ![Example Dashboard](./docs/images/grafana-example-dashboard.png)
 
+## CSV Import
 
+See [CSV Import](./docs/csv-import.md).

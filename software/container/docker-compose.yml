@@ -25,8 +25,9 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ${DATA_DIR}/grafana:/var/lib/grafana
+      - ../dashboard/grafana:/var/lib/grafana
       - ../dashboard/flows.json:/data/flows.json
+      - ../dashboard/grafana.ini:/etc/grafana/grafana.ini
 
   nodered:
     # https://hub.docker.com/r/grafana/grafana
