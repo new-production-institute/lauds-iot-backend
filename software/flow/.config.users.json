@@ -24,6 +24,9 @@
             "workflow": {
                 "mode": "manual"
             }
+        },
+        "debug": {
+            "filter": "filterAll"
         }
     }
 }

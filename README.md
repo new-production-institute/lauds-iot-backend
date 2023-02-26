@@ -47,4 +47,5 @@ See the [documentation in this repository](./hardware/README.md).
 ## Hardware sensors
 
 * [Energy Monitor](./software/firmware/energy-monitor/README.md)
+* [Plant Monitor](./software/firmware/plant-monitor/README.md)
 * [Shelly Example](./software/firmware/shelly-monitor/README.md)
