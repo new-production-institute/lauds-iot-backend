@@ -1,9 +1,10 @@
 # Plant Monitor
 
-## 
+## Existing project
 
 We use our existing plant monitor for this project.
 
+It can be found in this Git instance: [Plant sensor workshop](https://code.curious.bio/curious.bio/pflanzensensor-workshop)
 
 ## Tasmota
 
