@@ -45,7 +45,7 @@ Tasmota's main protocol is MQTT. You can setup MQTT under `Configuration -> MQTT
 
  ![MQTT](./docs/images/07-setup-mqtt.png)
 
-To send data more frequent (nice for debugging) you have to change the telemetry period to a lower leven (than 300 s / 5 min).
+To send data more frequent (nice for debugging) you have to change the telemetry period to a lower level (than 300 s / 5 min). I'd went for 10 s.
 
  ![Telemetry interval](./docs/images/08-configure-telemetry-interval.png)
  
