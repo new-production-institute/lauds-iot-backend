@@ -24,5 +24,5 @@ Whith Grafana having access to data in the CSV file, it's easy to access this da
 
 ![Using CSV data](./images/grafana-csv-data.png)
 ![Defining types](./images/grafana-csv-data-type.png)
-
+![Two boards in Grafana](./images/grafana-two-boards.png)
 
