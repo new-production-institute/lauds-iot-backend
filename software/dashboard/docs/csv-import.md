@@ -10,6 +10,8 @@ I added this plugin to our Grafana installation, so it's ready to be used.
 
 > I just mounted the whole [Grafana directory](../grafana/) into our Docker-Compose setup. Maybe we have to come up with a better solution.
 
+![Mounted directory](./images/mounted-grafana-directory.png)
+
 Garafana is running on [localhost on port 3000 with credentials admin:admin](http://localhost:3000). So let's get there to add the CSV file as a usable data source.
 
 > I added the CSV file to this repository and mounted it into our Docker-Compose setup. So the CSV file is also available in Grafana. Maybe we have to come up with a better solution..  
