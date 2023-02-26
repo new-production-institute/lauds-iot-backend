@@ -23,6 +23,6 @@ As the CSV is reachable by Grafana, you can create a data source, there.
 Whith Grafana having access to data in the CSV file, it's easy to access this data to create a dashboard.
 
 ![Using CSV data](./images/grafana-csv-data.png)
-
+![Defining types](./images/grafana-csv-data-type.png)
 
 
