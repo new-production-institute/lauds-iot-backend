@@ -29,7 +29,7 @@ The Shelly Plus S will create create a new Wifi.
 
 ![Tasmota Wifi](./docs/images/wifi.png)
 
-Join that Wifi and [configure the device](http://192.164.4.1/).
+Join that Wifi and configure the device: http://192.164.4.1/
 
 ![Join Wifi](./docs/images/configure-wifi.png)
 
