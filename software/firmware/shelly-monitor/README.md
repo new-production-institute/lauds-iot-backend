@@ -12,7 +12,7 @@ Locate your Shellie's IP adress (in my case: 192.168.2.150) and update it "over 
 
 http://192.168.2.150/ota?url=http://ota.tasmota.com/tasmota/shelly/mg2tasmota-ShellyPlugS.zip
 
-Your shelly will return a JSON object that looks like that:
+Your Shelly will return a JSON object that looks like that:
 
 ```
 {
