@@ -124,3 +124,4 @@ Using this query you can crate a dashboard in Grafana.
 ](https://faulty.cloud/blog/shelly-plug-s-pinout)
 * [Youtube video: Upgrade Shelly Switches | Easy NO Soldering Smart Garage Door Opener](https://www.youtube.com/watch?v=_oRr8FZyyQ0)
 * [mg2x](https://github.com/arendst/mgos-to-tasmota)
+* [Shelly Plug S Power Monitoring Plug Tasmota template](https://templates.blakadder.com/shelly_plug_S.html)
