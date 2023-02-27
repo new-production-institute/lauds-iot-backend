@@ -419,7 +419,7 @@
         "type": "function",
         "z": "f6f2187d.f17ca8",
         "name": "shelly2Influx",
-        "func": "return  {\n    payload: {\n        power: Number(msg.payload.ENERGY.Power),\n        volate: Number(msg.payload.ENERGY.Voltage),\n        current: Number(msg.payload.ENERGY.Current)\n    }\n};\n",
+        "func": "return  {\n    payload: {\n        power: Number(msg.payload.ENERGY.Power),\n        voltage: Number(msg.payload.ENERGY.Voltage),\n        current: Number(msg.payload.ENERGY.Current)\n    }\n};\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",

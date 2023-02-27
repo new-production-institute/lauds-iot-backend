@@ -86,7 +86,7 @@ The message is fed into a filter function to only store usefull information:
 return  {
     payload: {
         power: Number(msg.payload.ENERGY.Power),
-        volate: Number(msg.payload.ENERGY.Voltage),
+        voltage: Number(msg.payload.ENERGY.Voltage),
         current: Number(msg.payload.ENERGY.Current)
     }
 };
@@ -106,7 +106,7 @@ The query created by Data Explorer looks like that:
 from(bucket: "shelly")
   |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
   |> filter(fn: (r) => r["_measurement"] == "msg")
-  |> filter(fn: (r) => r["_field"] == "power" or r["_field"] == "volate" or r["_field"] == "current")
+  |> filter(fn: (r) => r["_field"] == "power" or r["_field"] == "voltage" or r["_field"] == "current")
   |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
   |> yield(name: "mean")
 ```
