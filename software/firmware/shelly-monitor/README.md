@@ -72,7 +72,7 @@ We now can consume this messages in Node-RED, store them in InfluxDB and build a
 
 ### InfluxDB Bucket
 
-I created a bucket called `Shelly`in InfluxDB, so we can store the messages in this bucket.
+I created a bucket called `shelly`in InfluxDB, so we can store the messages in this bucket.
 
 ### Node-RED
 
