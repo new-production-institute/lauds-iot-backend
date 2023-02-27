@@ -116,3 +116,11 @@ from(bucket: "shelly")
 Using this query you can crate a dashboard in Grafana.
 
 ![Grafana](./docs/images/grafana.png)
+
+
+## Links
+
+* [Pinout for the ESP8266 based Shelly Plug-S Smart Plug
+](https://faulty.cloud/blog/shelly-plug-s-pinout)
+* [Youtube video: Upgrade Shelly Switches | Easy NO Soldering Smart Garage Door Opener](https://www.youtube.com/watch?v=_oRr8FZyyQ0)
+* [mg2x](https://github.com/arendst/mgos-to-tasmota)
