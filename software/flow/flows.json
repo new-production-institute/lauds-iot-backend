@@ -342,19 +342,95 @@
         "id": "29cd45a4f1feb505",
         "type": "function",
         "z": "f6f2187d.f17ca8",
-        "name": "toNumber",
+        "name": "plant2Influx",
         "func": "var newMsg =  {\n    payload: {\n        temperature: Number(msg.payload.DHT11.Temperature),\n        humidity: Number(msg.payload.DHT11.Humidity)\n    }\n};\nreturn newMsg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 520,
+        "x": 530,
         "y": 640,
         "wires": [
             [
                 "23c62c30ebabca6e",
                 "e3742f5060cf6cb7"
+            ]
+        ]
+    },
+    {
+        "id": "f21213aec2f647ff",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "tele/tasmota_891E97/SENSOR",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 1000,
+        "wires": [
+            [
+                "5e4f2b3e1acad45b"
+            ]
+        ]
+    },
+    {
+        "id": "26b455c1bd337375",
+        "type": "influxdb out",
+        "z": "f6f2187d.f17ca8",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "Influx Shelly device",
+        "measurement": "msg",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "shelly",
+        "x": 770,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "96eaf14353a89e9c",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "shelly",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "5e4f2b3e1acad45b",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "shelly2Influx",
+        "func": "return  {\n    payload: {\n        power: Number(msg.payload.ENERGY.Power),\n        volate: Number(msg.payload.ENERGY.Voltage),\n        current: Number(msg.payload.ENERGY.Current)\n    }\n};\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 1000,
+        "wires": [
+            [
+                "26b455c1bd337375",
+                "96eaf14353a89e9c"
             ]
         ]
     },
