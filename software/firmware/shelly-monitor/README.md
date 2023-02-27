@@ -1,5 +1,9 @@
 # Shelly Plug
 
+Shelly Plugs are quite cheap but relatively accurate to measure power consumptions less than 2.5 kW.
+
+## Using Shellies Firmware
+
 If you already have a sheyll device, you can locate it in your network.
 
 ![Web interface](./docs/images/shelly1.png "web interace")
@@ -82,3 +86,30 @@ Then it will post a message on boot to your MQTT server:
 You an use shelly script to update this status periodically.
 
 A documentation on how to do this can be found on [Shellie's documentation](https://shelly-api-docs.shelly.cloud/gen2/ComponentsAndServices/Mqtt/).
+
+## Flash Tasmota
+
+There's an OpenSource project to flash Tasmota on Shelly Plug S':  [mg2x](https://github.com/arendst/mgos-to-tasmota)
+
+> Danger: This is still not working.
+
+Locate your Shellie's IP adress (here: 192.168.2.150) and update it "over the air" with the Tasmota firmware:
+
+http://192.168.2.150/ota?url=http://ota.tasmota.com/tasmota/shelly/mg2tasmota-ShellyPlugS.zip
+
+Your shelly will return something like a JSON object that looks like that:
+
+```
+{
+  "status": "updating",
+  "has_update": false,
+  "new_version": "20230109-114426/v1.12.2-g32055ee",
+  "old_version": "20230109-114426/v1.12.2-g32055ee"
+}
+```
+
+After a while your Shelly Plug S should be flashed with Tasmota firmware and create a new Wifi. Join that Wifi and [configure the device)(http://192.164.4.1/).
+
+> Note: This bricked my shelly device. I cannot reach it, anymore.
+
+It should be configurable just like our [plant monitor](../plant-monitor/README.md).
