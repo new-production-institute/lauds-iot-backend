@@ -24,7 +24,6 @@ result
 /flow_backup.json
 
 # Mkdocs
-dist
 docs/_*
 site
 
