@@ -21,6 +21,8 @@ mosquitto_sub -h localhost -t '#' -p 1883
 mosquitto_pub -h localhost -p 1883 -t '/' -m $(date --utc +%s)
 ```
 
+There is also a *very* usefuly tool to debug MQTT: [MQTT Explorer](https://github.com/thomasnordquist/MQTT-Explorer/), that is also available at [mqtt-explorer.com](https://mqtt-explorer.com/).
+
 ### Node-RED
 
 NodeRed is running here: http://localhost:1880/
