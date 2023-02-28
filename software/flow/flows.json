@@ -456,20 +456,6 @@
         ]
     },
     {
-        "id": "1f140270e13f73cd",
-        "type": "json",
-        "z": "f6f2187d.f17ca8",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": false,
-        "x": 370,
-        "y": 1220,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "688eeb4c8835fc6e",
         "type": "influxdb out",
         "z": "f6f2187d.f17ca8",
@@ -515,7 +501,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 540,
+        "x": 460,
         "y": 1260,
         "wires": [
             [

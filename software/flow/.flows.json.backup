@@ -509,7 +509,7 @@
         "type": "function",
         "z": "f6f2187d.f17ca8",
         "name": "3dPrinter2Influx",
-        "func": "return {\n    payload: {\n        device: String(msg.payload.device),\n        unit: String(msg.payload.unit),\n        value: Number(msg.payload.value)\n    }\n};",
+        "func": "return {\n    payload: {\n        device: String(msg.payload.device),\n        unit: String(msg.payload.unit),\n        measure: Number(msg.payload.value)\n    }\n};",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
