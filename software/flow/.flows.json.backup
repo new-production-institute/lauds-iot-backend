@@ -419,7 +419,7 @@
         "type": "function",
         "z": "f6f2187d.f17ca8",
         "name": "shelly2Influx",
-        "func": "return  {\n    payload: {\n        power: Number(msg.payload.ENERGY.Power),\n        volate: Number(msg.payload.ENERGY.Voltage),\n        current: Number(msg.payload.ENERGY.Current)\n    }\n};\n",
+        "func": "return  {\n    payload: {\n        power: Number(msg.payload.ENERGY.Power),\n        voltage: Number(msg.payload.ENERGY.Voltage),\n        current: Number(msg.payload.ENERGY.Current)\n    }\n};\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -431,6 +431,96 @@
             [
                 "26b455c1bd337375",
                 "96eaf14353a89e9c"
+            ]
+        ]
+    },
+    {
+        "id": "de75dc47910e5a82",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "microfactory/3dPrinter",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 1260,
+        "wires": [
+            [
+                "78453032339fa301"
+            ]
+        ]
+    },
+    {
+        "id": "1f140270e13f73cd",
+        "type": "json",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 370,
+        "y": 1220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "688eeb4c8835fc6e",
+        "type": "influxdb out",
+        "z": "f6f2187d.f17ca8",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "influx 3dPrinter",
+        "measurement": "FilamentSensor",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "NPI",
+        "bucket": "3dPrinter",
+        "x": 780,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "665f1b4136421405",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "3dPrinter Sensor",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "78453032339fa301",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "3dPrinter2Influx",
+        "func": "return {\n    payload: {\n        device: String(msg.payload.device),\n        unit: String(msg.payload.unit),\n        value: Number(msg.payload.value)\n    }\n};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 1260,
+        "wires": [
+            [
+                "688eeb4c8835fc6e",
+                "665f1b4136421405"
             ]
         ]
     },
