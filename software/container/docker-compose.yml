@@ -16,7 +16,7 @@ services:
     ports:
       - 8086:8086
     volumes:
-      - ../database//influxdb2:/var/lib/influxdb2
+      - ../database/influxdb2:/var/lib/influxdb2
 
   grafana:
     # https://hub.docker.com/r/grafana/grafana
