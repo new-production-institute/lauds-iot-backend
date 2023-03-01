@@ -46,6 +46,14 @@
         "env": []
     },
     {
+        "id": "306896b1c1761662",
+        "type": "tab",
+        "label": "Test Watts to KWh",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "7ce136dbb8c897d1",
         "type": "mqtt-broker",
         "name": "pi-mqtt-server:1833",
@@ -271,7 +279,7 @@
         "topic": "/iot-platform/energy-monitor/test-device/watt",
         "qos": "1",
         "datatype": "auto-detect",
-        "broker": "7ce136dbb8c897d1",
+        "broker": "4cf36a44b74caee5",
         "nl": false,
         "rap": true,
         "rh": 0,
@@ -347,7 +355,7 @@
         "topic": "tele/tasmota_A4D1F3/SENSOR",
         "qos": "1",
         "datatype": "auto-detect",
-        "broker": "7ce136dbb8c897d1",
+        "broker": "4cf36a44b74caee5",
         "nl": false,
         "rap": true,
         "rh": 0,
@@ -423,7 +431,7 @@
         "topic": "tele/tasmota_891E97/SENSOR",
         "qos": "1",
         "datatype": "auto-detect",
-        "broker": "7ce136dbb8c897d1",
+        "broker": "4cf36a44b74caee5",
         "nl": false,
         "rap": true,
         "rh": 0,
@@ -499,7 +507,7 @@
         "topic": "/iot-platform/energy-monitor/test-device/watt",
         "qos": "1",
         "datatype": "auto-detect",
-        "broker": "7ce136dbb8c897d1",
+        "broker": "4cf36a44b74caee5",
         "nl": false,
         "rap": true,
         "rh": 0,
@@ -1040,6 +1048,158 @@
         "x": 680,
         "y": 1160,
         "wires": []
+    },
+    {
+        "id": "f721f6ca3b0cecf9",
+        "type": "mqtt in",
+        "z": "325e309897bf4538",
+        "name": "",
+        "topic": "microfactory/3dprinter/filament",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4cf36a44b74caee5",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 1360,
+        "wires": [
+            [
+                "fd226380c8ce5db6"
+            ]
+        ]
+    },
+    {
+        "id": "fd226380c8ce5db6",
+        "type": "function",
+        "z": "325e309897bf4538",
+        "name": "parse filament data",
+        "func": "return {\n    payload: {\n        device: String(msg.payload.device),\n        unit: String(msg.payload.unit),\n        measure: Number(msg.payload.value)\n    }\n};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 1360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "de4f15d4a930ac7c",
+        "type": "mqtt in",
+        "z": "325e309897bf4538",
+        "name": "",
+        "topic": "inmachines/3dprinter/filename",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 1440,
+        "wires": [
+            [
+                "8009b4490856d02b"
+            ]
+        ]
+    },
+    {
+        "id": "8009b4490856d02b",
+        "type": "function",
+        "z": "325e309897bf4538",
+        "name": "parse filename data",
+        "func": "return {\n    payload: String(msg.payload)\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 1440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4d79d002fc073730",
+        "type": "mqtt in",
+        "z": "325e309897bf4538",
+        "name": "",
+        "topic": "inmachines/3dprinter/starttime",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 1400,
+        "wires": [
+            [
+                "68b1314794d5f138"
+            ]
+        ]
+    },
+    {
+        "id": "68b1314794d5f138",
+        "type": "function",
+        "z": "325e309897bf4538",
+        "name": "starttime message trigger",
+        "func": "return 1;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 1400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a5836d9b547ecc51",
+        "type": "mqtt in",
+        "z": "325e309897bf4538",
+        "name": "",
+        "topic": "inmachines/3dprinter/endtime",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 1480,
+        "wires": [
+            [
+                "36054fb13964cc2c"
+            ]
+        ]
+    },
+    {
+        "id": "36054fb13964cc2c",
+        "type": "function",
+        "z": "325e309897bf4538",
+        "name": "endtime message trigger",
+        "func": "return 1;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 1480,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "03218742c3ad8813",
@@ -1800,5 +1960,220 @@
         "x": 700,
         "y": 880,
         "wires": []
+    },
+    {
+        "id": "d62baedc.ded46",
+        "type": "debug",
+        "z": "306896b1c1761662",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "74280b50.f704a4",
+        "type": "inject",
+        "z": "306896b1c1761662",
+        "name": "1 kW feed",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1000",
+        "payloadType": "str",
+        "x": 370,
+        "y": 120,
+        "wires": [
+            [
+                "5eb66b22.1a4de4"
+            ]
+        ]
+    },
+    {
+        "id": "5eb66b22.1a4de4",
+        "type": "watt2kwh",
+        "z": "306896b1c1761662",
+        "format": "kwh",
+        "maximum": "5",
+        "maximumunit": "mins",
+        "name": "",
+        "x": 530,
+        "y": 120,
+        "wires": [
+            [
+                "d62baedc.ded46"
+            ]
+        ]
+    },
+    {
+        "id": "0a53eaae9809ca5d",
+        "type": "inject",
+        "z": "306896b1c1761662",
+        "name": "1 kW feed",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "100",
+        "payloadType": "str",
+        "x": 360,
+        "y": 340,
+        "wires": [
+            [
+                "b8a15b474b58d57e"
+            ]
+        ]
+    },
+    {
+        "id": "b8a15b474b58d57e",
+        "type": "watt2kwh",
+        "z": "306896b1c1761662",
+        "format": "kwh",
+        "maximum": "5",
+        "maximumunit": "mins",
+        "name": "energy",
+        "x": 510,
+        "y": 340,
+        "wires": [
+            [
+                "49376315951ce5fa"
+            ]
+        ]
+    },
+    {
+        "id": "49376315951ce5fa",
+        "type": "function",
+        "z": "306896b1c1761662",
+        "name": "Store kwh",
+        "func": "\nif (msg.topic == \"starttime\"){\n    flow.set(\"energyVal\", 0);\n    flow.set(\"starttime\", String(msg.payload));\n}\nelse if (msg.topic == \"filename\"){\n    flow.set(\"filename\", msg.payload);\n}\nelse if (msg.topic == \"energy\"){\n    var savedVal = flow.get(\"energyVal\")||0;\n    savedVal += Number(msg.payload);\n    flow.set(\"energyVal\", savedVal);\n}\nelse if (msg.topic == \"endtime\") {\n    return {\n        payload: {\n            filename: String(flow.get(\"filename\")),\n            totalEnergy: Number(flow.get(\"energyVal\")),\n            starttime: String(flow.get(\"starttime\")),\n            endtime: String(msg.payload)\n        }\n    };\n}\n\n\n\n\n// var inputVal = msg.payload;\n// return {\n//     payload: Number(inputVal)\n// }\n// if (inputVal == \"reset\"){\n//     flow.set(\"energyVal\",0); \n// } \n// else {\n//     var savedVal = flow.get('energyVal')||0;\n//     savedVal += inputVal;\n//     flow.set(\"energyVal\",savedVal);\n//     msg.payload = savedVal;\n//     return msg;\n// }",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 300,
+        "wires": [
+            [
+                "429b6abaf0a24b24"
+            ]
+        ]
+    },
+    {
+        "id": "429b6abaf0a24b24",
+        "type": "debug",
+        "z": "306896b1c1761662",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 870,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "a22c25030b9db89c",
+        "type": "inject",
+        "z": "306896b1c1761662",
+        "name": "starttime",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 360,
+        "y": 220,
+        "wires": [
+            [
+                "49376315951ce5fa"
+            ]
+        ]
+    },
+    {
+        "id": "205d111a44376ad3",
+        "type": "inject",
+        "z": "306896b1c1761662",
+        "name": "endtime",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 360,
+        "y": 260,
+        "wires": [
+            [
+                "49376315951ce5fa"
+            ]
+        ]
+    },
+    {
+        "id": "e467f8636f87a598",
+        "type": "inject",
+        "z": "306896b1c1761662",
+        "name": "filename",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "test.gcode",
+        "payloadType": "str",
+        "x": 360,
+        "y": 300,
+        "wires": [
+            [
+                "49376315951ce5fa"
+            ]
+        ]
     }
 ]
