@@ -22,10 +22,34 @@
         "info": ""
     },
     {
+        "id": "325e309897bf4538",
+        "type": "tab",
+        "label": "3dprinter",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "47e5443dc1c29bcd",
+        "type": "tab",
+        "label": "laser cutter",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8ef0902d5920bef2",
+        "type": "tab",
+        "label": "cnc",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "7ce136dbb8c897d1",
         "type": "mqtt-broker",
-        "name": "mosquitto:1833",
-        "broker": "mosquitto",
+        "name": "pi-mqtt-server:1833",
+        "broker": "pi-mqtt-server",
         "port": "1883",
         "clientid": "",
         "autoConnect": true,
@@ -35,14 +59,17 @@
         "cleansession": true,
         "birthTopic": "",
         "birthQos": "0",
+        "birthRetain": "false",
         "birthPayload": "",
         "birthMsg": {},
         "closeTopic": "",
         "closeQos": "0",
+        "closeRetain": "false",
         "closePayload": "",
         "closeMsg": {},
         "willTopic": "",
         "willQos": "0",
+        "willRetain": "false",
         "willPayload": "",
         "willMsg": {},
         "userProps": "",
@@ -205,6 +232,36 @@
         "influxdbVersion": "2.0",
         "url": "http://influxdb:8086",
         "rejectUnauthorized": true
+    },
+    {
+        "id": "4cf36a44b74caee5",
+        "type": "mqtt-broker",
+        "name": "mosquitto",
+        "broker": "mosquitto",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
     },
     {
         "id": "00a750cdfb54579e",
@@ -435,82 +492,6 @@
         ]
     },
     {
-        "id": "de75dc47910e5a82",
-        "type": "mqtt in",
-        "z": "f6f2187d.f17ca8",
-        "name": "",
-        "topic": "microfactory/3dPrinter",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "7ce136dbb8c897d1",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 180,
-        "y": 1260,
-        "wires": [
-            [
-                "78453032339fa301"
-            ]
-        ]
-    },
-    {
-        "id": "688eeb4c8835fc6e",
-        "type": "influxdb out",
-        "z": "f6f2187d.f17ca8",
-        "influxdb": "d61a7da6caeb26aa",
-        "name": "influx 3dPrinter",
-        "measurement": "FilamentSensor",
-        "precision": "",
-        "retentionPolicy": "",
-        "database": "database",
-        "precisionV18FluxV20": "ms",
-        "retentionPolicyV18Flux": "",
-        "org": "NPI",
-        "bucket": "3dPrinter",
-        "x": 780,
-        "y": 1220,
-        "wires": []
-    },
-    {
-        "id": "665f1b4136421405",
-        "type": "debug",
-        "z": "f6f2187d.f17ca8",
-        "name": "3dPrinter Sensor",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 790,
-        "y": 1320,
-        "wires": []
-    },
-    {
-        "id": "78453032339fa301",
-        "type": "function",
-        "z": "f6f2187d.f17ca8",
-        "name": "3dPrinter2Influx",
-        "func": "return {\n    payload: {\n        device: String(msg.payload.device),\n        unit: String(msg.payload.unit),\n        measure: Number(msg.payload.value)\n    }\n};",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 460,
-        "y": 1260,
-        "wires": [
-            [
-                "688eeb4c8835fc6e",
-                "665f1b4136421405"
-            ]
-        ]
-    },
-    {
         "id": "e0977f2582bfaaa6",
         "type": "mqtt in",
         "z": "d0f6fc20cc752ed0",
@@ -603,5 +584,1221 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "ab06ffb0bf2c56e8",
+        "type": "mqtt in",
+        "z": "325e309897bf4538",
+        "name": "",
+        "topic": "microfactory/3dprinter/filament",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4cf36a44b74caee5",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "b0d392d2c63876e6"
+            ]
+        ]
+    },
+    {
+        "id": "4becd7ada513bdcf",
+        "type": "debug",
+        "z": "325e309897bf4538",
+        "name": "filament sensor",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "b0d392d2c63876e6",
+        "type": "function",
+        "z": "325e309897bf4538",
+        "name": "filament2Influx",
+        "func": "return {\n    payload: {\n        device: String(msg.payload.device),\n        unit: String(msg.payload.unit),\n        measure: Number(msg.payload.value)\n    }\n};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 120,
+        "wires": [
+            [
+                "4becd7ada513bdcf",
+                "f0a128bf29194ea6"
+            ]
+        ]
+    },
+    {
+        "id": "f0a128bf29194ea6",
+        "type": "influxdb out",
+        "z": "325e309897bf4538",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "Influx filament",
+        "measurement": "filament",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "3dprinter",
+        "x": 700,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "5743e72dc31c53a8",
+        "type": "mqtt in",
+        "z": "325e309897bf4538",
+        "name": "",
+        "topic": "inmachines/3dprinter/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 380,
+        "wires": [
+            [
+                "833743b62b5687d6"
+            ]
+        ]
+    },
+    {
+        "id": "833743b62b5687d6",
+        "type": "function",
+        "z": "325e309897bf4538",
+        "name": "power2Influx",
+        "func": "return {\n    payload: Number(msg.payload)\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 380,
+        "wires": [
+            [
+                "e2da2b347453dd67",
+                "2bbfb79be4639a0f"
+            ]
+        ]
+    },
+    {
+        "id": "e2da2b347453dd67",
+        "type": "debug",
+        "z": "325e309897bf4538",
+        "name": "power",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "2bbfb79be4639a0f",
+        "type": "influxdb out",
+        "z": "325e309897bf4538",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "Influx power",
+        "measurement": "power",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "3dprinter",
+        "x": 690,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "45612fd7f9c352cd",
+        "type": "mqtt in",
+        "z": "325e309897bf4538",
+        "name": "",
+        "topic": "inmachines/3dprinter/state",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 580,
+        "wires": [
+            [
+                "da214da48c4af7a9"
+            ]
+        ]
+    },
+    {
+        "id": "da214da48c4af7a9",
+        "type": "function",
+        "z": "325e309897bf4538",
+        "name": "state2Influx",
+        "func": "return {\n    payload: String(msg.payload)\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 580,
+        "wires": [
+            [
+                "b905735dc618a8a0",
+                "de6344746014f314"
+            ]
+        ]
+    },
+    {
+        "id": "b905735dc618a8a0",
+        "type": "debug",
+        "z": "325e309897bf4538",
+        "name": "state",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "de6344746014f314",
+        "type": "influxdb out",
+        "z": "325e309897bf4538",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "Influx state",
+        "measurement": "state",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "3dprinter",
+        "x": 690,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "043e7748ef5e677b",
+        "type": "mqtt in",
+        "z": "325e309897bf4538",
+        "name": "",
+        "topic": "inmachines/3dprinter/filename",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 800,
+        "wires": [
+            [
+                "a2b0ef42bca5e9f1"
+            ]
+        ]
+    },
+    {
+        "id": "a2b0ef42bca5e9f1",
+        "type": "function",
+        "z": "325e309897bf4538",
+        "name": "filename2Influx",
+        "func": "return {\n    payload: String(msg.payload)\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 800,
+        "wires": [
+            [
+                "04b4d32bae0f2348",
+                "8d1f5be333d2d226"
+            ]
+        ]
+    },
+    {
+        "id": "04b4d32bae0f2348",
+        "type": "debug",
+        "z": "325e309897bf4538",
+        "name": "filename",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "8d1f5be333d2d226",
+        "type": "influxdb out",
+        "z": "325e309897bf4538",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "Influx filename",
+        "measurement": "fileaname",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "3dprinter",
+        "x": 700,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "65bf19a4f55aee7e",
+        "type": "mqtt in",
+        "z": "325e309897bf4538",
+        "name": "",
+        "topic": "inmachines/3dprinter/starttime",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 1000,
+        "wires": [
+            [
+                "1d33bc1b547f5ce2"
+            ]
+        ]
+    },
+    {
+        "id": "1d33bc1b547f5ce2",
+        "type": "function",
+        "z": "325e309897bf4538",
+        "name": "starttime2Influx",
+        "func": "return {\n    payload: String(msg.payload)\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 1000,
+        "wires": [
+            [
+                "6af55efed77b7ef4",
+                "af07e620b26d2106"
+            ]
+        ]
+    },
+    {
+        "id": "6af55efed77b7ef4",
+        "type": "debug",
+        "z": "325e309897bf4538",
+        "name": "starttime",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "af07e620b26d2106",
+        "type": "influxdb out",
+        "z": "325e309897bf4538",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "Influx starttime",
+        "measurement": "starttime",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "3dprinter",
+        "x": 680,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "957acd380de62057",
+        "type": "mqtt in",
+        "z": "325e309897bf4538",
+        "name": "",
+        "topic": "inmachines/3dprinter/endtime",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 1200,
+        "wires": [
+            [
+                "048a2e5ff076bae4"
+            ]
+        ]
+    },
+    {
+        "id": "048a2e5ff076bae4",
+        "type": "function",
+        "z": "325e309897bf4538",
+        "name": "endtime2Influx",
+        "func": "return {\n    payload: String(msg.payload)\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 1200,
+        "wires": [
+            [
+                "2dc5b48d55a82a7c",
+                "ee288ff508fa00f2"
+            ]
+        ]
+    },
+    {
+        "id": "2dc5b48d55a82a7c",
+        "type": "debug",
+        "z": "325e309897bf4538",
+        "name": "endtime",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "ee288ff508fa00f2",
+        "type": "influxdb out",
+        "z": "325e309897bf4538",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "Influx endtime",
+        "measurement": "starttime",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "3dprinter",
+        "x": 680,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "03218742c3ad8813",
+        "type": "mqtt in",
+        "z": "47e5443dc1c29bcd",
+        "name": "",
+        "topic": "inmachines/lasercutter/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 100,
+        "wires": [
+            [
+                "d5c6cec404621985"
+            ]
+        ]
+    },
+    {
+        "id": "d5c6cec404621985",
+        "type": "function",
+        "z": "47e5443dc1c29bcd",
+        "name": "power2Influx",
+        "func": "return {\n    payload: Number(msg.payload)\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 100,
+        "wires": [
+            [
+                "bc5a407d180795d6",
+                "717f97209a08d9e6"
+            ]
+        ]
+    },
+    {
+        "id": "bc5a407d180795d6",
+        "type": "debug",
+        "z": "47e5443dc1c29bcd",
+        "name": "power",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "717f97209a08d9e6",
+        "type": "influxdb out",
+        "z": "47e5443dc1c29bcd",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "Influx power",
+        "measurement": "power",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "lasercutter",
+        "x": 710,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "de46b19aa31d7651",
+        "type": "mqtt in",
+        "z": "47e5443dc1c29bcd",
+        "name": "",
+        "topic": "inmachines/lasercutter/state",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 300,
+        "wires": [
+            [
+                "c744b426dfa65eb5"
+            ]
+        ]
+    },
+    {
+        "id": "c744b426dfa65eb5",
+        "type": "function",
+        "z": "47e5443dc1c29bcd",
+        "name": "state2Influx",
+        "func": "return {\n    payload: String(msg.payload)\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 300,
+        "wires": [
+            [
+                "efd7719d7decb1ea",
+                "2b6011429c5db2cf"
+            ]
+        ]
+    },
+    {
+        "id": "efd7719d7decb1ea",
+        "type": "debug",
+        "z": "47e5443dc1c29bcd",
+        "name": "state",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "2b6011429c5db2cf",
+        "type": "influxdb out",
+        "z": "47e5443dc1c29bcd",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "Influx state",
+        "measurement": "state",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "lasercutter",
+        "x": 710,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "8526861fd9b04a1e",
+        "type": "mqtt in",
+        "z": "47e5443dc1c29bcd",
+        "name": "",
+        "topic": "inmachines/lasercutter/filename",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 520,
+        "wires": [
+            [
+                "608cda03a9c0f11c"
+            ]
+        ]
+    },
+    {
+        "id": "608cda03a9c0f11c",
+        "type": "function",
+        "z": "47e5443dc1c29bcd",
+        "name": "filename2Influx",
+        "func": "return {\n    payload: String(msg.payload)\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 520,
+        "wires": [
+            [
+                "338d4cf095415f71",
+                "6a44d6248d307f2f"
+            ]
+        ]
+    },
+    {
+        "id": "338d4cf095415f71",
+        "type": "debug",
+        "z": "47e5443dc1c29bcd",
+        "name": "filename",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "6a44d6248d307f2f",
+        "type": "influxdb out",
+        "z": "47e5443dc1c29bcd",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "Influx filename",
+        "measurement": "fileaname",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "lasercutter",
+        "x": 720,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "04a28afa6d1e805e",
+        "type": "mqtt in",
+        "z": "47e5443dc1c29bcd",
+        "name": "",
+        "topic": "inmachines/lasercutter/starttime",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 720,
+        "wires": [
+            [
+                "fced75dd9147f098"
+            ]
+        ]
+    },
+    {
+        "id": "fced75dd9147f098",
+        "type": "function",
+        "z": "47e5443dc1c29bcd",
+        "name": "starttime2Influx",
+        "func": "return {\n    payload: String(msg.payload)\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 720,
+        "wires": [
+            [
+                "77a78efc551054de",
+                "e8414361ec62c0fd"
+            ]
+        ]
+    },
+    {
+        "id": "77a78efc551054de",
+        "type": "debug",
+        "z": "47e5443dc1c29bcd",
+        "name": "starttime",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "e8414361ec62c0fd",
+        "type": "influxdb out",
+        "z": "47e5443dc1c29bcd",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "Influx starttime",
+        "measurement": "starttime",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "lasercutter",
+        "x": 700,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "3090b2bebdaf9dc4",
+        "type": "mqtt in",
+        "z": "47e5443dc1c29bcd",
+        "name": "",
+        "topic": "inmachines/lasercutter/endtime",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 920,
+        "wires": [
+            [
+                "1c4d7a829c5238f5"
+            ]
+        ]
+    },
+    {
+        "id": "1c4d7a829c5238f5",
+        "type": "function",
+        "z": "47e5443dc1c29bcd",
+        "name": "endtime2Influx",
+        "func": "return {\n    payload: String(msg.payload)\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 920,
+        "wires": [
+            [
+                "b44d4302a407dd2b",
+                "dbfb1873d5556ab7"
+            ]
+        ]
+    },
+    {
+        "id": "b44d4302a407dd2b",
+        "type": "debug",
+        "z": "47e5443dc1c29bcd",
+        "name": "endtime",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "dbfb1873d5556ab7",
+        "type": "influxdb out",
+        "z": "47e5443dc1c29bcd",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "Influx endtime",
+        "measurement": "starttime",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "lasercutter",
+        "x": 700,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "638c6ded649c614b",
+        "type": "mqtt in",
+        "z": "8ef0902d5920bef2",
+        "name": "",
+        "topic": "inmachines/cnc/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 100,
+        "wires": [
+            [
+                "10cf598593d1c733"
+            ]
+        ]
+    },
+    {
+        "id": "10cf598593d1c733",
+        "type": "function",
+        "z": "8ef0902d5920bef2",
+        "name": "power2Influx",
+        "func": "return {\n    payload: Number(msg.payload)\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 100,
+        "wires": [
+            [
+                "c7fb8cedc139159b",
+                "0786982790db5744"
+            ]
+        ]
+    },
+    {
+        "id": "c7fb8cedc139159b",
+        "type": "debug",
+        "z": "8ef0902d5920bef2",
+        "name": "power",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "0786982790db5744",
+        "type": "influxdb out",
+        "z": "8ef0902d5920bef2",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "Influx power",
+        "measurement": "power",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "cnc",
+        "x": 710,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "98b5ad128b01848f",
+        "type": "mqtt in",
+        "z": "8ef0902d5920bef2",
+        "name": "",
+        "topic": "inmachines/cnc/state",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 300,
+        "wires": [
+            [
+                "53e884adebc7c2b6"
+            ]
+        ]
+    },
+    {
+        "id": "53e884adebc7c2b6",
+        "type": "function",
+        "z": "8ef0902d5920bef2",
+        "name": "state2Influx",
+        "func": "return {\n    payload: String(msg.payload)\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 300,
+        "wires": [
+            [
+                "9e773dd4015689eb",
+                "ef7d6e2d40f1aa5f"
+            ]
+        ]
+    },
+    {
+        "id": "9e773dd4015689eb",
+        "type": "debug",
+        "z": "8ef0902d5920bef2",
+        "name": "state",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "ef7d6e2d40f1aa5f",
+        "type": "influxdb out",
+        "z": "8ef0902d5920bef2",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "Influx state",
+        "measurement": "state",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "cnc",
+        "x": 710,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "7bd4b1807e47ee1d",
+        "type": "mqtt in",
+        "z": "8ef0902d5920bef2",
+        "name": "",
+        "topic": "inmachines/cnc/filename",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 520,
+        "wires": [
+            [
+                "cb768f2f0da63c93"
+            ]
+        ]
+    },
+    {
+        "id": "cb768f2f0da63c93",
+        "type": "function",
+        "z": "8ef0902d5920bef2",
+        "name": "filename2Influx",
+        "func": "return {\n    payload: String(msg.payload)\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 520,
+        "wires": [
+            [
+                "cb4c266a29ef1440",
+                "1cc4882458d1f319"
+            ]
+        ]
+    },
+    {
+        "id": "cb4c266a29ef1440",
+        "type": "debug",
+        "z": "8ef0902d5920bef2",
+        "name": "filename",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "1cc4882458d1f319",
+        "type": "influxdb out",
+        "z": "8ef0902d5920bef2",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "Influx filename",
+        "measurement": "fileaname",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "cnc",
+        "x": 720,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "885cd93aa8f7ef38",
+        "type": "mqtt in",
+        "z": "8ef0902d5920bef2",
+        "name": "",
+        "topic": "inmachines/cnc/starttime",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 720,
+        "wires": [
+            [
+                "2257476829ab9742"
+            ]
+        ]
+    },
+    {
+        "id": "2257476829ab9742",
+        "type": "function",
+        "z": "8ef0902d5920bef2",
+        "name": "starttime2Influx",
+        "func": "return {\n    payload: String(msg.payload)\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 720,
+        "wires": [
+            [
+                "217def6e60f47b93",
+                "6d5919e96c3906fd"
+            ]
+        ]
+    },
+    {
+        "id": "217def6e60f47b93",
+        "type": "debug",
+        "z": "8ef0902d5920bef2",
+        "name": "starttime",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "6d5919e96c3906fd",
+        "type": "influxdb out",
+        "z": "8ef0902d5920bef2",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "Influx starttime",
+        "measurement": "starttime",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "cnc",
+        "x": 700,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "2293ee44337863a9",
+        "type": "mqtt in",
+        "z": "8ef0902d5920bef2",
+        "name": "",
+        "topic": "inmachines/cnc/endtime",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 920,
+        "wires": [
+            [
+                "8e5574ad90cc3b10"
+            ]
+        ]
+    },
+    {
+        "id": "8e5574ad90cc3b10",
+        "type": "function",
+        "z": "8ef0902d5920bef2",
+        "name": "endtime2Influx",
+        "func": "return {\n    payload: String(msg.payload)\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 920,
+        "wires": [
+            [
+                "25d21239196d7faa",
+                "28113e349797c645"
+            ]
+        ]
+    },
+    {
+        "id": "25d21239196d7faa",
+        "type": "debug",
+        "z": "8ef0902d5920bef2",
+        "name": "endtime",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "28113e349797c645",
+        "type": "influxdb out",
+        "z": "8ef0902d5920bef2",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "Influx endtime",
+        "measurement": "starttime",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "cnc",
+        "x": 700,
+        "y": 880,
+        "wires": []
     }
 ]
