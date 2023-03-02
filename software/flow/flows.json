@@ -598,7 +598,7 @@
         "type": "mqtt in",
         "z": "325e309897bf4538",
         "name": "",
-        "topic": "microfactory/3dprinter/filament",
+        "topic": "microfactory/3dprinter",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "4cf36a44b74caee5",
@@ -606,7 +606,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 150,
+        "x": 120,
         "y": 120,
         "wires": [
             [
@@ -1054,7 +1054,7 @@
         "type": "mqtt in",
         "z": "325e309897bf4538",
         "name": "",
-        "topic": "microfactory/3dprinter/filament",
+        "topic": "microfactory/3dprinter",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "4cf36a44b74caee5",
@@ -1062,7 +1062,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 150,
+        "x": 120,
         "y": 1780,
         "wires": [
             [
@@ -1426,7 +1426,7 @@
         "type": "function",
         "z": "325e309897bf4538",
         "name": "parse filament data",
-        "func": "return {\n    payload: Number(msg.payload),\n    topic: \"filament\"\n}",
+        "func": "return {\n    payload: Number(msg.payload.value),\n    topic: \"filament\"\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
