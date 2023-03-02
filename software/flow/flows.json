@@ -910,7 +910,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 130,
+        "x": 150,
         "y": 1000,
         "wires": [
             [
@@ -929,7 +929,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 400,
+        "x": 420,
         "y": 1000,
         "wires": [
             [
@@ -951,7 +951,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 660,
+        "x": 680,
         "y": 1040,
         "wires": []
     },
@@ -969,7 +969,7 @@
         "retentionPolicyV18Flux": "",
         "org": "Curious Community Labs",
         "bucket": "3dprinter",
-        "x": 680,
+        "x": 700,
         "y": 960,
         "wires": []
     },
@@ -986,7 +986,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 120,
+        "x": 140,
         "y": 1200,
         "wires": [
             [
@@ -1005,7 +1005,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 400,
+        "x": 420,
         "y": 1200,
         "wires": [
             [
@@ -1027,7 +1027,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 660,
+        "x": 680,
         "y": 1240,
         "wires": []
     },
@@ -1045,7 +1045,7 @@
         "retentionPolicyV18Flux": "",
         "org": "Curious Community Labs",
         "bucket": "3dprinter",
-        "x": 680,
+        "x": 700,
         "y": 1160,
         "wires": []
     },
@@ -1062,29 +1062,12 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 130,
-        "y": 1360,
+        "x": 150,
+        "y": 1780,
         "wires": [
             [
-                "fd226380c8ce5db6"
+                "457e27536f3374c3"
             ]
-        ]
-    },
-    {
-        "id": "fd226380c8ce5db6",
-        "type": "function",
-        "z": "325e309897bf4538",
-        "name": "parse filament data",
-        "func": "return {\n    payload: {\n        device: String(msg.payload.device),\n        unit: String(msg.payload.unit),\n        measure: Number(msg.payload.value)\n    }\n};",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 410,
-        "y": 1360,
-        "wires": [
-            []
         ]
     },
     {
@@ -1100,29 +1083,12 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 120,
-        "y": 1440,
+        "x": 140,
+        "y": 1740,
         "wires": [
             [
-                "8009b4490856d02b"
+                "f801ca46ae96ee13"
             ]
-        ]
-    },
-    {
-        "id": "8009b4490856d02b",
-        "type": "function",
-        "z": "325e309897bf4538",
-        "name": "parse filename data",
-        "func": "return {\n    payload: String(msg.payload)\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 410,
-        "y": 1440,
-        "wires": [
-            []
         ]
     },
     {
@@ -1138,29 +1104,12 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 130,
-        "y": 1400,
+        "x": 150,
+        "y": 1660,
         "wires": [
             [
-                "68b1314794d5f138"
+                "1f71b44724013341"
             ]
-        ]
-    },
-    {
-        "id": "68b1314794d5f138",
-        "type": "function",
-        "z": "325e309897bf4538",
-        "name": "starttime message trigger",
-        "func": "return 1;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 390,
-        "y": 1400,
-        "wires": [
-            []
         ]
     },
     {
@@ -1176,30 +1125,375 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 120,
-        "y": 1480,
+        "x": 140,
+        "y": 1700,
         "wires": [
             [
-                "36054fb13964cc2c"
+                "ec5b4e4a5bfd740c"
             ]
         ]
     },
     {
-        "id": "36054fb13964cc2c",
+        "id": "c53493537ea6f7be",
+        "type": "watt2kwh",
+        "z": "325e309897bf4538",
+        "format": "kwh",
+        "maximum": "5",
+        "maximumunit": "mins",
+        "name": "energy",
+        "x": 570,
+        "y": 1520,
+        "wires": [
+            [
+                "70b6224a4844669b"
+            ]
+        ]
+    },
+    {
+        "id": "70b6224a4844669b",
         "type": "function",
         "z": "325e309897bf4538",
-        "name": "endtime message trigger",
-        "func": "return 1;",
+        "name": "Calculate Total Energy per Job in KWh",
+        "func": "if (msg.topic == \"starttime\"){\n    flow.set(\"energyVal\", 0);\n    flow.set(\"starttime\", String(msg.payload));\n}\nelse if (msg.topic == \"filename\"){\n    flow.set(\"filename\", msg.payload);\n}\nelse if (msg.topic == \"energy\"){\n    var savedVal = flow.get(\"energyVal\")||0;\n    savedVal += Number(msg.payload);\n    flow.set(\"energyVal\", savedVal);\n}\nelse if (msg.topic == \"endtime\") {\n\n    var filename = String(flow.get(\"filename\"));\n    var totalEnergy = Number(flow.get(\"energyVal\"));\n    var starttime = String(flow.get(\"starttime\"));\n    var endtime = String(msg.payload);\n\n    if (filename == \"\") endtime = \"\";\n\n    flow.set(\"energyVal\", 0);\n    flow.set(\"filename\", \"\");\n    flow.set(\"starttime\", \"\");\n    \n    if (filename != \"\"){\n        return {\n            payload: {\n                filename: filename,\n                totalEnergy: totalEnergy,\n                starttime: starttime,\n                endtime: endtime\n            }\n        }\n    };\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 390,
+        "x": 710,
+        "y": 1400,
+        "wires": [
+            [
+                "03a1941ce253b3b9",
+                "68c658d3edbf677c"
+            ]
+        ]
+    },
+    {
+        "id": "03a1941ce253b3b9",
+        "type": "debug",
+        "z": "325e309897bf4538",
+        "name": "total energy data",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "67657741888fde9e",
+        "type": "function",
+        "z": "325e309897bf4538",
+        "name": "parse power data",
+        "func": "return {\n    payload: Number(msg.payload),\n    topic: \"energy\"\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 1520,
+        "wires": [
+            [
+                "c53493537ea6f7be"
+            ]
+        ]
+    },
+    {
+        "id": "4285ef3b1208e509",
+        "type": "function",
+        "z": "325e309897bf4538",
+        "name": "parse filename data",
+        "func": "return {\n    payload: String(msg.payload),\n    topic: \"filename\"\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
         "y": 1480,
         "wires": [
-            []
+            [
+                "70b6224a4844669b"
+            ]
         ]
+    },
+    {
+        "id": "9ac67ad3477863de",
+        "type": "function",
+        "z": "325e309897bf4538",
+        "name": "parse start time data",
+        "func": "return {\n    payload: String(msg.payload),\n    topic: \"starttime\"\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 1400,
+        "wires": [
+            [
+                "70b6224a4844669b"
+            ]
+        ]
+    },
+    {
+        "id": "98d996ff21aa233a",
+        "type": "function",
+        "z": "325e309897bf4538",
+        "name": "parse end time data",
+        "func": "return {\n    payload: String(msg.payload),\n    topic: \"endtime\"\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 1440,
+        "wires": [
+            [
+                "70b6224a4844669b"
+            ]
+        ]
+    },
+    {
+        "id": "68c658d3edbf677c",
+        "type": "influxdb out",
+        "z": "325e309897bf4538",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "energy2Influx",
+        "measurement": "energy",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "3dprinter",
+        "x": 820,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "542cedacd11634a0",
+        "type": "mqtt in",
+        "z": "325e309897bf4538",
+        "name": "",
+        "topic": "inmachines/3dprinter/starttime",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 1400,
+        "wires": [
+            [
+                "9ac67ad3477863de"
+            ]
+        ]
+    },
+    {
+        "id": "073af3328a03ced6",
+        "type": "mqtt in",
+        "z": "325e309897bf4538",
+        "name": "",
+        "topic": "inmachines/3dprinter/filename",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 1480,
+        "wires": [
+            [
+                "4285ef3b1208e509"
+            ]
+        ]
+    },
+    {
+        "id": "6ef8324a574f7fb8",
+        "type": "mqtt in",
+        "z": "325e309897bf4538",
+        "name": "",
+        "topic": "inmachines/3dprinter/endtime",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 1440,
+        "wires": [
+            [
+                "98d996ff21aa233a"
+            ]
+        ]
+    },
+    {
+        "id": "1b85b9d5bddbdeeb",
+        "type": "mqtt in",
+        "z": "325e309897bf4538",
+        "name": "",
+        "topic": "inmachines/3dprinter/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 1520,
+        "wires": [
+            [
+                "67657741888fde9e"
+            ]
+        ]
+    },
+    {
+        "id": "1f71b44724013341",
+        "type": "function",
+        "z": "325e309897bf4538",
+        "name": "parse start time data",
+        "func": "return {\n    payload: String(msg.payload),\n    topic: \"starttime\"\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 1660,
+        "wires": [
+            [
+                "cc1955fcad08f307"
+            ]
+        ]
+    },
+    {
+        "id": "ec5b4e4a5bfd740c",
+        "type": "function",
+        "z": "325e309897bf4538",
+        "name": "parse end time data",
+        "func": "return {\n    payload: String(msg.payload),\n    topic: \"endtime\"\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 1700,
+        "wires": [
+            [
+                "cc1955fcad08f307"
+            ]
+        ]
+    },
+    {
+        "id": "f801ca46ae96ee13",
+        "type": "function",
+        "z": "325e309897bf4538",
+        "name": "parse filename data",
+        "func": "return {\n    payload: String(msg.payload),\n    topic: \"filename\"\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 1740,
+        "wires": [
+            [
+                "cc1955fcad08f307"
+            ]
+        ]
+    },
+    {
+        "id": "457e27536f3374c3",
+        "type": "function",
+        "z": "325e309897bf4538",
+        "name": "parse filament data",
+        "func": "return {\n    payload: Number(msg.payload),\n    topic: \"filament\"\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 1780,
+        "wires": [
+            [
+                "cc1955fcad08f307"
+            ]
+        ]
+    },
+    {
+        "id": "cc1955fcad08f307",
+        "type": "function",
+        "z": "325e309897bf4538",
+        "name": "Calculate Total Filament per Job in mm",
+        "func": "if (msg.topic == \"starttime\"){\n    flow.set(\"energyVal\", 0);\n    flow.set(\"starttime\", String(msg.payload));\n}\nelse if (msg.topic == \"filename\"){\n    flow.set(\"filename\", msg.payload);\n}\nelse if (msg.topic == \"filament\"){\n    var savedVal = flow.get(\"filamentVal\")||0;\n    savedVal += Number(msg.payload);\n    flow.set(\"filamentVal\", savedVal);\n}\nelse if (msg.topic == \"endtime\") {\n\n    var filename = String(flow.get(\"filename\"));\n    var totalFilament = Number(flow.get(\"filamentVal\"));\n    var starttime = String(flow.get(\"starttime\"));\n    var endtime = String(msg.payload);\n\n    if (filename == \"\") endtime = \"\";\n\n    flow.set(\"filamentVal\", 0);\n    flow.set(\"filename\", \"\");\n    flow.set(\"starttime\", \"\");\n    \n    if (filename != \"\"){\n        return {\n            payload: {\n                filename: filename,\n                totalFilament: totalFilament,\n                starttime: starttime,\n                endtime: endtime\n            }\n        }\n    };\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 1660,
+        "wires": [
+            [
+                "2ce2d1777768561f",
+                "6df29c651de8a30f"
+            ]
+        ]
+    },
+    {
+        "id": "2ce2d1777768561f",
+        "type": "influxdb out",
+        "z": "325e309897bf4538",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "totalFilament2Influx",
+        "measurement": "totalFilament",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "3dprinter",
+        "x": 810,
+        "y": 1720,
+        "wires": []
+    },
+    {
+        "id": "6df29c651de8a30f",
+        "type": "debug",
+        "z": "325e309897bf4538",
+        "name": "total filament data",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 1600,
+        "wires": []
     },
     {
         "id": "03218742c3ad8813",
@@ -1579,6 +1873,237 @@
         "bucket": "lasercutter",
         "x": 700,
         "y": 880,
+        "wires": []
+    },
+    {
+        "id": "9d7570569e826d67",
+        "type": "watt2kwh",
+        "z": "47e5443dc1c29bcd",
+        "format": "kwh",
+        "maximum": "5",
+        "maximumunit": "mins",
+        "name": "energy",
+        "x": 570,
+        "y": 1260,
+        "wires": [
+            [
+                "2a8f5b34aa7515dc"
+            ]
+        ]
+    },
+    {
+        "id": "2a8f5b34aa7515dc",
+        "type": "function",
+        "z": "47e5443dc1c29bcd",
+        "name": "Calculate Total Energy per Job in KWh",
+        "func": "if (msg.topic == \"starttime\"){\n    flow.set(\"energyVal\", 0);\n    flow.set(\"starttime\", String(msg.payload));\n}\nelse if (msg.topic == \"filename\"){\n    flow.set(\"filename\", msg.payload);\n}\nelse if (msg.topic == \"energy\"){\n    var savedVal = flow.get(\"energyVal\")||0;\n    savedVal += Number(msg.payload);\n    flow.set(\"energyVal\", savedVal);\n}\nelse if (msg.topic == \"endtime\") {\n\n    var filename = String(flow.get(\"filename\"));\n    var totalEnergy = Number(flow.get(\"energyVal\"));\n    var starttime = String(flow.get(\"starttime\"));\n    var endtime = String(msg.payload);\n\n    if (filename == \"\") endtime = \"\";\n\n    flow.set(\"energyVal\", 0);\n    flow.set(\"filename\", \"\");\n    flow.set(\"starttime\", \"\");\n    \n    if (filename != \"\"){\n        return {\n            payload: {\n                filename: filename,\n                totalEnergy: totalEnergy,\n                starttime: starttime,\n                endtime: endtime\n            }\n        }\n    };\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 1140,
+        "wires": [
+            [
+                "17442662acc3cc61",
+                "a18f6f9a24ea9144"
+            ]
+        ]
+    },
+    {
+        "id": "17442662acc3cc61",
+        "type": "debug",
+        "z": "47e5443dc1c29bcd",
+        "name": "total energy data",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "ef92d9755a6cee93",
+        "type": "mqtt in",
+        "z": "47e5443dc1c29bcd",
+        "name": "",
+        "topic": "inmachines/lasercutter/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 1260,
+        "wires": [
+            [
+                "168fb8d5dd594bf7"
+            ]
+        ]
+    },
+    {
+        "id": "137b0ca0a7dd2b65",
+        "type": "mqtt in",
+        "z": "47e5443dc1c29bcd",
+        "name": "",
+        "topic": "inmachines/lasercutter/filename",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 1220,
+        "wires": [
+            [
+                "2e896c2ae1ba2354"
+            ]
+        ]
+    },
+    {
+        "id": "7cedd8b637dc1ff5",
+        "type": "mqtt in",
+        "z": "47e5443dc1c29bcd",
+        "name": "",
+        "topic": "inmachines/lasercutter/starttime",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 1140,
+        "wires": [
+            [
+                "74f85843b62cb4e5"
+            ]
+        ]
+    },
+    {
+        "id": "0d6281f5484dc85f",
+        "type": "mqtt in",
+        "z": "47e5443dc1c29bcd",
+        "name": "",
+        "topic": "inmachines/lasercutter/endtime",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 1180,
+        "wires": [
+            [
+                "a9fccfc5db812bc1"
+            ]
+        ]
+    },
+    {
+        "id": "168fb8d5dd594bf7",
+        "type": "function",
+        "z": "47e5443dc1c29bcd",
+        "name": "parse power data",
+        "func": "return {\n    payload: Number(msg.payload),\n    topic: \"energy\"\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 1260,
+        "wires": [
+            [
+                "9d7570569e826d67"
+            ]
+        ]
+    },
+    {
+        "id": "2e896c2ae1ba2354",
+        "type": "function",
+        "z": "47e5443dc1c29bcd",
+        "name": "parse filename data",
+        "func": "return {\n    payload: String(msg.payload),\n    topic: \"filename\"\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 1220,
+        "wires": [
+            [
+                "2a8f5b34aa7515dc"
+            ]
+        ]
+    },
+    {
+        "id": "74f85843b62cb4e5",
+        "type": "function",
+        "z": "47e5443dc1c29bcd",
+        "name": "parse start time data",
+        "func": "return {\n    payload: String(msg.payload),\n    topic: \"starttime\"\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 1140,
+        "wires": [
+            [
+                "2a8f5b34aa7515dc"
+            ]
+        ]
+    },
+    {
+        "id": "a9fccfc5db812bc1",
+        "type": "function",
+        "z": "47e5443dc1c29bcd",
+        "name": "parse end time data",
+        "func": "return {\n    payload: String(msg.payload),\n    topic: \"endtime\"\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 1180,
+        "wires": [
+            [
+                "2a8f5b34aa7515dc"
+            ]
+        ]
+    },
+    {
+        "id": "a18f6f9a24ea9144",
+        "type": "influxdb out",
+        "z": "47e5443dc1c29bcd",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "energy2Influx",
+        "measurement": "energy",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "lasercutter",
+        "x": 820,
+        "y": 1200,
         "wires": []
     },
     {
@@ -1962,6 +2487,237 @@
         "wires": []
     },
     {
+        "id": "b0a15edf8fe83d66",
+        "type": "watt2kwh",
+        "z": "8ef0902d5920bef2",
+        "format": "kwh",
+        "maximum": "5",
+        "maximumunit": "mins",
+        "name": "energy",
+        "x": 570,
+        "y": 1340,
+        "wires": [
+            [
+                "8fcc98c839a1453f"
+            ]
+        ]
+    },
+    {
+        "id": "8fcc98c839a1453f",
+        "type": "function",
+        "z": "8ef0902d5920bef2",
+        "name": "Calculate Total Energy per Job in KWh",
+        "func": "if (msg.topic == \"starttime\"){\n    flow.set(\"energyVal\", 0);\n    flow.set(\"starttime\", String(msg.payload));\n}\nelse if (msg.topic == \"filename\"){\n    flow.set(\"filename\", msg.payload);\n}\nelse if (msg.topic == \"energy\"){\n    var savedVal = flow.get(\"energyVal\")||0;\n    savedVal += Number(msg.payload);\n    flow.set(\"energyVal\", savedVal);\n}\nelse if (msg.topic == \"endtime\") {\n\n    var filename = String(flow.get(\"filename\"));\n    var totalEnergy = Number(flow.get(\"energyVal\"));\n    var starttime = String(flow.get(\"starttime\"));\n    var endtime = String(msg.payload);\n\n    if (filename == \"\") endtime = \"\";\n\n    flow.set(\"energyVal\", 0);\n    flow.set(\"filename\", \"\");\n    flow.set(\"starttime\", \"\");\n    \n    if (filename != \"\"){\n        return {\n            payload: {\n                filename: filename,\n                totalEnergy: totalEnergy,\n                starttime: starttime,\n                endtime: endtime\n            }\n        }\n    };\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 1220,
+        "wires": [
+            [
+                "9eab0627c1031cf2",
+                "082316617296f409"
+            ]
+        ]
+    },
+    {
+        "id": "9eab0627c1031cf2",
+        "type": "debug",
+        "z": "8ef0902d5920bef2",
+        "name": "total energy data",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "082316617296f409",
+        "type": "influxdb out",
+        "z": "8ef0902d5920bef2",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "energy2Influx",
+        "measurement": "energy",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "cnc",
+        "x": 900,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "96f6eaa5c9904074",
+        "type": "mqtt in",
+        "z": "8ef0902d5920bef2",
+        "name": "",
+        "topic": "inmachines/cnc/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 1340,
+        "wires": [
+            [
+                "0d0ec5e5d29889ce"
+            ]
+        ]
+    },
+    {
+        "id": "4c227772c7eca826",
+        "type": "mqtt in",
+        "z": "8ef0902d5920bef2",
+        "name": "",
+        "topic": "inmachines/cnc/filename",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 1300,
+        "wires": [
+            [
+                "bcc39f1191b7d553"
+            ]
+        ]
+    },
+    {
+        "id": "4011677e0ba8e6b1",
+        "type": "mqtt in",
+        "z": "8ef0902d5920bef2",
+        "name": "",
+        "topic": "inmachines/cnc/starttime",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 1220,
+        "wires": [
+            [
+                "6b42430ab3b72380"
+            ]
+        ]
+    },
+    {
+        "id": "311050b52addd82f",
+        "type": "mqtt in",
+        "z": "8ef0902d5920bef2",
+        "name": "",
+        "topic": "inmachines/cnc/endtime",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7ce136dbb8c897d1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 1260,
+        "wires": [
+            [
+                "e7a627de85bde4b5"
+            ]
+        ]
+    },
+    {
+        "id": "0d0ec5e5d29889ce",
+        "type": "function",
+        "z": "8ef0902d5920bef2",
+        "name": "parse power data",
+        "func": "return {\n    payload: Number(msg.payload),\n    topic: \"energy\"\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 1340,
+        "wires": [
+            [
+                "b0a15edf8fe83d66"
+            ]
+        ]
+    },
+    {
+        "id": "bcc39f1191b7d553",
+        "type": "function",
+        "z": "8ef0902d5920bef2",
+        "name": "parse filename data",
+        "func": "return {\n    payload: String(msg.payload),\n    topic: \"filename\"\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 1300,
+        "wires": [
+            [
+                "8fcc98c839a1453f"
+            ]
+        ]
+    },
+    {
+        "id": "6b42430ab3b72380",
+        "type": "function",
+        "z": "8ef0902d5920bef2",
+        "name": "parse start time data",
+        "func": "return {\n    payload: String(msg.payload),\n    topic: \"starttime\"\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 1220,
+        "wires": [
+            [
+                "8fcc98c839a1453f"
+            ]
+        ]
+    },
+    {
+        "id": "e7a627de85bde4b5",
+        "type": "function",
+        "z": "8ef0902d5920bef2",
+        "name": "parse end time data",
+        "func": "return {\n    payload: String(msg.payload),\n    topic: \"endtime\"\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 1260,
+        "wires": [
+            [
+                "8fcc98c839a1453f"
+            ]
+        ]
+    },
+    {
         "id": "d62baedc.ded46",
         "type": "debug",
         "z": "306896b1c1761662",
@@ -2041,11 +2797,11 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "",
+        "topic": "energy",
         "payload": "100",
         "payloadType": "str",
-        "x": 360,
-        "y": 340,
+        "x": 340,
+        "y": 740,
         "wires": [
             [
                 "b8a15b474b58d57e"
@@ -2060,11 +2816,13 @@
         "maximum": "5",
         "maximumunit": "mins",
         "name": "energy",
-        "x": 510,
-        "y": 340,
+        "x": 490,
+        "y": 740,
         "wires": [
             [
-                "49376315951ce5fa"
+                "49376315951ce5fa",
+                "ec96c9fe97b07be6",
+                "566d67059f548be9"
             ]
         ]
     },
@@ -2073,14 +2831,14 @@
         "type": "function",
         "z": "306896b1c1761662",
         "name": "Store kwh",
-        "func": "\nif (msg.topic == \"starttime\"){\n    flow.set(\"energyVal\", 0);\n    flow.set(\"starttime\", String(msg.payload));\n}\nelse if (msg.topic == \"filename\"){\n    flow.set(\"filename\", msg.payload);\n}\nelse if (msg.topic == \"energy\"){\n    var savedVal = flow.get(\"energyVal\")||0;\n    savedVal += Number(msg.payload);\n    flow.set(\"energyVal\", savedVal);\n}\nelse if (msg.topic == \"endtime\") {\n    return {\n        payload: {\n            filename: String(flow.get(\"filename\")),\n            totalEnergy: Number(flow.get(\"energyVal\")),\n            starttime: String(flow.get(\"starttime\")),\n            endtime: String(msg.payload)\n        }\n    };\n}\n\n\n\n\n// var inputVal = msg.payload;\n// return {\n//     payload: Number(inputVal)\n// }\n// if (inputVal == \"reset\"){\n//     flow.set(\"energyVal\",0); \n// } \n// else {\n//     var savedVal = flow.get('energyVal')||0;\n//     savedVal += inputVal;\n//     flow.set(\"energyVal\",savedVal);\n//     msg.payload = savedVal;\n//     return msg;\n// }",
+        "func": "if (msg.topic == \"starttime\"){\n    flow.set(\"energyVal\", 0);\n    flow.set(\"starttime\", String(msg.payload));\n}\nelse if (msg.topic == \"filename\"){\n    flow.set(\"filename\", msg.payload);\n}\nelse if (msg.topic == \"energy\"){\n    var savedVal = flow.get(\"energyVal\")||0;\n    savedVal += Number(msg.payload);\n    flow.set(\"energyVal\", savedVal);\n}\nelse if (msg.topic == \"endtime\") {\n\n    var filename = String(flow.get(\"filename\"));\n    var totalEnergy = Number(flow.get(\"energyVal\"));\n    var starttime = String(flow.get(\"starttime\"));\n    var endtime = String(msg.payload);\n\n    if (filename == \"\") endtime = \"\";\n\n    flow.set(\"energyVal\", 0);\n    flow.set(\"filename\", \"\");\n    flow.set(\"starttime\", \"\");\n    \n    if (filename != \"\"){\n        return {\n            payload: {\n                filename: filename,\n                totalEnergy: totalEnergy,\n                starttime: starttime,\n                endtime: endtime\n            }\n        }\n    };\n}\n\n\n\n\n// var inputVal = msg.payload;\n// return {\n//     payload: Number(inputVal)\n// }\n// if (inputVal == \"reset\"){\n//     flow.set(\"energyVal\",0); \n// } \n// else {\n//     var savedVal = flow.get('energyVal')||0;\n//     savedVal += inputVal;\n//     flow.set(\"energyVal\",savedVal);\n//     msg.payload = savedVal;\n//     return msg;\n// }",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 680,
-        "y": 300,
+        "y": 500,
         "wires": [
             [
                 "429b6abaf0a24b24"
@@ -2097,8 +2855,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 870,
-        "y": 340,
+        "x": 830,
+        "y": 500,
         "wires": []
     },
     {
@@ -2109,20 +2867,26 @@
         "props": [
             {
                 "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
             }
         ],
         "repeat": "",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "",
+        "topic": "starttime",
         "payload": "",
         "payloadType": "date",
-        "x": 360,
-        "y": 220,
+        "x": 340,
+        "y": 320,
         "wires": [
             [
-                "49376315951ce5fa"
+                "49376315951ce5fa",
+                "4e0ba29caa8ba379",
+                "9b027270db41cce4"
             ]
         ]
     },
@@ -2134,20 +2898,26 @@
         "props": [
             {
                 "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
             }
         ],
         "repeat": "",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "",
+        "topic": "endtime",
         "payload": "",
         "payloadType": "date",
-        "x": 360,
-        "y": 260,
+        "x": 320,
+        "y": 460,
         "wires": [
             [
-                "49376315951ce5fa"
+                "49376315951ce5fa",
+                "066026e31d385e24",
+                "b18e4570d774eeb7"
             ]
         ]
     },
@@ -2159,21 +2929,350 @@
         "props": [
             {
                 "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
             }
         ],
         "repeat": "",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "",
+        "topic": "filename",
         "payload": "test.gcode",
         "payloadType": "str",
-        "x": 360,
-        "y": 300,
+        "x": 340,
+        "y": 600,
         "wires": [
             [
-                "49376315951ce5fa"
+                "49376315951ce5fa",
+                "0cb3904156cccc89",
+                "f4618e8839ee98c9"
             ]
         ]
+    },
+    {
+        "id": "ec96c9fe97b07be6",
+        "type": "debug",
+        "z": "306896b1c1761662",
+        "name": "energy payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 360,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "4e0ba29caa8ba379",
+        "type": "debug",
+        "z": "306896b1c1761662",
+        "name": "starttime payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 350,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "066026e31d385e24",
+        "type": "debug",
+        "z": "306896b1c1761662",
+        "name": "endtime payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 350,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "0cb3904156cccc89",
+        "type": "debug",
+        "z": "306896b1c1761662",
+        "name": "filename payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 350,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "9b027270db41cce4",
+        "type": "debug",
+        "z": "306896b1c1761662",
+        "name": "starttime topic",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 340,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "566d67059f548be9",
+        "type": "debug",
+        "z": "306896b1c1761662",
+        "name": "energy topic",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 350,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "f4618e8839ee98c9",
+        "type": "debug",
+        "z": "306896b1c1761662",
+        "name": "filename topic",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 340,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "b18e4570d774eeb7",
+        "type": "debug",
+        "z": "306896b1c1761662",
+        "name": "endtime topic",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 340,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "09892d432d23febd",
+        "type": "inject",
+        "z": "306896b1c1761662",
+        "name": "1 kW feed",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "energy",
+        "payload": "100",
+        "payloadType": "str",
+        "x": 320,
+        "y": 1120,
+        "wires": [
+            [
+                "ea9bcaa0f0ec0b94"
+            ]
+        ]
+    },
+    {
+        "id": "ea9bcaa0f0ec0b94",
+        "type": "watt2kwh",
+        "z": "306896b1c1761662",
+        "format": "kwh",
+        "maximum": "5",
+        "maximumunit": "mins",
+        "name": "energy",
+        "x": 470,
+        "y": 1120,
+        "wires": [
+            [
+                "cfde7a2beb7bd7b1"
+            ]
+        ]
+    },
+    {
+        "id": "cfde7a2beb7bd7b1",
+        "type": "function",
+        "z": "306896b1c1761662",
+        "name": "Store kwh",
+        "func": "if (msg.topic == \"starttime\"){\n    flow.set(\"energyVal\", 0);\n    flow.set(\"starttime\", String(msg.payload));\n}\nelse if (msg.topic == \"filename\"){\n    flow.set(\"filename\", msg.payload);\n}\nelse if (msg.topic == \"energy\"){\n    var savedVal = flow.get(\"energyVal\")||0;\n    savedVal += Number(msg.payload);\n    flow.set(\"energyVal\", savedVal);\n}\nelse if (msg.topic == \"endtime\") {\n\n    var filename = String(flow.get(\"filename\"));\n    var totalEnergy = Number(flow.get(\"energyVal\"));\n    var starttime = String(flow.get(\"starttime\"));\n    var endtime = String(msg.payload);\n\n    if (filename == \"\") endtime = \"\";\n\n    flow.set(\"energyVal\", 0);\n    flow.set(\"filename\", \"\");\n    flow.set(\"starttime\", \"\");\n    \n    if (filename != \"\"){\n        return {\n            payload: {\n                filename: filename,\n                totalEnergy: totalEnergy,\n                starttime: starttime,\n                endtime: endtime\n            }\n        }\n    };\n}\n\n\n\n\n// var inputVal = msg.payload;\n// return {\n//     payload: Number(inputVal)\n// }\n// if (inputVal == \"reset\"){\n//     flow.set(\"energyVal\",0); \n// } \n// else {\n//     var savedVal = flow.get('energyVal')||0;\n//     savedVal += inputVal;\n//     flow.set(\"energyVal\",savedVal);\n//     msg.payload = savedVal;\n//     return msg;\n// }",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 1060,
+        "wires": [
+            [
+                "6279be3cba18b520",
+                "7ba6782b58c6f6f9"
+            ]
+        ]
+    },
+    {
+        "id": "6279be3cba18b520",
+        "type": "debug",
+        "z": "306896b1c1761662",
+        "name": "total energy data",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "2d61f4f33de55817",
+        "type": "inject",
+        "z": "306896b1c1761662",
+        "name": "starttime",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "starttime",
+        "payload": "",
+        "payloadType": "date",
+        "x": 460,
+        "y": 1000,
+        "wires": [
+            [
+                "cfde7a2beb7bd7b1"
+            ]
+        ]
+    },
+    {
+        "id": "a021859dc895ce1c",
+        "type": "inject",
+        "z": "306896b1c1761662",
+        "name": "endtime",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "endtime",
+        "payload": "",
+        "payloadType": "date",
+        "x": 460,
+        "y": 1040,
+        "wires": [
+            [
+                "cfde7a2beb7bd7b1"
+            ]
+        ]
+    },
+    {
+        "id": "7aa25b20b1aba7e7",
+        "type": "inject",
+        "z": "306896b1c1761662",
+        "name": "filename",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "filename",
+        "payload": "test.gcode",
+        "payloadType": "str",
+        "x": 460,
+        "y": 1080,
+        "wires": [
+            [
+                "cfde7a2beb7bd7b1"
+            ]
+        ]
+    },
+    {
+        "id": "7ba6782b58c6f6f9",
+        "type": "influxdb out",
+        "z": "306896b1c1761662",
+        "influxdb": "d61a7da6caeb26aa",
+        "name": "energy2Influx",
+        "measurement": "energy",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Curious Community Labs",
+        "bucket": "cnc",
+        "x": 840,
+        "y": 1060,
+        "wires": []
     }
 ]
