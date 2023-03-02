@@ -1,0 +1,13 @@
+Time,State-CNC,State-Lasercutter,State-3D-Printer
+2023-03-01 12:31:28,Connected,Connected,Connected
+2023-03-01 12:31:29,Idle,Idle,Idle
+2023-03-01 12:31:30,Idle, Run,Idle
+2023-03-01 12:31:31,Run,Idle,Run
+2023-03-01 12:31:32,Idle,Run,Run
+2023-03-01 12:31:33,Run,Run,Run
+2023-03-01 12:31:52,Idle,Idle,Run
+2023-03-01 12:31:52,Idle,Run,Idle
+2023-03-01 12:32:17,Idle,Run,Idle
+2023-03-01 12:32:20,Run,Idle,Run
+2023-03-01 12:32:39,Idle,Run,Run
+2023-03-01 12:32:39,Idle,Idle,Idle
