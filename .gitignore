@@ -4,12 +4,15 @@
 *.so
 *.swp
 export
+img
 tmp
 
 # Nix
 .direnv
 .pre-commit-config.yaml
 result
+*.img*
+*.qcow2
 
 # Python
 /*.py[cod]
@@ -23,11 +26,32 @@ result
 /flow_backup.json
 
 # Mkdocs
+dist
 docs/_*
 site
 
 # macOS
 .DS_Store
 
+# KiCad
+*.000
+*.bak
+*.bck
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*-backups
+*.kicad_prl
+*.sch-bak
+*~
+_autosave-*
+*.tmp
+*-save.pro
+*-save.kicad_pcb
+fp-info-cache*
+*.net
+*.dsn
+*.ses
+
 # Misc
+template
 TODOS.md
