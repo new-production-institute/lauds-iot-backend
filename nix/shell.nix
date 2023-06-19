@@ -1,7 +1,7 @@
 {self, ...}: system:
 with self.pkgs.${system};
   mkShell {
-    name = "FabNet";
+    name = "Smart Energy Monitor";
     nativeBuildInputs =
       [
         # Development

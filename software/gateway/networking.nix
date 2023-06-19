@@ -5,7 +5,7 @@
   ...
 }: {
   networking.firewall.enable = lib.mkForce true;
-  networking.wireless.enable = lib.mkDefault true;
+  # networking.wireless.enable = lib.mkDefault true;
   networking.networkmanager.enable = lib.mkDefault true;
 
   services.avahi.enable = lib.mkDefault true;

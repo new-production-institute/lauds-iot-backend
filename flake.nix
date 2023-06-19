@@ -1,5 +1,5 @@
 {
-  description = "FabNet IoT Platform";
+  description = "Smart Energy Monitor";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -91,11 +91,11 @@
       };
 
       deploy.nodes.gateway = {
-        hostname = "fabnet";
+        hostname = "sem";
         fastConnection = true;
         profiles = {
           system = {
-            sshUser = "fabnet";
+            sshUser = "sem";
             path =
               deploy-rs.lib.aarch64-linux.activate.nixos
               self.nixosConfigurations.gateway;
