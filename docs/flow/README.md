@@ -19,11 +19,12 @@ Flows are an organized sequence of nodes. Let's do the "first steps" by creating
 
 ## Plugins
 
-Node-RED uses plugins (e.g. for InfluxDB or own Dashboard capabilites).
 
-You can access the plugins in the right burger menu.
+Node-RED uses plugins. You can access the plugins in the right burger menu. We already added  plugins for InfluxDB, an aggregator/tranformer from watt to kwh and capabilites for Node-RED's own Dashboard capabilites, so you don't have to add them.
 
 ![Plugins](./docs/images/node-red-plugins.png)
+
+Of course you can install more plugins in this section, but it's better, to add them to [package.json](../../software/flow/package.json) and build a new Docker image using the [Dockerfile](../../software/flow/Dockerfile) provided in this project. 
 
 ## First steps
 
