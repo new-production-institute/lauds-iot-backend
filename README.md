@@ -11,6 +11,16 @@ This project is a backend solution for prototyping Internet of Things (IoT) serv
 * [InfluxDB](https://www.influxdata.com/): High-performance data storage
 * [Node-RED](https://nodered.org/): Flow-based development tool for visual programming and data flow automation
 
+## Architecture overview
+
+Data is collected by IoT devices, e.g. an ESP32 based power monitor. These devices *publish* their data via MQTT into a topic in a message broker. We use Eclipse Mosquitto as a MQTT message broker.
+
+Node-RED is used to read and transform or combine data and to implement more sophicsticated use cases like notifications or worksflow. Node-RED *subscribes* to topics in Mosquitto and can be used to save transformed data into a database.
+
+As our data is bases on time, we are using a *time series database* to store information. We used InfluxDB as this database.
+
+Dashboards can already be created in Node-RED, but to be more flexible (and include more options) we are using Grafana. Grafana reads data from our *database* and *other sources* (like CSV files on the Internet) and displays them in a nice dashboard.
+
 ## Prerequisites
 
 ### Docker
@@ -22,6 +32,7 @@ First install Docker and `docker-compose`:
 * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
 If you want to use an UI for Docker, you can optionally also use [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+
 
 ## Installation
 
@@ -63,7 +74,7 @@ Node-RED is also running in Docker and is exposed on port `1880`: http://localho
 
 ### InfluxDB
 
-[InfluxDB](https://www.influxdata.com) is a database for any time series data with a single. It runs in Docker and is exposed on port `8086`: http://localhost:8086/ (you have to create an initial user in just a few simple steps)
+[InfluxDB](https://www.influxdata.com) is a database for any time series data. It runs in Docker and is exposed on port `8086`: http://localhost:8086/ (you have to create an initial user in just a few simple steps)
 
 ### Grafana
 
