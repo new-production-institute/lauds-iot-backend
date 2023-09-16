@@ -55,6 +55,6 @@ You can view the dashboard in an (also mobile) web browser.
 
 ![Mobile view](./docs/images/5-dashboard.png)
 
-Have a look at the flow also in [this repository](./00-dashboard-example/dashboard.json).
+Have a look at the flow also in [this repository](./docs/00-dashboard-example/dashboard.json).
 
 You can also [connect to InfluxDB](./docs/node-influx.md).
