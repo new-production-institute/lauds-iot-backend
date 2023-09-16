@@ -1,4 +1,4 @@
-version: '3'
+version: '3.2'
 services:
   mosquitto:
     # https://hub.docker.com/_/eclipse-mosquitto
@@ -16,9 +16,7 @@ services:
     ports:
       - 8086:8086
     volumes:
-      - type: bind
-        source: ../database/influxdb2
-        target: /var/lib/influxdb2
+      - influxdb2:/var/lib/influxdb2
 
   grafana:
     # https://hub.docker.com/r/grafana/grafana
@@ -29,8 +27,8 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ../dashboard/grafana:/var/lib/grafana
-      - ../dashboard/flows.json:/data/flows.json
+      - grafana-dashboards:/var/lib/grafana
+      - grafana-data:/data/
       - ../dashboard/grafana.ini:/etc/grafana/grafana.ini
 
   nodered:
@@ -47,4 +45,10 @@ services:
       - NODE_RED_ENABLE_PROJECTS=true
       - FLOWS=flows.json
     volumes:
-      - ../flow:/data
+      - nodered-data:/data
+volumes:
+  influxdb2:
+  grafana-dashboards: 
+  grafana-data: 
+  nodered-data:
+
