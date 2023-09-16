@@ -1,12 +1,11 @@
 ---
-site_name: iot-platform
-site_description: IoT platform for analyzing open lab resource consumption and machine status
-site_url: https://iot-platform.curious.bio/
-repo_name: iot-platform
-repo_url: https://code.curious.bio/curious.bio/iot-platform
+site_name: iot-backend
+site_description: An Open-Source prototype for collecting, working with and displaying sensor data from MQTT enabled IoT devices.
+repo_name: iot-backend
+repo_url: https://code.curious.bio/curious.bio/iot-backend
 
 nav:
-  - Home: documents/index.md
+  - Home: README.md
 
 theme:
   logo: images/logos/iot-platform.svg
@@ -64,18 +63,6 @@ markdown_extensions:
           - overrides/.icons
   - pymdownx.tasklist:
       custom_checkbox: true
-
-extra:
-  homepage: https://iot-platform.curious.bio/
-  social:
-    - icon: fontawesome/brands/comments-alt
-      link: https://matrix.to/#/#iot-platform:curious.bio
-    - icon: fontawesome/brands/mastodon
-      link: https://social.curious.bio/@iot-platform
-  generator: false
-
-extra_css:
-  - stylesheets/extra.css
 
 copyright: >
   Copyright &copy; 2023 Curious Community Labs e. V.
