@@ -32,7 +32,7 @@ git clone https://code.curious.bio/simonox/iot-backend
 cd iot-backend
 ```
 
-### Build and kaunch Docker Containers
+### Build and launch Docker containers
 
 Most Docker containers are of the shelf, but the Node-RED container has the be built, so some usefull plugins are already included. You can build and run these Docker containers in a single step:
 
@@ -59,13 +59,11 @@ There is also a *very* usefuly tool to debug MQTT: [MQTT Explorer](https://githu
 
 It provides a browser-based editor that makes it easy to wire together flows using the wide range of nodes in the palette that can be deployed to its runtime in a single-click
 
-NodeRed is also running in Docker: http://localhost:1880/
+NodeRed is also running in Docker and is exposed on port `1880`: http://localhost:1880/
 
 ### InfluxDB
 
-[InfluxDB](https://www.influxdata.com) is a database for any time series data with a single. It runs in Docker and is exposed on port `8086`:
-
-InfluxDb is running here: http://localhost:8086/ (you have to create an initial user in just a few simple steps)
+[InfluxDB](https://www.influxdata.com) is a database for any time series data with a single. It runs in Docker and is exposed on port `8086`: http://localhost:8086/ (you have to create an initial user in just a few simple steps)
 
 ### Grafana
 
