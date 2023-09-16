@@ -32,7 +32,9 @@ git clone https://code.curious.bio/simonox/iot-backend
 cd iot-backend
 ```
 
-### Launch Docker Containers
+### Build and kaunch Docker Containers
+
+Most Docker containers are of the shelf, but the Node-RED container has the be built, so some usefull plugins are already included. You can build and run these Docker containers in a single step:
 
 ```sh
 docker-compose --file software/container/docker-compose.yml up --force-recreate --build
@@ -71,11 +73,14 @@ InfluxDb is running here: http://localhost:8086/ (you have to create an initial 
 
 You can login to Grafana: http://localhost:3000/login (admin:admin)
 
-Have a look at the [HowTo in this repository](./docs/dashboard/README.md).
 
 ## Usage
 
-### Setting up a simple Flow
+### Setting up Grafana
+
+Have a look at the [HowTo in this repository](./docs/dashboard/README.md).
+
+### Setting up a simple flow in Node-RED
 
 A simple introduction to Node-RED can be found - along with the nodes / the code -  in [this repository, please have a look](./docs/flow/README.md)! 
 
