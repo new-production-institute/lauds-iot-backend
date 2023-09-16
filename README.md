@@ -59,7 +59,7 @@ There is also a *very* usefuly tool to debug MQTT: [MQTT Explorer](https://githu
 
 It provides a browser-based editor that makes it easy to wire together flows using the wide range of nodes in the palette that can be deployed to its runtime in a single-click
 
-NodeRed is also running in Docker and is exposed on port `1880`: http://localhost:1880/
+Node-RED is also running in Docker and is exposed on port `1880`: http://localhost:1880/
 
 ### InfluxDB
 
