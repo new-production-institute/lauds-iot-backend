@@ -85,7 +85,7 @@ A more sophisticated exampe on how to connect Node-RED to influx is also availab
 
 ### Setting up Grafana
 
-Have a look at the [HowTo in this repository](./docs/dashboard/README.md).
+Have a look at the [the document in this repository](./docs/dashboard/README.md).
 
 
 ### Attaching a Shelly plug
