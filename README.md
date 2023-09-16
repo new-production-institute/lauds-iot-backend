@@ -103,6 +103,17 @@ Have a look at the [the document in this repository](./docs/dashboard/README.md)
 
 As an example you can use a Shelly plug flashed with Tasmota and feed MQTT data with Node-RED into InfluxDB and visualize it with Grafana. Have a look, [here](./docs/shelly/README.md).
 
+## Backup und hosting
+
+This is just a prototype. You should not expose the services as-it-is to the public internet.
+
+Also you have to think about a backup solution. At the moment data lives in Docker volumes, that could be backed up:
+
+* influxdb2: The time series database
+* grafana-dashboards: Grafana dashboards 
+* grafana-data: Grafana data 
+* nodered-data: Flows created in Node-RED
+
 ## Contribution
 
 Feel free to open an issue for bugs, feature requests, or questions. Contributions are welcome.
