@@ -74,9 +74,7 @@ InfluxDb is running here: http://localhost:8086/ (you have to create an initial 
 You can login to Grafana: http://localhost:3000/login (admin:admin)
 
 
-## Usage
-
-
+## Examples and set-up
 
 ### Setting up a simple flow in Node-RED
 
@@ -86,9 +84,15 @@ A simple introduction to Node-RED can be found - along with the nodes / the code
 
 A more sophisticated exampe on how to connect Node-RED to influx is also available in [this repository](./docs/flow/docs/node-influx.md).
 
+
 ### Setting up Grafana
 
 Have a look at the [HowTo in this repository](./docs/dashboard/README.md).
+
+
+### Attaching a Shelly plug
+
+As an example you can use a Shelly plug flashed with Tasmota and feed MQTT data with Node-RED into InfluxDB and visualize it with Grafana. Have a look, [here](./docs/shelly/README.md).
 
 ## Contribution
 
