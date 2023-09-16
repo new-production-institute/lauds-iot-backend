@@ -20,8 +20,6 @@ As the CSV is reachable by Grafana, you can create a data source, there.
 
 ![Mounting a CSV file](./images/grafana-csv-data-source.png)
 
-> grafana.ini is also mounted from [this repository](../grafana.ini). So local data mode is enabled.
-
 Whith Grafana having access to data in the CSV file, it's easy to access this data to create a dashboard.
 
 ![Using CSV data](./images/grafana-csv-data.png)

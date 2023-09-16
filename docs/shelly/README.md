@@ -2,8 +2,6 @@
 
 Shelly Plugs S are quite cheap but relatively accurate to measure power consumptions less than 2.5 kW.
 
-![Shelly Plug](https://shelly.hr/wp-content/uploads/2020/11/shelly_plug_s_1-1.jpg)
-
 In our [smart-energy-montior](https://code.curious.bio/curious.bio/smart-energy-monitor) project we already have set up a Shelly using Tasmota, on Open Source alternative firmware, that also runs on various other consumer off the shelf devices.
 
 
