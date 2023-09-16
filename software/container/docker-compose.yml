@@ -34,7 +34,6 @@ services:
   nodered:
     # https://hub.docker.com/r/grafana/grafana
     # https://nodered.org/docs/getting-started/docker
-    image: nodered/node-red:3.0.2
     depends_on:
       - influxdb
     restart: always
@@ -46,6 +45,8 @@ services:
       - FLOWS=flows.json
     volumes:
       - nodered-data:/data
+    build: ../flow
+
 volumes:
   influxdb2:
   grafana-dashboards: 

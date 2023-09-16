@@ -35,7 +35,7 @@ cd iot-backend
 ### Launch Docker Containers
 
 ```sh
-docker-compose up -d
+docker-compose --file software/container/docker-compose.yml up --force-recreate --build
 ```
 
 ## Usage
@@ -59,13 +59,11 @@ It provides a browser-based editor that makes it easy to wire together flows usi
 
 NodeRed is also running in Docker: http://localhost:1880/
 
-A simple introduction to Node-RED can be found - along with the nodes / the code -  in [this repository, please have a look](./docs/flow/README.md)! 
-
 ### InfluxDB
 
 [InfluxDB](https://www.influxdata.com) is a database for any time series data with a single. It runs in Docker and is exposed on port `8086`:
 
-InfluxDb is running here: http://localhost:8086/ (admin:adminadmin)
+InfluxDb is running here: http://localhost:8086/ (you have to create an initial user in just a few simple steps)
 
 ### Grafana
 
@@ -74,6 +72,13 @@ InfluxDb is running here: http://localhost:8086/ (admin:adminadmin)
 You can login to Grafana: http://localhost:3000/login (admin:admin)
 
 Have a look at the [HowTo in this repository](./docs/dashboard/README.md).
+
+## Usage
+
+### Setting up a simple Flow
+
+A simple introduction to Node-RED can be found - along with the nodes / the code -  in [this repository, please have a look](./docs/flow/README.md)! 
+
 
 ## Contribution
 

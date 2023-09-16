@@ -23,8 +23,6 @@ Flows are an organized sequence of nodes. Let's do the "first steps" by creating
 
 ## Plugins
 
-> The plugin folder is pushed into this Git repository and is mounted in Docker. Maybe we should use an own Docker file, instead.
-
 Node-RED uses plugins (e.g. for InfluxDB or own Dashboard capabilites).
 
 You can access the plugins in the right burger menu.
@@ -33,7 +31,7 @@ You can access the plugins in the right burger menu.
 
 ## First steps
 
-For debuging I already added Node-RED's own dashboard (sure, we are going to use Grafana, later).
+For debuging you can add Node-RED's own dashboard (sure, we are going to use Grafana, later).
 
 ![Overview](./docs/images/1-overview.png)
 
