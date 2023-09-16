@@ -31,7 +31,7 @@ You can use this `token` to create a connection in Node-RED.
 
 Then the measurements should be visible in [Influx Data Explorer](http://localhost:8086/orgs/721027680173bf2f/data-explorer?bucket=test).
 
-![Influx Data Explorer](./docs/influx-data-explorer.png)
+![Influx Data Explorer](./images/influx-data-explorer.png)
 
 As the data is now stored in Influx, [let's create a dashboard in Grafana](../../dashboard/README.md).
 
