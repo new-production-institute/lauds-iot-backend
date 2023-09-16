@@ -76,14 +76,19 @@ You can login to Grafana: http://localhost:3000/login (admin:admin)
 
 ## Usage
 
-### Setting up Grafana
 
-Have a look at the [HowTo in this repository](./docs/dashboard/README.md).
 
 ### Setting up a simple flow in Node-RED
 
-A simple introduction to Node-RED can be found - along with the nodes / the code -  in [this repository, please have a look](./docs/flow/README.md)! 
+A simple introduction to Node-RED can be found - along with the nodes / the code -  in [this repository](./docs/flow/README.md).
 
+### Connecting Node-RED to Influx
+
+A more sophisticated exampe on how to connect Node-RED to influx is also available in [this repository](./docs/flow/docs/node-influx.md).
+
+### Setting up Grafana
+
+Have a look at the [HowTo in this repository](./docs/dashboard/README.md).
 
 ## Contribution
 
