@@ -13,34 +13,32 @@ This project is a backend solution for prototyping Internet of Things (IoT) serv
 
 ## Prerequisites
 
+### Docker
+
+First install Docker and `docker-compose`:
+
 * [Docker](https://docs.docker.com/engine/install/)
 * [Docker Compose](https://docs.docker.com/compose/)
 * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
+If you want to use an UI for Docker, you can optionally also use [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+
 ## Installation
 
+### Clone the Repository
+
 ```sh
-git clone https://github.com/your-repo/iot-backend-prototyping.git
-cd iot-backend-prototyping
+git clone https://code.curious.bio/simonox/iot-backend
+cd iot-backend
 ```
 
-Launch Docker Containers
+### Launch Docker Containers
 
-bash
-
+```sh
 docker-compose up -d
-
-
-## Docker
-
-First install DockerDesktop and `docker-compose`:
-
-- https://www.docker.com/products/docker-desktop/
-- https://docs.docker.com/compose/install/
-
-```sh
-docker-compose --file software/container/docker-compose.yml up
 ```
+
+## Usage
 
 ### Mosquitto
 
@@ -61,7 +59,7 @@ It provides a browser-based editor that makes it easy to wire together flows usi
 
 NodeRed is also running in Docker: http://localhost:1880/
 
-A simple introduction to Node-RED can be found - along with the nodes / the code -  in [this repository, please have a look](./software/flow/README.md)! 
+A simple introduction to Node-RED can be found - along with the nodes / the code -  in [this repository, please have a look](./docs/flow/README.md)! 
 
 ### InfluxDB
 
@@ -75,4 +73,12 @@ InfluxDb is running here: http://localhost:8086/ (admin:adminadmin)
 
 You can login to Grafana: http://localhost:3000/login (admin:admin)
 
-Have a look at the [HowTo in this repository](./software/dashboard/README.md).
+Have a look at the [HowTo in this repository](./docs/dashboard/README.md).
+
+## Contribution
+
+Feel free to open an issue for bugs, feature requests, or questions. Contributions are welcome.
+
+## License
+
+This project follows the [REUSE Specification](https://reuse.software/spec/) and is licensed under the [GPL 3.0 or later License - see the LICENSE file](./LICENSES/GPL-3.0-or-later.txt) for details.
