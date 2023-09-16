@@ -676,5 +676,24 @@
                 "file": "/data/node_modules/node-red-contrib-influxdb/influxdb.js"
             }
         }
+    },
+    "node-red-contrib-watt2kwh": {
+        "name": "node-red-contrib-watt2kwh",
+        "version": "0.1.2",
+        "local": true,
+        "user": true,
+        "nodes": {
+            "simpletime": {
+                "name": "simpletime",
+                "types": [
+                    "watt2kwh"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-watt2kwh",
+                "file": "/data/node_modules/node-red-contrib-watt2kwh/watt2kwh.js"
+            }
+        }
     }
 }
