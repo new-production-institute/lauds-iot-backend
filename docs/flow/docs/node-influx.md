@@ -4,7 +4,7 @@ Already added to this project is [node-red-contrib-influxdb](https://flows.noder
 
 In Node-RED we will be passing the power consumption number through MQTT. 
 
-![Overview](./docs/images/influx-flow.png)
+![Overview](./images/influx-flow.png)
 
 By default this will be passed as a string, so we need to create a function to convert it into a Number before storing it in InfluxDB. 
 
@@ -15,25 +15,25 @@ msg.payload = Number(msg.payload)
 return msg;
 ```
 
-![Function](./docs/images/influx-function.png)
+![Function](./images/influx-function.png)
 
 You can forward this message to InfluxDB. 
 
-![Influx Node](./docs/images/influx-node.png) 
+![Influx Node](./images/influx-node.png) 
 
 The `URL`of our InfluxDB is `http://influxdb:8086`. In InfluxDB you have to create a `token` to connect: [Load Data -> API Tokens](http://localhost:8086/orgs/721027680173bf2f/load-data/tokens).
 
-![Influx Create Token](./docs/images/influx-create-token.png)
+![Influx Create Token](./images/influx-create-token.png)
 
 You can use this `token` to create a connection in Node-RED.
 
-![Influx Connection](./docs/images/influx-connection.png)
+![Influx Connection](./images/influx-connection.png)
 
 Then the measurements should be visible in [Influx Data Explorer](http://localhost:8086/orgs/721027680173bf2f/data-explorer?bucket=test).
 
-![Influx Data Explorer](./docs/images/influx-data-explorer.png)
+![Influx Data Explorer](./docs/influx-data-explorer.png)
 
-As the data is now stored in Influx, [let's create a dashboard in Grafana](../dashboard/README.md).
+As the data is now stored in Influx, [let's create a dashboard in Grafana](../../dashboard/README.md).
 
 # Links
 
