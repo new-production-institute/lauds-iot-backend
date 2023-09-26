@@ -1,12 +1,13 @@
 ---
 marp: true
+class: invert
 ---
 
 # Fab City Dashboard
 
 This is a prototype of data management platform for Fab City Hamburg based on existing open source solutions.
 
-![](https://code.curious.bio/curious.bio/iot-backend/raw/branch/main/docs/workshop/images/architecure.svg)
+![width:100pxy](https://code.curious.bio/curious.bio/iot-backend/raw/branch/main/docs/workshop/images/architecure.svg)
 
 ---
 
@@ -59,20 +60,26 @@ Sensors can be build or bought:
 
 ---
 
-# Example sensor - Open Engergy Montior
+# Example sensor - Open Engergy Monitor
 
-![](https://code.curious.bio/curious.bio/smart-energy-monitor/media/branch/main/docs/images/breadboard.png)
-![](https://code.curious.bio/curious.bio/smart-energy-monitor/media/branch/main/docs/images/clamp1.jpeg)
+![[bg contain]](https://code.curious.bio/curious.bio/smart-energy-monitor/media/branch/main/docs/images/breadboard.png)
+
+---
+
+# Example sensor - Open Engergy Monitor
+
+![bg left](https://code.curious.bio/curious.bio/smart-energy-monitor/media/branch/main/docs/images/clamp1.jpeg)
 
 ---
 
 # Example sensor - Shelly Plug 
-![](https://code.curious.bio/curious.bio/smart-energy-monitor/media/branch/main/docs/images/shelly_plug_s_1-1.jpg)
+
+![bg right](https://code.curious.bio/curious.bio/smart-energy-monitor/media/branch/main/docs/images/shelly_plug_s_1-1.jpg)
 
 ---
 
 # Example sensor - GCode Sender
-![](https://pad.fabcity.hamburg/uploads/586181bc-6de2-46b8-9eba-8a11fbb59a5f.png)
+![bg left](https://pad.fabcity.hamburg/uploads/586181bc-6de2-46b8-9eba-8a11fbb59a5f.png)
 
 ---
 
@@ -95,7 +102,7 @@ Sensors can be build or bought:
 * routes them to subcribed clients 
 * clients subscribe to topic patterns
 
-![](https://upload.wikimedia.org/wikipedia/commons/8/82/MQTT_protocol_example_without_QoS.svg)
+![bg right](https://upload.wikimedia.org/wikipedia/commons/8/82/MQTT_protocol_example_without_QoS.svg)
 
 
 ---
@@ -104,7 +111,7 @@ Sensors can be build or bought:
 
 The idea behind it is to make it very easy to connect APIs, hardware devices, and anything else accessible over some type of network connection.
 
-![](https://nodered.org/images/nr-image-1.png)
+![bg left](https://nodered.org/images/nr-image-1.png)
 * open-source
 * low-code
 * visual programming tool
@@ -114,10 +121,10 @@ The idea behind it is to make it very easy to connect APIs, hardware devices, an
 
 # Node-RED - Core Concepts
 
-Nodes are the important part of Node-Red. 
+Nodes are the important part of Node-RED, they:
 
 *  are triggered by either receiving a message object from a previous node or an external event like an MQTT event 
-*  processes the message or event and then passes it on to the next node
+*  process messages or events and then passes them on to the next node
 
 A node can:
 
@@ -147,9 +154,19 @@ Node-RED uses plugins:
 
 # Database - InfluxDB
 
-InfluxDB is a database for any time series data.
+InfluxDB is a database for any time series data. Time series data is everywhere, since time is a constituent of everything that is observable. As our world gets increasingly instrumented, sensors and systems are constantly emitting a relentless stream of time series data. For example:
 
-![](https://code.curious.bio/curious.bio/iot-backend/media/branch/main/docs/flow/docs/images/influx-data-explorer.png)
+* Electrical activity in the brain
+* Rainfall measurements
+* Monthly subscribers
+* Heartbeats per minute
+* Electricity consumed by a chain saw
+
+----
+
+# Database - InfluxDB
+
+![height:600](https://code.curious.bio/curious.bio/iot-backend/media/branch/main/docs/flow/docs/images/influx-data-explorer.png)
 
 ---
 
@@ -167,23 +184,28 @@ As a visualization tool, Grafana is a popular component in monitoring stacks, of
 
 # Dashboard - Example
  
-![](https://code.curious.bio/curious.bio/iot-backend/raw/branch/main/docs/workshop/images/sampledashboard.png)
+![bg left](https://code.curious.bio/curious.bio/iot-backend/raw/branch/main/docs/workshop/images/sampledashboard.png)
 
 
 ---
 
 # Let's start
 
-* Check installation of
+* Check installation requirements
     * 64bit environment (AMD64, ARM64)
     * Docker
     * Docker-Compose
 * Checkout the repository: 
     * https://code.curious.bio/curious.bio/iot-backend
-* Let's follow the README, together
+* Let's follow the README, together!
+
+---
+# 🫵 Hands on
 
 ---
 
 # Where can I find this presentation?
 
 * https://code.curious.bio/curious.bio/iot-backend/src/branch/main/docs/workshop
+
+![bg left](https://code.curious.bio/curious.bio/iot-backend/raw/branch/main/docs/workshop/images/qrcode.png)
