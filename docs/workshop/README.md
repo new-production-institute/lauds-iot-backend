@@ -3,6 +3,12 @@ marp: true
 class: invert
 ---
 
+# IoT-Workshop 
+
+![bg](https://curious.bio/wp-content/uploads/2023/09/image.png)
+
+--- 
+
 # Fab City Dashboard
 
 This is a prototype of data management platform for Fab City Hamburg based on existing open source solutions.
