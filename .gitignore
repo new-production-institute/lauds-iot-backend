@@ -7,6 +7,10 @@ export
 img
 tmp
 
+# marp
+
+docs/workshop/README.html
+
 # Nix
 .direnv
 .pre-commit-config.yaml

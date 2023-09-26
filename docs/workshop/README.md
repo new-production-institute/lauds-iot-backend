@@ -97,7 +97,7 @@ Sensors can be build or bought:
 
 # MQTT - Components
 
-* one message broker (Mosquito) and many clients
+* one message broker (Mosquitto) and many clients
 * broker receives published messages from clients
 * routes them to subcribed clients 
 * clients subscribe to topic patterns
@@ -142,7 +142,7 @@ Node-RED uses plugins:
 
 * extend functionality (like dashboard)
 * connectors (like influxdb)
-* libraries (like aggregating watts and traosnform them to khw)
+* libraries (like aggregating watts and transform them to khw)
 
 ---
 
@@ -206,6 +206,6 @@ As a visualization tool, Grafana is a popular component in monitoring stacks, of
 
 # Where can I find this presentation?
 
-* https://code.curious.bio/curious.bio/iot-backend/src/branch/main/docs/workshop
 
-![bg left](https://code.curious.bio/curious.bio/iot-backend/raw/branch/main/docs/workshop/images/qrcode.png)
+![](https://code.curious.bio/curious.bio/iot-backend/raw/branch/main/docs/workshop/images/qrcode.png)
+https://code.curious.bio/curious.bio/iot-backend/src/branch/main/docs/workshop
