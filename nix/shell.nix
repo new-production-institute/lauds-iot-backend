@@ -6,21 +6,12 @@ with self.pkgs.${system};
       [
         # Development
         editorconfig-checker
-        esptool
-        micropython
-        nodePackages.node-red
-        openscad
         pre-commit
-        python310Full
-        python310Packages.mkdocs
-        python310Packages.mkdocs-material
-        python310Packages.mkdocs-material-extensions
         yaml-language-server
       ]
       ++ lib.optionals (pkgs.hostPlatform.system == "x86_64-linux") [
         vscodium-fhs
         vscode-extensions.marp-team.marp-vscode
-        freecad
       ]
       ++ [
         # Linter
@@ -28,19 +19,15 @@ with self.pkgs.${system};
         yamllint
 
         # Nix
-        deploy-rs
         alejandra
         nixUnstable
-        rnix-lsp
+        nil
 
         # Service
         mosquitto
 
         # Misc
         reuse
-        zstd
-        wget
-        raspberrypi-eeprom
       ];
     shellHook = ''
       ${self.checks.${system}.pre-commit-check.shellHook}
