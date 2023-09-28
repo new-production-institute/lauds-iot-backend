@@ -28,6 +28,7 @@ with self.pkgs.${system};
 
         # Misc
         reuse
+        marp-cli
       ];
     shellHook = ''
       ${self.checks.${system}.pre-commit-check.shellHook}
