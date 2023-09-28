@@ -26,9 +26,12 @@ with self.pkgs.${system};
         # Service
         mosquitto
 
+        # Marp slides
+        marp-cli
+        chromium
+
         # Misc
         reuse
-        marp-cli
       ];
     shellHook = ''
       ${self.checks.${system}.pre-commit-check.shellHook}
