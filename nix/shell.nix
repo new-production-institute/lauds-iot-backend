@@ -19,6 +19,7 @@ with self.pkgs.${system};
       ]
       ++ lib.optionals (pkgs.hostPlatform.system == "x86_64-linux") [
         vscodium-fhs
+        vscode-extensions.marp-team.marp-vscode
         freecad
       ]
       ++ [
