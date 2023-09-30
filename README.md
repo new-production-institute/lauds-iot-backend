@@ -39,7 +39,7 @@ If you want to use an UI for Docker, you can optionally also use [Docker Desktop
 ### Clone the Repository
 
 ```sh
-git clone https://code.curious.bio/iot-backend
+git clone https://code.curious.bio/curious.bio/iot-backend
 cd iot-backend
 ```
 
