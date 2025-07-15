@@ -5,7 +5,7 @@ services:
     image: eclipse-mosquitto:2.0
     restart: always
     ports:
-      - 1883:1883
+      - 1886:1883
     volumes:
       - ../mqtt/mosquitto.conf:/mosquitto/config/mosquitto.conf
 
@@ -47,9 +47,20 @@ services:
       - nodered-data:/data
     build: ../flow
 
+  jupyter:
+    depends_on:
+      - influxdb
+    restart: always
+    ports:
+      - 8888:8888
+    volumes:
+      - jupyter-notebook-data:/data
+    build: ../jupyter
+
 volumes:
   influxdb2:
-  grafana-dashboards: 
-  grafana-data: 
+  grafana-dashboards:
+  grafana-data:
   nodered-data:
+  jupyter-notebook-data:
 
