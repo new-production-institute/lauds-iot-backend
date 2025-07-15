@@ -52,7 +52,7 @@ services:
       - influxdb
     restart: always
     ports:
-      - 8888:8888
+      - 8000:8000
     volumes:
       - jupyter-notebook-data:/data
     build: ../jupyter

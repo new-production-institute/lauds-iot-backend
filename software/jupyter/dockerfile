@@ -1,8 +1,17 @@
 # Use an official Python runtime as a parent image
 FROM python:3.11
 
+# Install git
+RUN apt-get update && apt-get install -y git
+
+# Clone your repository
+RUN git clone https://github.com/interfacerproject/Interfacer-notebook.git /app
+
 # Set the working directory to /app
 WORKDIR /app
+
+# Install Python dependencies if needed
+# RUN pip install -r pip_requirements.txt
 
 # Install Jupyter Notebook
 # RUN pip install jupyter
@@ -13,10 +22,10 @@ RUN pip install plotly
 # or pip3 install requests , pip3 install -U zenroom --pre and pip3 install plotly if not using conda
 
 # Make port 8888 available to the world outside this container
-EXPOSE 8888
+EXPOSE 8000
 
-# Define environment variable
-ENV NAME World
+# RUN touch outfile.py
+# CMD ["/bin/bash", "-c", "./doit.sh -o outfile"]
 
 # Run Jupyter Notebook when the container launches
-CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8000", "--no-browser", "--allow-root"]
