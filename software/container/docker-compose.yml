@@ -52,10 +52,20 @@ services:
       - influxdb
     restart: always
     ports:
-      - 8000:8000
+      - 8080:8080
     volumes:
       - jupyter-notebook-data:/data
     build: ../jupyter
+
+  server:
+    depends_on:
+      - influxdb
+    restart: always
+    ports:
+      - 8000:8000
+    volumes:
+      - server-data:/data
+    build: ../server
 
 volumes:
   influxdb2:
@@ -63,4 +73,5 @@ volumes:
   grafana-data:
   nodered-data:
   jupyter-notebook-data:
+  server-data:
 
