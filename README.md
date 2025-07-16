@@ -9,7 +9,9 @@ This project is a backend solution for prototyping Internet of Things (IoT) serv
 * [Eclipse Mosquitto](https://mosquitto.org): MQTT broker
 * [Grafana](https://grafana.com/): Real-time data visualization and monitoring dashboard
 * [InfluxDB](https://www.influxdata.com/): High-performance data storage
-* [Node-RED](https://nodered.org/): Flow-based development tool for visual programming and data flow automation
+* [NodeRED](https://nodered.org/): Flow-based development tool for visual programming and data flow automation
+* [Jupyter Notebook](https://jupyter.org/): a web application for creating and sharing computational documents
+* [Interfacer API](https://github.com/interfacerproject/Interfacer-notebook): an API for ingestion into the Interfacer application
 
 ## Architecture overview
 
@@ -78,10 +80,17 @@ Node-RED is also running in Docker and is exposed on port `1880`: http://localho
 
 ### Grafana
 
-[Grafana](https://grafana.com) is a software to build operational dashboards. It runs in Docker and is exposed on port `3000`:
+[Grafana](https://grafana.com) is visualisation software for building operational dashboards. It runs in Docker and is exposed on port `3000`:
 
 You can login to Grafana: http://localhost:3000/login (admin:admin)
 
+### Jupyter Notebook
+
+[Jupyter Notebook](https://jupyter.org/) is a web application for creating and sharing computational documents. It runs in Docker.
+
+### Interfacer API
+
+[Interfacer API](https://github.com/interfacerproject/Interfacer-notebook) is an API service for interacting with the [Interfacer Project](https://interfacerproject.dyne.org/)
 
 ## Examples and set-up
 
@@ -121,3 +130,4 @@ Feel free to open an issue for bugs, feature requests, or questions. Contributio
 ## License
 
 This project follows the [REUSE Specification](https://reuse.software/spec/) and is licensed under the [GPL 3.0 or later License - see the LICENSE file](./LICENSES/GPL-3.0-or-later.txt) for details.
+
