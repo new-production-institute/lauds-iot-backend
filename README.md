@@ -41,8 +41,8 @@ If you want to use an UI for Docker, you can optionally also use [Docker Desktop
 ### Clone the Repository
 
 ```sh
-git clone https://code.curious.bio/curious.bio/iot-backend
-cd iot-backend
+git clone https://github.com/dyne/lauds-iot-backend.git
+cd lauds-iot-backend
 ```
 
 ### Build and launch Docker containers
