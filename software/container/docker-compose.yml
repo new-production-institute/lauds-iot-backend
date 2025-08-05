@@ -47,9 +47,31 @@ services:
       - nodered-data:/data
     build: ../flow
 
+  jupyter:
+    depends_on:
+      - influxdb
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - jupyter-notebook-data:/data
+    build: ../jupyter
+
+  server:
+    depends_on:
+      - influxdb
+    restart: always
+    ports:
+      - 8000:8000
+    volumes:
+      - server-data:/data
+    build: ../server
+
 volumes:
   influxdb2:
-  grafana-dashboards: 
-  grafana-data: 
+  grafana-dashboards:
+  grafana-data:
   nodered-data:
+  jupyter-notebook-data:
+  server-data:
 
