@@ -4,6 +4,7 @@ services:
     # https://hub.docker.com/_/eclipse-mosquitto
     image: eclipse-mosquitto:2.0
     restart: always
+    container_name: mosquitto
     ports:
       - 1883:1883
     volumes:
@@ -13,6 +14,7 @@ services:
     # https://hub.docker.com/_/influxdb
     image: influxdb:2.6
     restart: always
+    container_name: influxdb
     ports:
       - 8086:8086
     volumes:
@@ -24,6 +26,7 @@ services:
     depends_on:
       - influxdb
     restart: always
+    container_name: grafana
     ports:
       - 3000:3000
     volumes:
@@ -37,6 +40,7 @@ services:
     depends_on:
       - influxdb
     restart: always
+    container_name: nodered
     ports:
       - 1880:1880
     environment:
@@ -51,6 +55,7 @@ services:
     depends_on:
       - influxdb
     restart: always
+    container_name: jupyter
     ports:
       - 8080:8080
     volumes:
@@ -61,6 +66,7 @@ services:
     depends_on:
       - influxdb
     restart: always
+    container_name: interfacer_api
     ports:
       - 8000:8000
     volumes:
