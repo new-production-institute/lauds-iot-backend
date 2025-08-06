@@ -5,6 +5,8 @@ services:
     image: eclipse-mosquitto:2.0
     restart: always
     container_name: mosquitto
+    networks:
+      - lauds_gw_network
     ports:
       - 1883:1883
     volumes:
@@ -15,6 +17,8 @@ services:
     image: influxdb:2.6
     restart: always
     container_name: influxdb
+    networks:
+      - lauds_gw_network
     ports:
       - 8086:8086
     volumes:
@@ -27,6 +31,8 @@ services:
       - influxdb
     restart: always
     container_name: grafana
+    networks:
+      - lauds_gw_network
     ports:
       - 3000:3000
     volumes:
@@ -41,6 +47,8 @@ services:
       - influxdb
     restart: always
     container_name: nodered
+    networks:
+      - lauds_gw_network
     ports:
       - 1880:1880
     environment:
@@ -56,6 +64,8 @@ services:
       - influxdb
     restart: always
     container_name: jupyter
+    networks:
+      - lauds_gw_network
     ports:
       - 8080:8080
     volumes:
@@ -67,6 +77,8 @@ services:
       - influxdb
     restart: always
     container_name: interfacer_api
+    networks:
+      - lauds_gw_network
     ports:
       - 8000:8000
     volumes:
@@ -81,3 +93,5 @@ volumes:
   jupyter-notebook-data:
   server-data:
 
+networks:
+  lauds_gw_network:
