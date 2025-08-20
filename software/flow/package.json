@@ -10,6 +10,8 @@
 	}
     },
     "dependencies": {
+        "@cgjgh/node-red-dashboard-2-ui-state-timeline": "^0.0.11",
+        "@flowfuse/node-red-dashboard": "^1.25.0",
         "node-red": "^4.0.9",
         "install": "^0.13.0",
 	"node-red-contrib-graphql": "^2.2.0",
@@ -17,7 +19,6 @@
 	"node-red-contrib-qrcode-generator": "^0.4.0",
         "node-red-contrib-influxdb": "^0.6.1",
         "node-red-contrib-watt2kwh": "~0.1.2",
-        "node-red-dashboard": "^3.3.1",
         "npm": "^9.5.1",
 	"zenroom": "^5.24.3"
     },
