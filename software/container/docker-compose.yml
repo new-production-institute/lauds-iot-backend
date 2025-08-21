@@ -95,3 +95,10 @@ volumes:
 
 networks:
   lauds_gw_network:
+    #    driver: ghcr.io/devplayer0/docker-net-dhcp:release-linux-arm64-v8
+    #    driver_opts:
+    #      ipv6: 'true'
+    #      ignore_conflicts: 'false'
+    #      skip_routes: 'false'
+    #    ipam:
+    #      driver: 'null'
