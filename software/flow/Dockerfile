@@ -7,6 +7,7 @@ RUN npm install --unsafe-perm --no-update-notifier --no-fund --only=production
 RUN mkdir -p /tmp/scripts
 COPY --chown=node-red nodered_secure_admin.sh /tmp/scripts
 COPY --chown=node-red settings.js /data/settings.js.orig
+COPY --chown=node-red flows.json /data/
 USER node-red
 RUN chmod +x /tmp/scripts/nodered_secure_admin.sh
 RUN /tmp/scripts/nodered_secure_admin.sh
