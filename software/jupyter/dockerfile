@@ -16,6 +16,8 @@ RUN pip install notebook
 RUN pip install requests
 RUN pip install zenroom
 RUN pip install plotly
+RUN pip install qrcode
+
 # or pip3 install requests , pip3 install -U zenroom --pre and pip3 install plotly if not using conda
 
 # Make port 8000 available to the world outside this container
