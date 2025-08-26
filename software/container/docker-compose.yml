@@ -71,6 +71,8 @@ services:
     volumes:
       - jupyter-notebook-data:/data
     build: ../jupyter
+    environment:
+      - JUPYTER_TOKEN=${JUPYTER_TOKEN}
 
   server:
     depends_on:
