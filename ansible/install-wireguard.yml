@@ -1,0 +1,12 @@
+---
+- name: Install wireguard
+  hosts: all
+  tags: packages
+  tasks:
+    - name: Install Wireguard
+      apt:
+        name: wireguard
+        update_cache: yes
+    - name: Install ip
+      apt:
+        name: iproute2
