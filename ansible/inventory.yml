@@ -1,0 +1,9 @@
+stands:
+  hosts:
+# Add your hosts to provision here ...
+#   flirc-pi5:
+#     ansible_host: flirc-pi5.local
+#     ansible_user: root
+    flirc-pi5:
+      ansible_host: flirc-pi5.local
+      ansible_user: root
