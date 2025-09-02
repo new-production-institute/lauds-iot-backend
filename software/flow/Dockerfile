@@ -14,4 +14,4 @@ USER root
 RUN rm /data/flows.json
 USER node-red
 COPY --chown=node-red flows.json /data/flows.json
-# RUN chown node-red flows.json
+COPY --chown=node-red fchh-flows/ /data/lib/flows/fchh-flows/
