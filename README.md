@@ -44,6 +44,17 @@ If you want to use an UI for Docker, you can optionally also use [Docker Desktop
 git clone https://github.com/dyne/lauds-iot-backend.git
 cd lauds-iot-backend
 ```
+### Configure local credentials
+
+Create file `.env` to set default credentials
+
+```sh
+# NodeRed admin user password
+export NR_ADMIN_PW="<your NR admin user login password>"
+# Jupyter Notebook token
+export JUPYTER_TOKEN="<your Jupyter Notebook login token>"
+```
+
 
 ### Build and launch Docker containers
 
