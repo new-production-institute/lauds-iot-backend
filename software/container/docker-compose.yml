@@ -58,6 +58,12 @@ services:
     volumes:
       - nodered-data:/data
     build: ../flow
+    develop:
+      watch:
+        - action: sync+restart
+          path: ../flow/flows.json
+          target: /data/flows.json
+
 
   jupyter:
     depends_on:
