@@ -33,7 +33,7 @@ First install Docker and `docker-compose`:
 * [Docker Compose](https://docs.docker.com/compose/)
 * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
-If you want to use an UI for Docker, you can optionally also use [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+If Docker UI is preferred, you can optionally use [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
 
 ## Installation
@@ -58,10 +58,12 @@ export JUPYTER_TOKEN="<your Jupyter Notebook login token>"
 
 ### Build and launch Docker containers
 
-Most Docker containers are of the shelf, but the Node-RED container has the be built, so some usefull plugins are already included. You can build and run these Docker containers in a single step:
+Most Docker containers are off-the-shelf, but the Node-RED container is built with some useful plugins included. To build and run these Docker containers in a single step:
+
+Assuming required credentials above are set in `.env`
 
 ```sh
-docker-compose --file software/container/docker-compose.yml up --force-recreate --build
+source .env && docker-compose --file software/container/docker-compose.yml up --force-recreate --build
 ```
 
 ## Usage
@@ -75,13 +77,13 @@ mosquitto_sub -h localhost -t '#' -p 1883
 mosquitto_pub -h localhost -p 1883 -t '/' -m $(date --utc +%s)
 ```
 
-There is also a *very* usefuly tool to debug MQTT: [MQTT Explorer](https://github.com/thomasnordquist/MQTT-Explorer/), that is also available at [mqtt-explorer.com](https://mqtt-explorer.com/).
+A useful tool to debug MQTT is  [MQTT Explorer](https://mqtt-explorer.com/) found on [Github](https://github.com/thomasnordquist/MQTT-Explorer/).
 
 ### Node-RED
 
-[Node-RED](https://nodered.org) is a programming tool for wiring together hardware devices, APIs and online services in new and interesting ways.
+[Node-RED](https://nodered.org) is a low-code programming tool for wiring together hardware devices, APIs and online services in new and interesting ways.
 
-It provides a browser-based editor that makes it easy to wire together flows using the wide range of nodes in the palette that can be deployed to its runtime in a single-click
+It provides a browser-based editor that makes it easy to wire together flows using the wide range of nodes in the palette that can be deployed to its runtime in a single-click.
 
 Node-RED is also running in Docker and is exposed on port `1880`: http://localhost:1880/
 
@@ -97,7 +99,7 @@ You can login to Grafana: http://localhost:3000/login (admin:admin)
 
 ### Jupyter Notebook
 
-[Jupyter Notebook](https://jupyter.org/) is a web application for creating and sharing computational documents. It runs in Docker.
+[Jupyter Notebook](https://jupyter.org/) is a web application for creating and sharing computational documents.
 
 ### Interfacer API
 
