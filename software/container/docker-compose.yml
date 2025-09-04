@@ -73,6 +73,7 @@ services:
     build: ../jupyter
     environment:
       - JUPYTER_TOKEN=${JUPYTER_TOKEN}
+      - IF_KEY=${IF_KEY}
 
   server:
     depends_on:
