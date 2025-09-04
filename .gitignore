@@ -59,3 +59,6 @@ fp-info-cache*
 # Misc
 template
 TODOS.md
+software/flow/.gitattributes
+software/flow/locNR
+.flows.json.backup
