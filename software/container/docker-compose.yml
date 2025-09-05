@@ -80,7 +80,10 @@ services:
     environment:
       - JUPYTER_TOKEN=${JUPYTER_TOKEN}
       - IF_KEY=${IF_KEY}
+      - DPP_SCHEMA=${DPP_SCHEMA}
       - DPP_FQDN=${DPP_FQDN}
+      - DPP_PATH=${DPP_PATH}
+      - DPP_QUERY=${DPP_QUERY}
 
   server:
     depends_on:
