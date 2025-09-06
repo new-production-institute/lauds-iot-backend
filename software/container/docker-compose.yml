@@ -82,6 +82,7 @@ services:
       - IF_KEY=${IF_KEY}
       - DPP_SCHEMA=${DPP_SCHEMA}
       - DPP_FQDN=${DPP_FQDN}
+      - DPP_PORT=${DPP_PORT}
       - DPP_PATH=${DPP_PATH}
       - DPP_QUERY=${DPP_QUERY}
 
