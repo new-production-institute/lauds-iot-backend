@@ -9,11 +9,6 @@
         path: /etc/wireguard
         mode: 0770
 
-#    - name: Change access rights to 077
-#      shell:
-#        cmd: umask 0077
-#        chdir: /etc/wireguard
-
     - name: Check if private key exists
       stat:
         path: /etc/wireguard/privatekey
@@ -56,11 +51,7 @@
         client_privatekey: "{{ slurped_client_privatekey.content | b64decode | trim }}"
         client_publickey: "{{ slurped_client_publickey.content | b64decode | trim }}"
 
-    - name: Print client public key
-      debug:
-        msg: Public key {{ client_publickey }}
-    
-    - name: Generate wireguard config
+    - name: Generate Wireguard config
       template:
         dest: /etc/wireguard/wg0.conf
         src: templates/client.conf.j2
@@ -90,8 +81,14 @@
         owner: root
         group: root
         mode: a+rx
+        force: no
 
     - name: Enable sysv service on boot
-      shell:
-        cmd: update-rc.d wg0 enable
+      service: name=wg0 enabled=yes
 
+    - name: Start service at run-time
+      service: name=wg0 state=started
+
+    - name: Print Wireguard VPN client public key and IP address
+      debug:
+        msg: Public key {{ client_publickey }} VPN IP Address {{ client_ip_addr }}
