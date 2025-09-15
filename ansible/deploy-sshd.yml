@@ -1,0 +1,22 @@
+---
+- name: Deploy SSH Server
+  hosts: all
+  tags: packages
+  tasks:
+    - name: Install SSH server
+      apt:
+        name: openssh-server
+        update_cache: yes
+
+    - name: Configure SSHD disable password login and allow login only with publickey
+      lineinfile: dest=/etc/ssh/sshd_config regexp='^#?AuthenticationMethods' line='AuthenticationMethods publickey'
+    - lineinfile: dest=/etc/ssh/sshd_config regexp='^#?PasswordAuthentication' line='PasswordAuthentication no'
+    - lineinfile: dest=/etc/ssh/sshd_config regexp='^#?ChallengeResponseAuthentication' line='ChallengeResponseAuthentication no'
+    - lineinfile: dest=/etc/ssh/sshd_config regexp='^#?PubkeyAuthentication' line='PubkeyAuthentication yes'
+      register: ssh_configured
+
+    - name: Restart SSHD
+      service:
+        name: ssh
+        state: restarted
+      when: ssh_configured.changed
