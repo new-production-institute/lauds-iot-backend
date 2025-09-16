@@ -1,5 +1,5 @@
 ---
-- name: Install wireguard
+- name: Install wireguard & Tools
   hosts: all
   tags: packages
   tasks:
