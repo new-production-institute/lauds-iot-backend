@@ -18,18 +18,6 @@
         mode: '0644'
       become: true
 
-    - name: print architecture
-      debug: msg="{{ ansible_architecture }}"
-
-    - name: print distribution
-      debug: msg="{{ ansible_distribution }}"
-      when:
-        - ansible_distribution == "Devuan"
-        - ansible_distribution_release == "daedalus"
-
-    - name: print initd type
-      debug: msg="{{ ansible_service_mgr }}"
-
     - name: Add docker's debian repo 
       ansible.builtin.apt_repository:
         repo: "deb [arch=arm64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian bookworm stable"
@@ -55,4 +43,7 @@
           - docker-compose-plugin
         state: latest
         update_cache: yes
-        
+      when:
+        - ansible_distribution == "Devuan"
+        - ansible_distribution_release == "daedalus"
+        - ansible_architecture == "aarch64"
