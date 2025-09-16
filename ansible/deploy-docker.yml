@@ -40,7 +40,7 @@
         - ansible_distribution_release == "daedalus"
         - ansible_architecture == "aarch64"
 
-    - name: Apt update
+    - name: Perform apt update
       apt:
         upgrade: yes
         update_cache: yes
