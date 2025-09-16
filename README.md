@@ -67,7 +67,7 @@ If Docker UI is preferred, you can optionally use [Docker Desktop](https://www.d
     - Power on your Raspberry Pi with the card inserted.
     - If you enabled Wi-Fi and SSH, you can connect remotely without a monitor.
     - Otherwise, connect a monitor and keyboard to complete setup.
-
+### Setting up Lauds stack.
 ### Clone the Repository
 
 ```sh
