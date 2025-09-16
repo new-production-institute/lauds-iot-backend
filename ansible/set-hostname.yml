@@ -1,0 +1,18 @@
+---
+- name: Set Hostname & enable mDNS
+  hosts: all
+  tags: system
+  tasks:
+    - name: Set Hostname
+      hostname:
+        name: "{{ inventory_hostname }}"
+
+    - name: Install mDNS server
+      apt:
+        name: avahi-daemon
+    
+    - name: Enable mDNS
+      service:
+        name: avahi-daemon
+        enabled: yes
+        state: started
