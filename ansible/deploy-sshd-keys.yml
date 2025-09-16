@@ -28,7 +28,7 @@
         user: '{{ item }}'
         state: present
         manage_dir: yes
-        key: "{{ lookup('file', './{{ item }}.pub') }}"
+        key: "{{ lookup('file', './{{ item }}.pub', errors='ignore') }}"
       with_items:
         - dyne
         - adam
