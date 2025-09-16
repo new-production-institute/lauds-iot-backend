@@ -1,4 +1,5 @@
 ---
+- import_playbook: set-hostname.yml
 - import_playbook: deploy-sshd.yml 
 - import_playbook: deploy-sshd-keys.yml
 - import_playbook: deploy-docker.yml 
