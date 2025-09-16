@@ -38,6 +38,36 @@ If Docker UI is preferred, you can optionally use [Docker Desktop](https://www.d
 
 ## Installation
 
+### Setting up Raspberry Pi
+- Download and Install Raspberry Pi Imager
+    - https://www.raspberrypi.com/software/
+- Connect your microSD card to your computer using a card reader.
+- Make sure the card is empty or that you have backed up any important data, as this process will erase everything on it.
+- Open the Imager program.
+- Click CHOOSE DEVICE and select Raspberry Pi DEVICE.
+- Click CHOOSE OS and select Raspberry Pi OS (64 bit).
+- Click CHOOSE STORAGE and select your microSD card.
+- Configure Advanced Options (Optional but Recommended)
+
+    - Click the gear icon (or press Ctrl+Shift+X) to open OS Customisation.
+    - Here you can:
+        - Enable SSH for remote access under services.
+
+        - Set a username and password (required in newer Raspberry Pi OS versions).
+
+        - Enter Wi-Fi SSID and password for headless setup.
+
+        - Set hostname, locale, keyboard layout, and timezone.
+
+- Write the Image
+- Wait for the program to write and verify the image. This can take several minutes.
+- Eject the Card
+- Insert the card into your Raspberry Pi.
+- First Boot
+    - Power on your Raspberry Pi with the card inserted.
+    - If you enabled Wi-Fi and SSH, you can connect remotely without a monitor.
+    - Otherwise, connect a monitor and keyboard to complete setup.
+
 ### Clone the Repository
 
 ```sh
