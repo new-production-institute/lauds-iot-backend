@@ -12,6 +12,7 @@ RUN chmod +x /tmp/scripts/nodered_secure_admin.sh
 RUN /tmp/scripts/nodered_secure_admin.sh
 USER root
 RUN rm /data/flows.json
+COPY --chown=node-red ./contrib/scripts /data/scripts
 USER node-red
 COPY --chown=node-red flows.json /data/flows.json
 COPY --chown=node-red ./contrib/. /data/lib/flows/
