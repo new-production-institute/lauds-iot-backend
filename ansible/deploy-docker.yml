@@ -1,0 +1,49 @@
+---
+- name: Deploy docker
+  hosts: all
+  tags: packages
+  tasks:
+    - name: Install docker install prerequisites
+      apt:
+        name:
+          - ca-certificates
+          - curl
+        state: latest
+        update_cache: yes
+
+    - name: Download docker repo GPG Key
+      ansible.builtin.get_url:
+        url: https://download.docker.com/linux/debian/gpg
+        dest: /etc/apt/keyrings/docker.asc
+        mode: '0644'
+      become: true
+
+    - name: Add docker's debian repo 
+      ansible.builtin.apt_repository:
+        repo: "deb [arch=arm64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian bookworm stable"
+        state: present
+        filename: docker
+      when:
+        - ansible_distribution == "Devuan"
+        - ansible_distribution_release == "daedalus"
+        - ansible_architecture == "aarch64"
+
+    - name: Perform apt update
+      apt:
+        upgrade: yes
+        update_cache: yes
+
+    - name: Install docker components from docker repo
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: latest
+        update_cache: yes
+      when:
+        - ansible_distribution == "Devuan"
+        - ansible_distribution_release == "daedalus"
+        - ansible_architecture == "aarch64"
