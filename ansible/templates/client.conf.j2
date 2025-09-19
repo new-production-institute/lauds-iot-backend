@@ -1,0 +1,11 @@
+[Interface]
+PrivateKey = {{ client_privatekey }}
+Address = {{ client_ip_addr }}
+DNS = {{ dns_list | default('8.8.8.8, 1.1.1.1') }}
+
+[Peer]
+PublicKey = {{ server_publickey }}
+Endpoint = {{ server_hostname }}:{{ server_port | default('51820') }}
+# AllowedIPs = 0.0.0.0/0, ::/0
+# Note netmask is in form '/24' ... and is set to /24 by default
+AllowedIPs = {{ client_ip_addr }}{{ client_ipv4_netmask }}
