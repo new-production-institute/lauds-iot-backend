@@ -1,0 +1,7 @@
+---
+server_ipv4: "{{ lookup('env','VPN_SERVER_IPV4') }}"
+server_ipv6: "{{ lookup('env','VPN_SERVER_IPV6') }}"
+server_hostname: "{{ lookup('env','VPN_SERVER_HOSTNAME') }}"
+server_port: "{{ lookup('env', 'VPN_SERVER_PORT') }}" 
+server_publickey: "{{ lookup('env', 'VPN_SERVER_PUBLIC_KEY') }}"
+client_ipv4_netmask: "{{ lookup('env', 'VPN_CLIENT_IPV4_NETMASK') }}"
