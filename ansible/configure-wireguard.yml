@@ -1,0 +1,94 @@
+---
+- name: Configure wireguard
+  hosts: all
+  tags: configuration
+
+  tasks:
+    - name: Correct perms for dir
+      ansible.builtin.file:
+        path: /etc/wireguard
+        mode: 0770
+
+    - name: Check if private key exists
+      stat:
+        path: /etc/wireguard/privatekey
+      register: private_key
+
+    - name: Generate client private key
+      shell:
+        cmd: wg genkey > privatekey
+        chdir: /etc/wireguard
+      when: not private_key.stat.exists
+
+    - name: Correct perms for client private key
+      ansible.builtin.file:
+        path: /etc/wireguard/privatekey
+        mode: '0400'
+
+    - name: Check if public key exists
+      stat:
+        path: /etc/wireguard/publickey
+      register: public_key
+
+    - name: Generate public key
+      shell:
+        cmd: wg pubkey < privatekey > publickey
+        chdir: /etc/wireguard
+      when: not public_key.stat.exists
+
+    - name: Load private key
+      slurp:
+        src: "/etc/wireguard/privatekey"
+      register: slurped_client_privatekey
+    
+    - name: Load public key
+      slurp:
+        src: "/etc/wireguard/publickey"
+      register: slurped_client_publickey
+
+    - name: Store private and public keys
+      set_fact:
+        client_privatekey: "{{ slurped_client_privatekey.content | b64decode | trim }}"
+        client_publickey: "{{ slurped_client_publickey.content | b64decode | trim }}"
+
+    - name: Generate Wireguard config
+      template:
+        dest: /etc/wireguard/wg0.conf
+        src: templates/client.conf.j2
+        mode: '0600'
+        backup: yes
+
+    - name: Configure ipv4 forwarding
+      ansible.posix.sysctl:
+        name: net.ipv4.ip_forward
+        value: '1'
+        sysctl_set: yes
+        state: present
+        reload: yes
+
+    - name: Configure ipv6 forwarding
+      ansible.posix.sysctl:
+        name: net.ipv6.conf.all.forwarding
+        value: '1'
+        sysctl_set: yes
+        state: present
+        reload: yes
+
+    - name: Copy wg0 sysv init file
+      ansible.builtin.copy:
+        src:  templates/wg0
+        dest: /etc/init.d/wg0
+        owner: root
+        group: root
+        mode: a+rx
+        force: no
+
+    - name: Enable sysv service on boot
+      service: name=wg0 enabled=yes
+
+    - name: Start service at run-time
+      service: name=wg0 state=started
+
+    - name: Print Wireguard VPN client public key and IP address
+      debug:
+        msg: Public key {{ client_publickey }} VPN IP Address {{ client_ip_addr }}
