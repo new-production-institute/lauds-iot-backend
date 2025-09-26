@@ -74,6 +74,7 @@ services:
       - lauds_gw_network
     ports:
       - 8080:8080
+      - 8050:8050
     volumes:
       - jupyter-notebook-data:/data
     build: ../jupyter
