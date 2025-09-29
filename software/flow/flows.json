@@ -1,13 +1,5 @@
 [
     {
-        "id": "f0ce8419681cf781",
-        "type": "tab",
-        "label": "Prusa-MK4-1-Shelly-04",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "f6f2187d.f17ca8",
         "type": "tab",
         "label": "emonPI energy sensor",
@@ -26,6 +18,14 @@
         "id": "c970b824705576f5",
         "type": "tab",
         "label": "air gradient sensor",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "57baeac36603a20d",
+        "type": "tab",
+        "label": "Prusa-MK4-1-Shelly-04",
         "disabled": false,
         "info": "",
         "env": []
@@ -740,112 +740,6 @@
         "sessionExpiry": ""
     },
     {
-        "id": "c3173234.2636e",
-        "type": "ui_tab",
-        "name": "RPi Control",
-        "icon": "dashboard",
-        "order": 1,
-        "disabled": false,
-        "hidden": false
-    },
-    {
-        "id": "005dc930a4cd13ec",
-        "type": "ui_base",
-        "theme": {
-            "name": "theme-light",
-            "lightTheme": {
-                "default": "#0094CE",
-                "baseColor": "#0094CE",
-                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
-                "edited": true,
-                "reset": false
-            },
-            "darkTheme": {
-                "default": "#097479",
-                "baseColor": "#097479",
-                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
-                "edited": false
-            },
-            "customTheme": {
-                "name": "Untitled Theme 1",
-                "default": "#4B7930",
-                "baseColor": "#4B7930",
-                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
-            },
-            "themeState": {
-                "base-color": {
-                    "default": "#0094CE",
-                    "value": "#0094CE",
-                    "edited": false
-                },
-                "page-titlebar-backgroundColor": {
-                    "value": "#0094CE",
-                    "edited": false
-                },
-                "page-backgroundColor": {
-                    "value": "#fafafa",
-                    "edited": false
-                },
-                "page-sidebar-backgroundColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "group-textColor": {
-                    "value": "#1bbfff",
-                    "edited": false
-                },
-                "group-borderColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "group-backgroundColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "widget-textColor": {
-                    "value": "#111111",
-                    "edited": false
-                },
-                "widget-backgroundColor": {
-                    "value": "#0094ce",
-                    "edited": false
-                },
-                "widget-borderColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "base-font": {
-                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
-                }
-            },
-            "angularTheme": {
-                "primary": "indigo",
-                "accents": "blue",
-                "warn": "red",
-                "background": "grey",
-                "palette": "light"
-            }
-        },
-        "site": {
-            "name": "Node-RED Dashboard",
-            "hideToolbar": "false",
-            "allowSwipe": "false",
-            "lockMenu": "false",
-            "allowTempTheme": "true",
-            "dateFormat": "DD/MM/YYYY",
-            "sizes": {
-                "sx": 48,
-                "sy": 48,
-                "gx": 6,
-                "gy": 6,
-                "cx": 6,
-                "cy": 6,
-                "px": 0,
-                "py": 0
-            }
-        }
-    },
-    {
         "id": "76d7eecefe571d37",
         "type": "mqtt-broker",
         "name": "rms-mosquitto",
@@ -1013,73 +907,27 @@
         "sessionExpiry": ""
     },
     {
-        "id": "83e8a627192fd934",
-        "type": "mqtt-broker",
-        "name": "",
-        "broker": "",
-        "port": "1883",
-        "clientid": "",
-        "autoConnect": true,
+        "id": "c4bb67b005f9e6aa",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-influxdb": "0.6.1",
+            "node-red-contrib-watt2kwh": "0.1.2"
+        }
+    },
+    {
+        "id": "c455d23cbf0602ed",
+        "type": "influxdb",
+        "hostname": "192.168.188.124",
+        "port": 8086,
+        "protocol": "http",
+        "database": "database",
+        "name": "Local lap influx",
         "usetls": false,
-        "protocolVersion": "4",
-        "keepalive": "60",
-        "cleansession": true,
-        "autoUnsubscribe": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthRetain": "false",
-        "birthPayload": "",
-        "birthMsg": {},
-        "closeTopic": "",
-        "closeQos": "0",
-        "closeRetain": "false",
-        "closePayload": "",
-        "closeMsg": {},
-        "willTopic": "",
-        "willQos": "0",
-        "willRetain": "false",
-        "willPayload": "",
-        "willMsg": {},
-        "userProps": "",
-        "sessionExpiry": ""
-    },
-    {
-        "id": "1890881e.83819",
-        "type": "ui_group",
-        "name": "Col1",
-        "tab": "c3173234.2636e",
-        "order": 1,
-        "disp": false,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "c5f1b8aa.45bc08",
-        "type": "ui_group",
-        "name": "Actions",
-        "tab": "c3173234.2636e",
-        "order": 4,
-        "disp": true,
-        "width": "6"
-    },
-    {
-        "id": "9a96a8b1.92db78",
-        "type": "ui_group",
-        "name": "Col2",
-        "tab": "c3173234.2636e",
-        "order": 2,
-        "disp": false,
-        "width": "6"
-    },
-    {
-        "id": "72fc319.cc425d",
-        "type": "ui_group",
-        "name": "Col3",
-        "tab": "c3173234.2636e",
-        "order": 3,
-        "disp": false,
-        "width": "6"
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://192.168.188.124:8086",
+        "rejectUnauthorized": true
     },
     {
         "id": "b71a7b0247b9a82f",
@@ -2002,414 +1850,6 @@
         ]
     },
     {
-        "id": "e9ae7b5a484044b9",
-        "type": "http request",
-        "z": "f0ce8419681cf781",
-        "name": "printer status",
-        "method": "GET",
-        "ret": "obj",
-        "paytoqs": "ignore",
-        "url": "http://192.168.188.61/api/v1/status",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "digest",
-        "senderr": false,
-        "headers": [],
-        "x": 650,
-        "y": 380,
-        "wires": [
-            [
-                "f91ecef7190937c2",
-                "d5d483547d41f050"
-            ]
-        ]
-    },
-    {
-        "id": "dc6d9c7a2e6c7192",
-        "type": "trigger",
-        "z": "f0ce8419681cf781",
-        "name": "",
-        "op1": "1",
-        "op2": "0",
-        "op1type": "str",
-        "op2type": "str",
-        "duration": "-1",
-        "extend": true,
-        "overrideDelay": true,
-        "units": "s",
-        "reset": "IDLE",
-        "bytopic": "all",
-        "topic": "payload.printerstate",
-        "outputs": 1,
-        "x": 460,
-        "y": 380,
-        "wires": [
-            [
-                "e9ae7b5a484044b9"
-            ]
-        ]
-    },
-    {
-        "id": "3068d3edb10e0119",
-        "type": "inject",
-        "z": "f0ce8419681cf781",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "printertype",
-                "v": "PRUSAMINI",
-                "vt": "str"
-            }
-        ],
-        "repeat": "60",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "1",
-        "topic": "",
-        "payload": "RUN",
-        "payloadType": "str",
-        "x": 310,
-        "y": 380,
-        "wires": [
-            [
-                "dc6d9c7a2e6c7192"
-            ]
-        ]
-    },
-    {
-        "id": "d5d483547d41f050",
-        "type": "debug",
-        "z": "f0ce8419681cf781",
-        "name": "mk4 telemetry",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 860,
-        "y": 440,
-        "wires": []
-    },
-    {
-        "id": "f91ecef7190937c2",
-        "type": "function",
-        "z": "f0ce8419681cf781",
-        "name": "Store Machine Data",
-        "func": "flow.set('machine-data', msg.payload);\nreturn msg;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 880,
-        "y": 380,
-        "wires": [
-            [
-                "aaf2b5ace20e2ac2",
-                "25c17262d0c06d42",
-                "803c4573a408f625"
-            ]
-        ]
-    },
-    {
-        "id": "064afbc6162f15e6",
-        "type": "debug",
-        "z": "f0ce8419681cf781",
-        "name": "Energy Per Print",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1400,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "aaf2b5ace20e2ac2",
-        "type": "change",
-        "z": "f0ce8419681cf781",
-        "name": "get printer state",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "printerData.printer",
-                "tot": "flow"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1160,
-        "y": 440,
-        "wires": [
-            [
-                "c23ef8cc5a9ff9ee"
-            ]
-        ]
-    },
-    {
-        "id": "25c17262d0c06d42",
-        "type": "change",
-        "z": "f0ce8419681cf781",
-        "name": "get job state",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "printerData.job",
-                "tot": "flow"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1170,
-        "y": 380,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "c23ef8cc5a9ff9ee",
-        "type": "function",
-        "z": "f0ce8419681cf781",
-        "name": "structure for influx",
-        "func": "msg.payload = [\n    {\n        measurement: \"machine\",   \n        fields: msg.payload,\n        tags: {\n            device: \"prusa-mk4-1\",  \n            brand: \"prusa\",\n            type: \"3dp\" \n        },\n    }\n];\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1360,
-        "y": 440,
-        "wires": [
-            [
-                "5c1a913771316c9f"
-            ]
-        ]
-    },
-    {
-        "id": "5c1a913771316c9f",
-        "type": "influxdb batch",
-        "z": "f0ce8419681cf781",
-        "influxdb": "a0bedc1d1fa7092d",
-        "precision": "",
-        "retentionPolicy": "",
-        "name": "influxDB microfactory",
-        "database": "database",
-        "precisionV18FluxV20": "ms",
-        "retentionPolicyV18Flux": "",
-        "org": "microfactory",
-        "bucket": "microfactory-jupiter-DS",
-        "x": 1600,
-        "y": 440,
-        "wires": []
-    },
-    {
-        "id": "d12e723deb17e1b7",
-        "type": "function",
-        "z": "f0ce8419681cf781",
-        "name": "structure job for influx",
-        "func": "msg.payload = [\n    {\n        measurement: \"jobs\",\n        fields: msg.payload,\n        tags: {\n            device: \"prusa-mk4-1\",\n            brand: \"prusa\",\n            type: \"3dp\"\n        },\n    }\n];\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1450,
-        "y": 340,
-        "wires": [
-            [
-                "5c1a913771316c9f"
-            ]
-        ]
-    },
-    {
-        "id": "5f3816b88de14c69",
-        "type": "function",
-        "z": "f0ce8419681cf781",
-        "name": "Calculate Energy Per Print",
-        "func": "// -------------------- INPUTS FROM MSG --------------------\nlet currentEnergy = msg.energyCounter;\nlet machineState = msg.machineState;\nlet jobId = msg.jobId;\n\n// Define machine states\nlet activeState = ['WORKING','PRINTING','CUTTING'];\nlet idleStates = ['IDLE', 'FINISHED'];\n// ---------------------------------------------------------\n\nif (!flow.get('jobStarted')) flow.set('jobStarted', false);\n\nfunction generateRandomId(length) {\n    let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\n    let result = '';\n    for (let i = 0; i < length; i++) {\n        result += chars.charAt(Math.floor(Math.random() * chars.length));\n    }\n    return result;\n}\n\nif (activeState.includes(machineState)) {\n    if (!flow.get('jobStarted')) {\n        if (!jobId || jobId.trim() === '') {\n            jobId = generateRandomId(5);   // Assign random ID if missing/empty\n        }\n        flow.set('jobStarted', true);\n        flow.set('initialEnergy', currentEnergy);\n        flow.set('currentJobId', jobId);\n        flow.set('jobStartTime', Date.now());\n        node.warn(`Job started. JobId: ${jobId}, Initial energy: ${currentEnergy}`);\n    } else {\n        node.warn(`Job is running. Current energy: ${currentEnergy}`);\n    }\n} else if (flow.get('jobStarted') && idleStates.includes(machineState)) {\n    let initialEnergy = flow.get('initialEnergy');\n    let currentJobId = flow.get('currentJobId');\n    let energyConsumed = currentEnergy - initialEnergy;\n    let jobStartTime = flow.get('jobStartTime');\n    let jobEndTime = Date.now();\n\n    let jobResult = {\n        jobId: currentJobId,\n        energyConsumed: energyConsumed,\n        jobDuration: (jobEndTime - jobStartTime) / 1000,\n    };\n\n    flow.set('jobStarted', false);\n    flow.set('initialEnergy', null);\n    flow.set('currentJobId', null);\n    flow.set('jobStartTime', null);\n\n    node.warn(`Job completed. JobId: ${currentJobId}, Final energy: ${currentEnergy}, Energy consumed: ${energyConsumed}, Duration: ${jobResult.jobDuration} seconds`);\n    node.send({ payload: jobResult });\n} else {\n    node.warn(`No active job. Current state: ${machineState}, Current energy: ${currentEnergy}`);\n}\n\nreturn null;\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1150,
-        "y": 280,
-        "wires": [
-            [
-                "064afbc6162f15e6",
-                "d12e723deb17e1b7"
-            ]
-        ]
-    },
-    {
-        "id": "803c4573a408f625",
-        "type": "function",
-        "z": "f0ce8419681cf781",
-        "name": "Inpu require variables",
-        "func": "let required_data = {\n    energyCounter: flow.get('currentEnergy'),\n\n    // change to machine-data.API structure of used machine API\n    machineState: flow.get('machine-data').printer.state,\n    jobId: flow.get('machine-data').job.id,\n};\n\n// Option 1: send collected data in the outgoing message\nmsg = required_data;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 880,
-        "y": 280,
-        "wires": [
-            [
-                "c632824ae01a5905",
-                "5f3816b88de14c69"
-            ]
-        ]
-    },
-    {
-        "id": "1fa3a6af2ad192d1",
-        "type": "mqtt in",
-        "z": "f0ce8419681cf781",
-        "name": "SPPS-04 Shelly Data",
-        "topic": "SPPS-04/status/switch:0",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "af889725daaa1ec0",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 340,
-        "y": 100,
-        "wires": [
-            [
-                "d9f423ffd2ee923b",
-                "6007edc33f1f547d",
-                "7fbfa55ac31053ff"
-            ]
-        ]
-    },
-    {
-        "id": "d9f423ffd2ee923b",
-        "type": "function",
-        "z": "f0ce8419681cf781",
-        "name": "structure for influx",
-        "func": "msg.payload = [\n    {\n        measurement: \"sensor\",\n        fields: msg.payload,\n        tags: {\n            brand: \"shelly\",\n            device: \" SPPS-04\",\n            type: \"electrical-energy\"\n        },\n    }\n];\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 650,
-        "y": 100,
-        "wires": [
-            [
-                "598f87188b757cb9"
-            ]
-        ]
-    },
-    {
-        "id": "598f87188b757cb9",
-        "type": "influxdb batch",
-        "z": "f0ce8419681cf781",
-        "influxdb": "a0bedc1d1fa7092d",
-        "precision": "",
-        "retentionPolicy": "",
-        "name": "influxDB microfactory",
-        "database": "database",
-        "precisionV18FluxV20": "ms",
-        "retentionPolicyV18Flux": "",
-        "org": "microfactory",
-        "bucket": "microfactory-jupiter-DS",
-        "x": 910,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "7fbfa55ac31053ff",
-        "type": "debug",
-        "z": "f0ce8419681cf781",
-        "name": "debug 13",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 920,
-        "y": 40,
-        "wires": []
-    },
-    {
-        "id": "6007edc33f1f547d",
-        "type": "function",
-        "z": "f0ce8419681cf781",
-        "name": "store current energy",
-        "func": "flow.set('currentEnergy', msg.payload.aenergy.total);\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 600,
-        "y": 280,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "c632824ae01a5905",
-        "type": "debug",
-        "z": "f0ce8419681cf781",
-        "name": "debug 14",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1080,
-        "y": 200,
-        "wires": []
-    },
-    {
-        "id": "ec2abdddf360baa3",
-        "type": "comment",
-        "z": "f0ce8419681cf781",
-        "name": "adapt to machine API",
-        "info": "",
-        "x": 880,
-        "y": 240,
-        "wires": []
-    },
-    {
         "id": "3cc11d24.ff01a2",
         "type": "comment",
         "z": "f6f2187d.f17ca8",
@@ -2712,13 +2152,462 @@
         "wires": []
     },
     {
-        "id": "c4bb67b005f9e6aa",
-        "type": "global-config",
-        "env": [],
-        "modules": {
-            "node-red-contrib-influxdb": "0.6.1",
-            "node-red-dashboard": "3.6.6",
-            "node-red-contrib-watt2kwh": "0.1.2"
-        }
+        "id": "cd929542f7fa8a3b",
+        "type": "http request",
+        "z": "57baeac36603a20d",
+        "name": "printer status",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "digest",
+        "senderr": false,
+        "headers": [],
+        "x": 650,
+        "y": 380,
+        "wires": [
+            [
+                "10a27260fe52c4d9",
+                "f0375236fa9ee83f"
+            ]
+        ]
+    },
+    {
+        "id": "4128cd9f9bf4f993",
+        "type": "trigger",
+        "z": "57baeac36603a20d",
+        "name": "",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "-1",
+        "extend": true,
+        "overrideDelay": true,
+        "units": "s",
+        "reset": "IDLE",
+        "bytopic": "all",
+        "topic": "payload.printerstate",
+        "outputs": 1,
+        "x": 240,
+        "y": 380,
+        "wires": [
+            [
+                "94d2851a44cfdf95"
+            ]
+        ]
+    },
+    {
+        "id": "56175a0e7bbaa8a2",
+        "type": "inject",
+        "z": "57baeac36603a20d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "printertype",
+                "v": "PRUSAMINI",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "RUN",
+        "payloadType": "str",
+        "x": 90,
+        "y": 380,
+        "wires": [
+            [
+                "4128cd9f9bf4f993"
+            ]
+        ]
+    },
+    {
+        "id": "f0375236fa9ee83f",
+        "type": "debug",
+        "z": "57baeac36603a20d",
+        "name": "mk4 telemetry",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "10a27260fe52c4d9",
+        "type": "function",
+        "z": "57baeac36603a20d",
+        "name": "Store Machine Data",
+        "func": "flow.set('machine-data', msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 380,
+        "wires": [
+            [
+                "3f42bb761c80a0bf",
+                "6aca11aeeddc9452",
+                "6e0449a69b18ced0"
+            ]
+        ]
+    },
+    {
+        "id": "c740a5c2bc039326",
+        "type": "debug",
+        "z": "57baeac36603a20d",
+        "name": "Energy Per Print",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1400,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "6aca11aeeddc9452",
+        "type": "function",
+        "z": "57baeac36603a20d",
+        "name": "structure for influx",
+        "func": "msg.payload = [\n    {\n        measurement: \"machine\",\n        fields: msg.payload,\n        tags: {\n            device: \"prusa-mk4-1\",\n            brand: \"prusa\",\n            type: \"3dp\"\n        },\n    }\n];\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1170,
+        "y": 420,
+        "wires": [
+            [
+                "a04690efd2a6f0fc",
+                "c59de4ed040fd1e9"
+            ]
+        ]
+    },
+    {
+        "id": "1b0be97060b6fb1e",
+        "type": "function",
+        "z": "57baeac36603a20d",
+        "name": "structure job for influx",
+        "func": "msg.payload = [\n    {\n        measurement: \"jobs\",\n        fields: msg.payload,\n        tags: {\n            device: \"prusa-mk4-1\",\n            brand: \"prusa\",\n            type: \"3dp\"\n        },\n    }\n];\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1450,
+        "y": 340,
+        "wires": [
+            [
+                "c59de4ed040fd1e9"
+            ]
+        ]
+    },
+    {
+        "id": "22146774fc315105",
+        "type": "function",
+        "z": "57baeac36603a20d",
+        "name": "Calculate Energy Per Print",
+        "func": "let currentEnergy = msg.energyCounter;\nlet machineState = msg.machineState;\nlet jobId = msg.jobId;\n\n// Define machine states\nlet activeState = ['WORKING','PRINTING','CUTTING'];\nlet idleStates = ['IDLE', 'FINISHED'];\n\n// Initialize jobStarted\nif (!flow.get('jobStarted')) flow.set('jobStarted', false);\n\nfunction generateRandomId(length) {\n    let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\n    let result = '';\n    for (let i = 0; i < length; i++) {\n        result += chars.charAt(Math.floor(Math.random() * chars.length));\n    }\n    return result;\n}\n\n// Prepare outputs: [triggerHttpNode, jobResult]\nlet outputs = [null, null];\n\nif (activeState.includes(machineState)) {\n    if (!flow.get('jobStarted')) {\n        // Safely convert jobId to string to avoid trim errors\n        jobId = jobId != null ? String(jobId) : '';\n        if (jobId === '') {\n            jobId = generateRandomId(5); // Assign random ID if missing/empty\n        }\n\n        // Start job\n        flow.set('jobStarted', true);\n        flow.set('initialEnergy', currentEnergy);\n        flow.set('currentJobId', jobId);\n        flow.set('jobStartTime', Date.now());\n        outputs[0] = { payload: {} }; // first output triggers HTTP node\n        return outputs;\n        //node.warn(`Job started. JobId: ${jobId}, Initial energy: ${currentEnergy}`);\n    } else {\n        //node.warn(`Job is running. Current energy: ${currentEnergy}`);\n    }\n} \nelse if (flow.get('jobStarted') && idleStates.includes(machineState)) {\n    // Job finished\n    let initialEnergy = flow.get('initialEnergy');\n    let currentJobId = flow.get('currentJobId');\n    let energyConsumed = currentEnergy - initialEnergy;\n    let jobStartTime = flow.get('jobStartTime');\n    let jobEndTime = Date.now();\n\n    let jobResult = {\n        jobId: currentJobId,\n        energyConsumed: energyConsumed,\n        jobDuration: (jobEndTime - jobStartTime) / 1000,\n        gcodeFilePath: flow.get('gcodeFilePath') // Include G-code path\n    };\n\n    // Reset flow variables\n    flow.set('jobStarted', false);\n    flow.set('initialEnergy', null);\n    flow.set('currentJobId', null);\n    flow.set('jobStartTime', null);\n    flow.set('gcodeFilePath', null);\n\n    node.warn(`Job completed. JobId: ${currentJobId}, Energy consumed: ${energyConsumed}, Duration: ${jobResult.jobDuration}s, G-code Path: ${jobResult.gcodeFilePath}`);\n\n    outputs[1] = { payload: jobResult }; // second output sends job result\n}\n\n// Return both outputs\nreturn outputs;\n",
+        "outputs": 2,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1150,
+        "y": 280,
+        "wires": [
+            [],
+            [
+                "c740a5c2bc039326",
+                "1b0be97060b6fb1e"
+            ]
+        ]
+    },
+    {
+        "id": "3f42bb761c80a0bf",
+        "type": "function",
+        "z": "57baeac36603a20d",
+        "name": "Inpu require variables",
+        "func": "let required_data = {\n    energyCounter: flow.get('currentEnergy'),\n\n    // optional chaining prevents errors if intermediate objects are undefined\n    machineState: flow.get('machine-data')?.printer?.state || null,\n    jobId: flow.get('machine-data')?.job?.id || null,\n};\n\n// Send collected data\nmsg = required_data;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 280,
+        "wires": [
+            [
+                "4b8cad6788dbc3ff",
+                "22146774fc315105"
+            ]
+        ]
+    },
+    {
+        "id": "c65b1b38fb15c364",
+        "type": "mqtt in",
+        "z": "57baeac36603a20d",
+        "name": "SPPS-04 Shelly Data",
+        "topic": "SPPS-05/status/switch:0",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "af889725daaa1ec0",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 340,
+        "y": 600,
+        "wires": [
+            [
+                "f7b1e4e0eb5675fc",
+                "3ba05b737ca84ab8",
+                "96b7144416781ced"
+            ]
+        ]
+    },
+    {
+        "id": "f7b1e4e0eb5675fc",
+        "type": "function",
+        "z": "57baeac36603a20d",
+        "name": "structure for influx",
+        "func": "msg.payload = [\n    {\n        measurement: \"sensor\",\n        fields: msg.payload,\n        tags: {\n            brand: \"shelly\",\n            device: \" SPPS-04\",\n            type: \"electrical-energy\"\n        },\n    }\n];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 600,
+        "wires": [
+            [
+                "713f1b254f9114c6"
+            ]
+        ]
+    },
+    {
+        "id": "713f1b254f9114c6",
+        "type": "influxdb batch",
+        "z": "57baeac36603a20d",
+        "influxdb": "c455d23cbf0602ed",
+        "precision": "",
+        "retentionPolicy": "",
+        "name": "influxDB microfactory",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "microfactory",
+        "bucket": "microfactory-jupiter-DS",
+        "x": 910,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "96b7144416781ced",
+        "type": "debug",
+        "z": "57baeac36603a20d",
+        "name": "debug 13",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "3ba05b737ca84ab8",
+        "type": "function",
+        "z": "57baeac36603a20d",
+        "name": "store current energy",
+        "func": "flow.set('currentEnergy', msg.payload.aenergy.total);\nflow.set('shellydata', msg.payload)\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4b8cad6788dbc3ff",
+        "type": "debug",
+        "z": "57baeac36603a20d",
+        "name": "debug 14",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "47d0f4f679d1cc04",
+        "type": "comment",
+        "z": "57baeac36603a20d",
+        "name": "adapt to machine API",
+        "info": "",
+        "x": 880,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "a04690efd2a6f0fc",
+        "type": "debug",
+        "z": "57baeac36603a20d",
+        "name": "debug 5",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1200,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "7ea7eb783a22aa55",
+        "type": "function",
+        "z": "57baeac36603a20d",
+        "name": "set device config",
+        "func": "let config_data = {\n        deviceId: \"prusa mk4 3\",\n        ipAddress: \"192.168.188.58\",\n        \n    }\n\nflow.set('machine_config_data', config_data);\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f24bbfc5da90ada7",
+        "type": "inject",
+        "z": "57baeac36603a20d",
+        "name": "Set machine config once",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 350,
+        "y": 60,
+        "wires": [
+            [
+                "7ea7eb783a22aa55"
+            ]
+        ]
+    },
+    {
+        "id": "94d2851a44cfdf95",
+        "type": "function",
+        "z": "57baeac36603a20d",
+        "name": "url for printer status",
+        "func": "// Get the config object from flow\nlet config = flow.get('machine_config_data');\n\n// Build the full URL\nmsg.url = `http://${config.ipAddress}/api/v1/status`;\n\n// Pass the message along\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 380,
+        "wires": [
+            [
+                "cd929542f7fa8a3b"
+            ]
+        ]
+    },
+    {
+        "id": "6e0449a69b18ced0",
+        "type": "function",
+        "z": "57baeac36603a20d",
+        "name": "get gcode file path",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1140,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c59de4ed040fd1e9",
+        "type": "influxdb batch",
+        "z": "57baeac36603a20d",
+        "influxdb": "c455d23cbf0602ed",
+        "precision": "",
+        "retentionPolicy": "",
+        "name": "influxDB microfactory",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "microfactory",
+        "bucket": "microfactory-jupiter-DS",
+        "x": 1460,
+        "y": 420,
+        "wires": []
     }
 ]
