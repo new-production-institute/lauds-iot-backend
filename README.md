@@ -33,17 +33,53 @@ First install Docker and `docker-compose`:
 * [Docker Compose](https://docs.docker.com/compose/)
 * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
-If Docker UI is preferred, you can optionally use [Docker Desktop](https://www.docker.com/products/docker-desktop/).
-
-
 ## Installation
 
-### Clone the Repository
+### Prepare SD Card Image of Devuan Pi Operating System
+
+- Download the Daedalus arm64 image zipfile for the Raspberry Pi 5 (nightly builds)[https://arm-files.devuan.org/RaspberryPi%20Latest%20Builds/] on the Devuan ARM files site (the zipfile begins with `rpi-5-devuan-daedalus-` and ends with `.zip`.
+
+- Transfer the image to the SD card using your prefered disk tool.
+
+- Insert the SD card into the RPi5.
+
+- Power up the RPi5, log in (devuan/devuan) and ensure the Raspberry Pi is connected to your network (either through the ethernet interface or you must configure the WiFi details for your local network).
+
+- Ensure the SSH daemon is running on the RPi5.
+
+- On the ansible provisioning host, generate an SSH key pair and add the public key to the RPi5 root SSH authorized_keys configuration file `/root/.ssh/authorized_keys`.
+
+### Clone the Repository on the Ansible Provisioning Host
 
 ```sh
 git clone https://github.com/dyne/lauds-iot-backend.git
 cd lauds-iot-backend
 ```
+
+### Installation via ansible
+
+#### Remote ansible install
+
+For each gateway to be configured, an intended hostname and VPN IP address must be uniquely defined.
+
+Individual unique hostname should be related to the LAUDS factory sitename or consortium member name.
+
+Individual host VPN IP address configuration is configured in `ansible/host_vars/` with the configuration file matching the hostname (eg, the host configuration example file in the repo is `ansible/host_vars/flirc-pi5`:
+
+```sh
+client_ip_addr: 192.168.10.201
+```
+
+
+On the ansible provisioning host:
+
+```sh
+cd ansible
+source ../.env && ansible-playbook -i inventory.yml playbook.yml
+```
+
+
+
 ### Configure local credentials
 
 Create file `.env` to set default credentials
