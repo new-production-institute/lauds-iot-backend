@@ -41,11 +41,13 @@ First install Docker and `docker-compose`:
 
 - Transfer the image to the SD card using your prefered disk tool.
 
-- Insert the SD card into the RPi5.
+- Insert the SD card into the Devuan RPi5.
 
-- Power up the RPi5, log in (devuan/devuan) and ensure the Raspberry Pi is connected to your network (either through the ethernet interface or you must configure the WiFi details for your local network).
+- Power up the Devuan RPi5, log in (devuan/devuan) and ensure the Raspberry Pi is connected to your network (either through the ethernet interface or you must configure the WiFi details for your local network).
 
-- Ensure the SSH daemon is running on the RPi5.
+- Ensure the SSH daemon is running on the Devuan RPi5.
+
+- Note down the IP address allocated to the Devuan RPi5.
 
 - On the ansible provisioning host, generate an SSH key pair and add the public key to the RPi5 root SSH authorized_keys configuration file `/root/.ssh/authorized_keys`.
 
@@ -53,32 +55,31 @@ First install Docker and `docker-compose`:
 
 ```sh
 git clone https://github.com/dyne/lauds-iot-backend.git
-cd lauds-iot-backend
+cd lauds-iot-backend/ansible
 ```
 
-### Installation via ansible
+### Provisioning via ansible
 
-#### Remote ansible install
+#### Remote ansible preparation
 
-For each gateway to be configured, an intended hostname and VPN IP address must be uniquely defined.
+- On the ansible provisioning host a hostname and local IP address must be uniquely defined for the Devuan Pi in the `inventory.yml` file (eg, a host configuration example for `flirc-rpi5` is the repo is `)
 
-Individual unique hostname should be related to the LAUDS factory sitename or consortium member name.
+The unique hostname should be related to the LAUDS factory sitename or consortium member name.
 
-Individual host VPN IP address configuration is configured in `ansible/host_vars/` with the configuration file matching the hostname (eg, the host configuration example file in the repo is `ansible/host_vars/flirc-pi5`:
+- Individual host VPN IP address configuration is configured in `ansible/host_vars/` with the configuration file matching the hostname (eg, the host configuration example file in the repo is `ansible/host_vars/flirc-pi5`):
 
 ```sh
-client_ip_addr: 192.168.10.201
+client_ip_addr: 192.168.10.[address]
 ```
+where [address] is a unique host address allocated to your install.
 
+#### Remote ansible provisioning
 
 On the ansible provisioning host:
 
 ```sh
-cd ansible
 source ../.env && ansible-playbook -i inventory.yml playbook.yml
 ```
-
-
 
 ### Configure local credentials
 
