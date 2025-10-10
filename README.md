@@ -62,7 +62,7 @@ cd lauds-iot-backend/ansible
 
 #### Remote ansible preparation
 
-- On the ansible provisioning host a hostname and local IP address must be uniquely defined for the Devuan Pi in the `inventory.yml` file (eg, a host configuration example for `flirc-rpi5` is the repo is `)
+- On the ansible provisioning host a hostname and local IP address must be uniquely defined for the Devuan RPi5 in the `inventory.yml` file (eg, a host configuration example for `flirc-rpi5` is given as an example)
 
 The unique hostname should be related to the LAUDS factory sitename or consortium member name.
 
@@ -72,6 +72,25 @@ The unique hostname should be related to the LAUDS factory sitename or consortiu
 client_ip_addr: 192.168.10.[address]
 ```
 where [address] is a unique host address allocated to your install.
+
+
+- On the ansible provisioning host, create or add to the file `../.env` with the following content:
+```
+# LAUDS GATEWAY SERVER DETAILS
+#
+# export GATEWAY_SERVER_HOSTNAME="flirc-pi5"
+
+#
+## WIREGUARD VPN DETAILS (used in ansible)
+#
+export VPN_SERVER_IPV4="138.201.89.108"
+export VPN_SERVER_IPV6="2a01:4f8:c17:3dd5::1"
+export VPN_SERVER_HOSTNAME="zorro.free2air.net"
+export VPN_SERVER_PORT="51194"
+# TODO: Publish public key & lookup in DNS when BIND9.18.33 SIG0 update bugfix is published
+export VPN_SERVER_PUBLIC_KEY="IstwnIfVuvgfb7LzaE3YLb24FAT2oUEhVcsZILDhHXk="
+export VPN_CLIENT_IPV4_NETMASK="/24"
+```
 
 #### Remote ansible provisioning
 
