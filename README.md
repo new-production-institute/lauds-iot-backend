@@ -200,3 +200,8 @@ Feel free to open an issue for bugs, feature requests, or questions. Contributio
 
 This project follows the [REUSE Specification](https://reuse.software/spec/) and is licensed under the [GPL 3.0 or later License - see the LICENSE file](./LICENSES/GPL-3.0-or-later.txt) for details.
 
+## Funding
+This project was developed inside the LAUDS Factory project, Work Package 2 "Digital and physical infrastructure to enable LAUDS manufacturing".
+
+LAUDS Local Accessible Urban Digital Sustainable Factories is a Horizon Europe research and innovation action - Co-funded by the European Union, 2024-2026, GA 101135986.
+
