@@ -37,7 +37,7 @@ First install Docker and `docker-compose`:
 
 ### Prepare SD Card Image of Devuan Pi Operating System
 
-- Download the Daedalus arm64 image zipfile for the Raspberry Pi 5 (nightly builds)[https://arm-files.devuan.org/RaspberryPi%20Latest%20Builds/] on the Devuan ARM files site (the zipfile begins with `rpi-5-devuan-daedalus-` and ends with `.zip`.
+- Download the Daedalus arm64 image zipfile for the Raspberry Pi 5 [nightly builds](https://arm-files.devuan.org/RaspberryPi%20Latest%20Builds/) on the Devuan ARM files site (the zipfile begins with `rpi-5-devuan-daedalus-` and ends with `.zip`).
 
 - Transfer the image to the SD card using your prefered disk tool.
 
