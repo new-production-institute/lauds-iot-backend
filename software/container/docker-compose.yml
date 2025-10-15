@@ -39,6 +39,8 @@ services:
       - grafana-dashboards:/var/lib/grafana
       - grafana-data:/data/
       - ../dashboard/grafana.ini:/etc/grafana/grafana.ini
+      - ../dashboard/provisioning:/etc/grafana/provisioning
+      - ../dashboard/dashboards:/etc/grafana/dashboards
 
   nodered:
     # https://hub.docker.com/r/grafana/grafana
@@ -64,7 +66,6 @@ services:
           path: ../flow/flows.json
           target: /data/flows.json
 
-
   jupyter:
     depends_on:
       - influxdb
@@ -74,6 +75,7 @@ services:
       - lauds_gw_network
     ports:
       - 8080:8080
+      - 8050:8050
     volumes:
       - jupyter-notebook-data:/data
     build: ../jupyter
@@ -106,6 +108,7 @@ volumes:
   nodered-data:
   jupyter-notebook-data:
   server-data:
+
 
 networks:
   lauds_gw_network:

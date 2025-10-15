@@ -25,8 +25,14 @@ RUN pip install zenroom
 RUN pip install plotly
 RUN pip install Pillow
 RUN pip install qrcode
+RUN pip install pandas
+RUN pip install dash  
+RUN pip install dash-bootstrap-components
+RUN pip install statsmodels
+RUN pip install paho-mqtt
 
-COPY fchh-notebook ./fchh-notebook/
+
+COPY example_notebooks/fchh-notebook ./fchh-notebook/
 # or pip3 install requests , pip3 install -U zenroom --pre and pip3 install plotly if not using conda
 
 # Make port 8000 available to the world outside this container

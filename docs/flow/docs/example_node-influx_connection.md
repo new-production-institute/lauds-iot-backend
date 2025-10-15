@@ -1,6 +1,6 @@
 # Node-RED and InfluxDB
 
-Already added to this project is [node-red-contrib-influxdb](https://flows.nodered.org/node/node-red-contrib-influxdb). You can use it's nodes to write and query data from an InfluxDB time series database. These nodes support both InfluxDB 1.x and InfluxDb 2.0 databases. At the time of this writing we are using [version 2.6 of InfluxDB on port 8086](http://admin:adminadmin@localhost:8086).
+Already added to this project is [node-red-contrib-influxdb](https://flows.nodered.org/node/node-red-contrib-influxdb). You can use it's nodes to write and query data from an InfluxDB time series database. These nodes support both InfluxDB 1.x and InfluxDb 2.0 databases.
 
 In Node-RED we will be passing the power consumption number through MQTT. 
 
