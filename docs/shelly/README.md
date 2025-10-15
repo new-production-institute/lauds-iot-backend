@@ -1,13 +1,13 @@
-# Shelly Plug (S)
+# Shelly Plug (S) - Example to configure
 
 Shelly Plugs S are quite cheap but relatively accurate to measure power consumptions less than 2.5 kW.
 
-In our [smart-energy-montior](https://code.curious.bio/curious.bio/smart-energy-monitor) project we already have set up a Shelly using Tasmota, on Open Source alternative firmware, that also runs on various other consumer off the shelf devices.
+In the reference [smart-energy-montior](https://code.curious.bio/curious.bio/smart-energy-monitor) project the Shelly is using Tasmota, on Open Source alternative firmware, that also runs on various other consumer off the shelf devices.
 
 
 ## InfluxDB Bucket
 
-In Influx I created a bucket called `shelly`in InfluxDB, so we can store the messages in this bucket.
+In Influx  a bucket called `shelly`in InfluxDB is created, so the messages can be stored in this bucket.
 
 ### Node-RED
 
