@@ -39,6 +39,8 @@ Dashboards can already be created in Node-RED, but to be more flexible (and incl
 
 - Note down the IP address allocated to the Devuan RPi5.
 
+- On the ansible provisioning host, ssh into the RPi5 via username and password (devuan/devuan) via ssh `devuan@IP_address_noted`, and issue `sudo su -` followed by `ssh-keygen`. Press return twice. Log out (control-D).
+
 - On the ansible provisioning host, generate an SSH key pair (`ssh-keygen`) and add the public key to the RPi5 root SSH authorized_keys configuration file `/root/.ssh/authorized_keys`.
 
 ### Clone the Repository on the Ansible Provisioning Host
