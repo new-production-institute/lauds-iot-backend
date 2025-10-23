@@ -43,9 +43,9 @@ In the following steps we will describe the confgiration steps to adapt the [tem
 
 ## Connecting to data source
 - Go to configurations(settings) -> Data sources and click on add data source.
-- Select influxDB
-- Select the query language as flux
-- Enter url of the influxdb,username and password, organization,tokn and bucket name.
+- Select ```InfluxDB```
+- Select the query language as ```Flux```
+- Enter url of the Influxdb, username and password, organization,token and bucket name.
 - Click on save and test to check the connection.
 - ![](https://pad.fabcity.hamburg/uploads/22b1a5b9-1e1c-4398-a4a3-c3d740488848.png)
 - ![](https://pad.fabcity.hamburg/uploads/ceadedc8-8f83-4519-aff8-e5b4366a219f.png)
