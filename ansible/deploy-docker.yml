@@ -28,10 +28,10 @@
         - ansible_distribution_release == "daedalus"
         - ansible_architecture == "aarch64"
 
-    - name: Perform apt update
-      apt:
-        upgrade: yes
-        update_cache: yes
+#   - name: Perform apt update
+#     apt:
+#       upgrade: yes
+#       update_cache: yes
 
     - name: Install docker components from docker repo
       apt:
