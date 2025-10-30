@@ -1,0 +1,8 @@
+---
+- name: Install wireguard & Tools
+  hosts: all
+  tags: packages
+  tasks:
+    - name: Install dnsmasq
+      apt:
+        name: dnsmasq
