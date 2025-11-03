@@ -25,64 +25,85 @@ Dashboards can already be created in Node-RED, but to be more flexible (and incl
 
 ## Prerequisites
 
-### Docker
-
-First install Docker and `docker-compose`:
-
-* [Docker](https://docs.docker.com/engine/install/)
-* [Docker Compose](https://docs.docker.com/compose/)
-* [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-
-If Docker UI is preferred, you can optionally use [Docker Desktop](https://www.docker.com/products/docker-desktop/).
-
-
 ## Installation
 
-### Setting up Raspberry Pi
-- Download and Install Raspberry Pi Imager
-    - https://www.raspberrypi.com/software/
-- Connect your microSD card to your computer using a card reader.
-- Make sure the card is empty or that you have backed up any important data, as this process will erase everything on it.
-- Open the Imager program.
-- Click CHOOSE DEVICE and select Raspberry Pi DEVICE.
-- Click CHOOSE OS and select Raspberry Pi OS (64 bit).
-- Click CHOOSE STORAGE and select your microSD card.
-- Configure Advanced Options (Optional but Recommended)
+### Prepare SD Card Image of Devuan Pi Operating System
 
-    - Click the gear icon (or press Ctrl+Shift+X) to open OS Customisation.
-    - Here you can:
-        - Enable SSH for remote access under services.
+- Download the Daedalus arm64 image zipfile for the Raspberry Pi 5 [nightly builds](https://arm-files.devuan.org/RaspberryPi%20Latest%20Builds/) on the Devuan ARM files site (the zipfile begins with `rpi-5-devuan-daedalus-` and ends with `.zip`).
 
-        - Set a username and password (required in newer Raspberry Pi OS versions).
+- Transfer the image to the SD card using your prefered disk tool.
 
-        - Enter Wi-Fi SSID and password for headless setup.
+- Insert the SD card into the Devuan RPi5.
 
-        - Set hostname, locale, keyboard layout, and timezone.
+- Power up the Devuan RPi5, log in (devuan/devuan), and ensure the Raspberry Pi is connected to your network (either through the ethernet interface or you must configure the WiFi details for your local network with the command `menu-config`).
 
-- Write the Image
-- Wait for the program to write and verify the image. This can take several minutes.
-- Eject the Card
-- Insert the card into your Raspberry Pi.
-- First Boot
-    - Power on your Raspberry Pi with the card inserted.
-    - If you enabled Wi-Fi and SSH, you can connect remotely without a monitor.
-    - Otherwise, connect a monitor and keyboard to complete setup.
-### Setting up Lauds stack.
-### Clone the Repository
+- Note down the IP address allocated to the Devuan RPi5.
+
+- On the ansible provisioning host, ssh into the RPi5 via username and password (devuan/devuan) via ssh `devuan@IP_address_noted`, and issue `sudo su -` followed by `ssh-keygen`. Press return twice. Log out (control-D).
+
+- On the ansible provisioning host, generate an SSH key pair (`ssh-keygen`) and add the public key to the RPi5 root SSH authorized_keys configuration file `/root/.ssh/authorized_keys`.
+
+### Clone the Repository on the Ansible Provisioning Host
 
 ```sh
 git clone https://github.com/dyne/lauds-iot-backend.git
-cd lauds-iot-backend
+cd lauds-iot-backend/ansible
 ```
+
+### Provisioning via ansible
+
+#### Remote ansible preparation
+
+- On the ansible provisioning host a hostname and local IP address must be uniquely defined for the Devuan RPi5 in the `inventory.yml` file (eg, a host configuration example for `flirc-rpi5` is given as an example)
+
+The unique hostname should be related to the LAUDS factory sitename or consortium member name and the IP address must correspond to the address noted in the previous step.
+
+- Individual host VPN IP address configuration is configured in `ansible/host_vars/` with the configuration file matching the hostname (eg, the host configuration example file in the repo is `ansible/host_vars/flirc-pi5`):
+
+```sh
+client_ip_addr: 192.168.10.[address]
+```
+where [address] is a unique host address that will be allocated to your install.
+
+
+- On the ansible provisioning host, create or add to the file `../.env` with the following content:
+```
+# LAUDS GATEWAY SERVER DETAILS
+#
+# export GATEWAY_SERVER_HOSTNAME="flirc-pi5"
+
+#
+## WIREGUARD VPN DETAILS (used in ansible)
+#
+export VPN_SERVER_IPV4="138.201.89.108"
+export VPN_SERVER_IPV6="2a01:4f8:c17:3dd5::1"
+export VPN_SERVER_HOSTNAME="zorro.free2air.net"
+export VPN_SERVER_PORT="51194"
+# TODO: Publish public key & lookup in DNS when BIND9.18.33 SIG0 update bugfix is published
+export VPN_SERVER_PUBLIC_KEY="IstwnIfVuvgfb7LzaE3YLb24FAT2oUEhVcsZILDhHXk="
+export VPN_CLIENT_IPV4_NETMASK="/24"
+```
+
+#### Remote ansible provisioning
+
+On the ansible provisioning host:
+
+```sh
+source ../.env && ansible-playbook -i inventory.yml playbook.yml
+```
+
 ### Configure local credentials
 
 Create file `.env` to set default credentials
 
 ```sh
 # NodeRed admin user password
-export NR_ADMIN_PW="<your NR admin user login password>"
+# export NR_ADMIN_PW="<your NR admin user login password>"
+export NR_ADMIN_PW="laudsgateway"
+
 # Jupyter Notebook token
-export JUPYTER_TOKEN="<your Jupyter Notebook login token>"
+# export JUPYTER_TOKEN="<your Jupyter Notebook login token>"
+export JUPYTER_TOKEN="laudsgateway"
 ```
 
 
@@ -93,7 +114,7 @@ Most Docker containers are off-the-shelf, but the Node-RED container is built wi
 Assuming required credentials above are set in `.env`
 
 ```sh
-source .env && docker-compose --file software/container/docker-compose.yml up --force-recreate --build
+source .env && docker compose --file software/container/docker-compose.yml up --force-recreate --build
 ```
 
 ## Usage
