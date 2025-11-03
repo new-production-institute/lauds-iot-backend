@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Microfactory Analytical Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Microfactory Analytical Dashboard</h1>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Machine Selector</h2>
+      <label for="machineSelect">Select Machine:</label>
+      <select id="machineSelect">
+        <option value="">-- Loading machines... --</option>
+      </select>
+
+      <div id="machineFieldsSection" class="hidden">
+        <h3>Available Machine Parameters</h3>
+        <div id="machineFieldsList" class="horizontal-list"></div>
+      </div>
+
+      <div id="electricalFieldsSection" class="hidden">
+        <h3>Available Electrical Parameters</h3>
+        <div id="electricalFieldsList"></div>
+      </div>
+
+      <div id="timeSelection" class="hidden">
+        <h3>Time Range</h3>
+        <label for="startTime">Start:</label>
+        <select id="startTime">
+          <option value="-1h">Last 1 Hour</option>
+          <option value="-6h">Last 6 Hours</option>
+          <option value="-12h">Last 12 Hours</option>
+          <option value="-1d">Last 1 Day</option>
+          <option value="-7d">Last 7 Days</option>
+        </select>
+
+        <label for="stopTime">Stop:</label>
+        <select id="stopTime">
+          <option value="now()">Now</option>
+        </select>
+      </div>
+
+      <button id="analyzeBtn" class="analyze-btn hidden">Analyze</button>
+    </aside>
+
+    <main class="content">
+      <h2>Correlation Results</h2>
+      <div id="correlationResults" class="hidden"></div>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

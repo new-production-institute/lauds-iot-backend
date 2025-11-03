@@ -101,6 +101,37 @@ services:
       - server-data:/data
     build: ../server
 
+  fastapi:
+    build: ../backend
+    container_name: fastapi_backend
+    restart: always
+    networks:
+      - lauds_gw_network
+    depends_on:
+      - influxdb
+    ports:
+      - 9000:9000
+    environment:
+      - INFLUXDB_URL=http://influxdb:8086
+      - INFLUXDB_TOKEN=aaoka0gOKHvwZQzOdbLDYosbImMWWA8TXQKeApi8F_HrhEQAMUMID5jnvjQ7oNThtqC7tTgbmA4HfoTBlnkWyQ==
+      - INFLUXDB_ORG=Microfactory
+      - INFLUXDB_BUCKET=microfactory
+    volumes:
+      - ../backend:/app
+
+  frontend:
+    build: ../frontend
+    container_name: frontend
+    restart: always
+    networks:
+      - lauds_gw_network
+    depends_on:
+      - fastapi
+    ports:
+      - 8088:80
+    volumes:
+      - ../frontend:/usr/share/nginx/html:ro
+
 volumes:
   influxdb2:
   grafana-dashboards:
