@@ -2,21 +2,12 @@ from fastapi import FastAPI, HTTPException,Query
 from influxdb_client import InfluxDBClient, Point
 from influxdb_client.client.flux_table import FluxTable
 import pandas as pd
-from fastapi.middleware.cors import CORSMiddleware
 import json
 from datetime import datetime
 import os
 
-app = FastAPI(title="FastAPI + InfluxDB")
+app = FastAPI(title="FastAPI + InfluxDB Example")
 
-# Allow frontend to access API
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # or ["http://localhost:8088"] for stricter control
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 # --- Connect to InfluxDB when the app starts ---
 @app.on_event("startup")
 def startup_event():
@@ -83,30 +74,35 @@ def get_unique_devices():
 @app.get("/get_machine_fields")
 def get_machine_fields(machine_name: str = Query(..., description="Name of the machine (device)")):
     """
-    Return predefined fields only if the machine name is similar to 'prusa-mk4'.
-    Otherwise, return an empty list.
+    Get all field keys for a specific machine in the 'microfactory' bucket
+    using the schema.fieldKeys() Flux function.
     """
     try:
-        # Only return fields if machine name contains "prusa-mk4"
-        if "prusa-mk4" in machine_name.lower():
-            fields = [
-                "axis_x",
-                "axis_y",
-                "axis_z",
-                "fan_hotend",
-                "fan_print",
-                "flow",
-                "speed",
-                "temp_bed",
-                "temp_nozzle"
-            ]
-        else:
-            fields = []  # return empty if not similar
+        client: InfluxDBClient = app.state.influx_client
+        query_api = client.query_api()
+
+        flux_query = f'''
+        import "influxdata/influxdb/schema"
+
+        schema.fieldKeys(
+          bucket: "microfactory",
+          predicate: (r) => r._measurement == "machine" and r.device == "{machine_name}",
+          start: -30d
+        )
+        '''
+
+        tables: list[FluxTable] = query_api.query(flux_query)
+
+        fields = []
+        for table in tables:
+            for record in table.records:
+                fields.append(record.get_value())
 
         return {"machine": machine_name, "fields": fields}
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to fetch fields for {machine_name}: {e}")
+
 
        # flux_query = """import "join" machine_data = from(bucket: "microfactory") |> range(start: -1h, stop: now()) |> filter(fn: (r) => r["_measurement"] == "machine") |> filter(fn: (r) => r["device"] == "prusa-mk4-1") |> filter(fn: (r) => r["_field"] == "temp_nozzle" or r["_field"] == "temp_bed") |> aggregateWindow(every: 10s, fn: mean, createEmpty: false) |> pivot(rowKey: ["_time"], columnKey: ["_field"], valueColumn: "_value") |> keep(columns: ["_time", "temp_nozzle", "temp_bed"]) energy_data = from(bucket: "microfactory") |> range(start: -1h, stop: now()) |> filter(fn: (r) => r["_measurement"] == "sensor") |> filter(fn: (r) => r["device"] == "SPPS-04") |> filter(fn: (r) => r["_field"] == "apower" or r["_field"] == "current" or r["_field"] == "voltage") |> aggregateWindow(every: 10s, fn: mean, createEmpty: false) |> pivot(rowKey: ["_time"], columnKey: ["_field"], valueColumn: "_value") |> keep(columns: ["_time", "apower", "current", "voltage"]) join.inner( left: machine_data, right: energy_data, on: (l, r) => l._time == r._time, as: (l, r) => ({ _time: l._time, temp_nozzle: l.temp_nozzle, temp_bed: l.temp_bed, apower: r.apower, current: r.current, voltage: r.voltage }) )"""
 @app.get("/machine_energy_correlation")
@@ -122,29 +118,6 @@ def get_machine_energy_correlation(
     Fetch machine + energy data and compute correlations between machine fields and energy fields.
     Only returns the correlations.
     """
-    try:
-        client: InfluxDBClient = app.state.influx_client
-        query_api = client.query_api()
-        flux_query = f'''
-        from(bucket: "microfactory")
-        |> range(start: -1d)
-        |> filter(fn: (r) => r["_measurement"] == "machine")
-        |> filter(fn: (r) => r["device"] == "{machine_device}")
-        |> filter(fn: (r) => r["_field"] == "electricaldeviceid")
-        |> last()
-        '''
-        result = query_api.query(flux_query)
-
-        electrical_device_id = None
-        for table in result:
-            for record in table.records:
-                electrical_device_id = record.get_value()
-      
-        # Print or use the variable
-        print("Electrical Device ID:", electrical_device_id)
-
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to fetch energy device id: {e}")
     try:
         client: InfluxDBClient = app.state.influx_client
         query_api = client.query_api()
@@ -166,7 +139,7 @@ def get_machine_energy_correlation(
             f'|> keep(columns: ["_time", {machine_keep}]) '
             f'energy_data = from(bucket: "microfactory") |> range(start: {start}, stop: {stop}) '
             f'|> filter(fn: (r) => r["_measurement"] == "sensor") '
-            f'|> filter(fn: (r) => r["device"] == "{electrical_device_id}") '
+            f'|> filter(fn: (r) => r["device"] == "{energy_device}") '
             f'|> filter(fn: (r) => {energy_fields_filter}) '
             f'|> aggregateWindow(every: 10s, fn: mean, createEmpty: false) '
             f'|> pivot(rowKey: ["_time"], columnKey: ["_field"], valueColumn: "_value") '
