@@ -54,3 +54,26 @@
         name: devuan
         groups: docker
 
+# add new /etc/default/docker
+#
+    - name: Copy new /etc/default/docker
+      ansible.builtin.copy:
+        src:  templates/docker
+        dest: /etc/default/docker
+        owner: root
+        group: root
+        mode: o+rw,go+r
+        force: yes
+      register: docker_default
+
+    - name: Restart dockerd
+      service:
+        name: docker
+        state: restarted
+      when: docker_default.changed
+
+# # add DOCKER_OPTS
+#     - name: Set DOCKER_OPTS for --dns to gateway interface
+#       lineinfile:
+#         dest: /etc/default/docker
+#         line: "DOCKER_OPTS=\"--dns `ip route get $(ip route show 0.0.0.0/0 | grep -oP 'via \K\S+') | grep -oP 'src \K\S+'`\""
