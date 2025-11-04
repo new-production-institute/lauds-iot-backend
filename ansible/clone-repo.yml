@@ -1,10 +1,19 @@
 ---
+
 - name: Clone lauds-iot-backend
   hosts: all
   tags: system
   tasks:
+    - name: Create a src directory if it does not exist
+      ansible.builtin.file:
+        path: /home/devuan/src
+        state: directory
+        owner: devuan
+        group: devuan
+
     - name: Updating local repository
       ansible.builtin.git:
         repo: 'https://github.com/dyne/lauds-iot-backend.git'
-        dest: /home/devuan/lauds-iot-backend
+        dest: /home/devuan/src/lauds-iot-backend
         update: yes
+      become_user: devuan
