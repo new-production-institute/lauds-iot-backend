@@ -35,5 +35,7 @@
       register: mdns2dnsmasq_config
 
     - name: run /etc/boot.d/10mdns2dnsmasq
-      ansible.builtin.shell: /etc/boot.d/10mdns2dnsmasq
+      ansible.builtin.shell: source /etc/boot.d/10mdns2dnsmasq
+      args:
+        executable: /bin/bash
       when: mdns2dnsmasq_config.changed
