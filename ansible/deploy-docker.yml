@@ -28,10 +28,10 @@
         - ansible_distribution_release == "daedalus"
         - ansible_architecture == "aarch64"
 
-    - name: Perform apt update
-      apt:
-        upgrade: yes
-        update_cache: yes
+#   - name: Perform apt update
+#     apt:
+#       upgrade: yes
+#       update_cache: yes
 
     - name: Install docker components from docker repo
       apt:
@@ -47,3 +47,10 @@
         - ansible_distribution == "Devuan"
         - ansible_distribution_release == "daedalus"
         - ansible_architecture == "aarch64"
+
+# add devuan user to docker group
+    - name: Add devuan user to docker group
+      ansible.builtin.user:
+        name: devuan
+        groups: docker
+

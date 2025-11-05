@@ -5,8 +5,9 @@
   tasks:
     - name: Install Wireguard
       apt:
-        name: wireguard
+        name: wireguard-tools
         update_cache: yes
+        install_recommends: false
     - name: Install ip
       apt:
         name: iproute2

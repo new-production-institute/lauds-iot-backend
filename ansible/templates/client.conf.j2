@@ -9,3 +9,4 @@ Endpoint = {{ server_hostname }}:{{ server_port | default('51820') }}
 # AllowedIPs = 0.0.0.0/0, ::/0
 # Note netmask is in form '/24' ... and is set to /24 by default
 AllowedIPs = {{ client_ip_addr }}{{ client_ipv4_netmask }}
+PersistentKeepalive = 10
