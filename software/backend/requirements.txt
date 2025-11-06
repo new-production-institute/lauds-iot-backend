@@ -1,0 +1,6 @@
+fastapi
+uvicorn[standard]
+influxdb-client
+python-dotenv
+pandas
+json5
