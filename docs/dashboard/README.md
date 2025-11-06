@@ -1,4 +1,4 @@
-# Grafana
+# Grafana general introduction
 
 Grafana is an open source analytics and interactive visualization tool. It provides charts, graphs, and alerts for the web when connected to supported data sources. 
 
@@ -33,6 +33,30 @@ from(bucket: "test")
 
 ![Example Dashboard](./docs/images/grafana-example-dashboard.png)
 
-## CSV Import
+## example - CSV Import
 
 See [CSV Import](./docs/csv-import.md).
+
+# Grafana LAUDS Gateway configuration
+
+In the following steps we will describe the confgiration steps to adapt the [template dashboard](https://github.com/new-production-institute/lauds-iot-backend/blob/template/software/dashboard/dashboards/Fleet%20Operations%20%26%20Machine-1760085326658.json) to a local LAUDS setup. As device example we use a machine with linked energy parameters.
+
+## Connecting to data source
+- Go to configurations(settings) -> Data sources and click on add data source.
+- Select ```InfluxDB```
+- Select the query language as ```Flux```
+- Enter url of the Influxdb, username and password, organization,token and bucket name.
+- Click on save and test to check the connection.
+- ![](https://pad.fabcity.hamburg/uploads/22b1a5b9-1e1c-4398-a4a3-c3d740488848.png)
+- ![](https://pad.fabcity.hamburg/uploads/ceadedc8-8f83-4519-aff8-e5b4366a219f.png)
+
+## Dashboard quey updates.
+- Go to Dashboards -> Browse -> Fleet Operation and Machine dashboard.
+- For each pannel select edit option and select the data source as influxdb or which name you provided while connecting the DB.
+- ![](https://pad.fabcity.hamburg/uploads/701b8685-daad-405a-8dd3-61994a3bd292.png)
+
+## Dashboard Variables
+- Selct the settings from the top left of the dashboard.
+- Go to variables 
+- Select the variable and change the data source with the name of your data source.
+- ![](https://pad.fabcity.hamburg/uploads/21c2be13-db35-438c-a52f-c31703f6305b.png)
