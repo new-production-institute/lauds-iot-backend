@@ -3,7 +3,7 @@
         "id": "ec5af00ecd098976",
         "type": "tab",
         "label": "prusa + shelly + gcode analyser",
-        "disabled": false,
+        "disabled": true,
         "info": "",
         "env": []
     },
@@ -19,14 +19,14 @@
         "id": "f6f2187d.f17ca8",
         "type": "tab",
         "label": "emonPI energy sensor",
-        "disabled": false,
+        "disabled": true,
         "info": ""
     },
     {
         "id": "e83f6f0b92151d65",
         "type": "tab",
         "label": "Shelly sensor",
-        "disabled": false,
+        "disabled": true,
         "info": "",
         "env": []
     },
@@ -34,7 +34,7 @@
         "id": "c970b824705576f5",
         "type": "tab",
         "label": "air gradient sensor",
-        "disabled": false,
+        "disabled": true,
         "info": "",
         "env": []
     },
