@@ -1,4 +1,6 @@
-from fastapi import FastAPI, HTTPException,Query
+from fastapi import FastAPI, HTTPException,Query,Depends
+from fastapi.security.api_key import APIKeyHeader
+from fastapi import Security
 from influxdb_client import InfluxDBClient, Point
 from influxdb_client.client.flux_table import FluxTable
 import pandas as pd
@@ -17,6 +19,20 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# --- API Key Security ---
+API_KEY = os.getenv("API_KEY", "laudsgateway")
+API_KEY_NAME = "x-api-key"
+
+api_key_header = APIKeyHeader(name=API_KEY_NAME, auto_error=False)
+def get_api_key(api_key: str = Security(api_key_header)):
+    if api_key == API_KEY:
+        return api_key
+    raise HTTPException(
+        status_code=401,
+        detail="Unauthorized: Invalid or missing API Key"
+    )
+
 # --- Connect to InfluxDB when the app starts ---
 @app.on_event("startup")
 def startup_event():
@@ -36,7 +52,7 @@ def shutdown_event():
 
 
 @app.get("/test")
-def test_influxdb():
+def test_influxdb(api_key: str = Depends(get_api_key)):
     """
     Test the connection to InfluxDB by listing all buckets.
     """
@@ -50,7 +66,7 @@ def test_influxdb():
         raise HTTPException(status_code=500, detail=f"InfluxDB connection failed: {e}")
     
 @app.get("/get_machines")
-def get_unique_devices():
+def get_unique_devices(api_key: str = Depends(get_api_key)):
     """
     Get all unique devices from the 'machine' measurement
     in the 'microfactory' bucket from the beginning of time.
@@ -81,7 +97,7 @@ def get_unique_devices():
     
 
 @app.get("/get_machine_fields")
-def get_machine_fields(machine_name: str = Query(..., description="Name of the machine (device)")):
+def get_machine_fields(machine_name: str = Query(..., description="Name of the machine (device)"),api_key: str = Depends(get_api_key)):
     """
     Return predefined fields only if the machine name is similar to 'prusa-mk4'.
     Otherwise, return an empty list.
@@ -116,7 +132,8 @@ def get_machine_energy_correlation(
     energy_device: str = Query("SPPS-04", description="Energy device name"),
     energy_fields: list[str] = Query(["apower", "current", "voltage"], description="Energy fields"),
     start: str = Query("-1h", description="Start time (Flux format)"),
-    stop: str = Query("now()", description="Stop time (Flux format)")
+    stop: str = Query("now()", description="Stop time (Flux format)"),
+    api_key: str = Depends(get_api_key)
 ):
     """
     Fetch machine + energy data and compute correlations between machine fields and energy fields.

@@ -116,6 +116,7 @@ services:
       - INFLUXDB_TOKEN=aaoka0gOKHvwZQzOdbLDYosbImMWWA8TXQKeApi8F_HrhEQAMUMID5jnvjQ7oNThtqC7tTgbmA4HfoTBlnkWyQ==
       - INFLUXDB_ORG=Microfactory
       - INFLUXDB_BUCKET=microfactory
+      - API_KEY=${API_KEY}
     volumes:
       - ../backend:/app
 
