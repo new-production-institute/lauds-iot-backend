@@ -54,3 +54,31 @@
         name: devuan
         groups: docker
 
+# add new /etc/boot.d/20docker to check that docker is running correctly with dns redirection
+#
+    - name: Copy new /etc/boot.d/etc-boot.d-20docker
+      ansible.builtin.copy:
+        src:  templates/etc-boot.d-20docker
+        dest: /etc/boot.d/20docker
+        owner: root
+        group: root
+        mode: o+rwx,go+rx
+        force: yes
+
+# add new /etc/default/docker
+#
+    - name: Copy new /etc/default/docker
+      ansible.builtin.copy:
+        src:  templates/etc-defaults-docker
+        dest: /etc/default/docker
+        owner: root
+        group: root
+        mode: o+rw,go+r
+        force: yes
+      register: docker_default
+
+    - name: Restart dockerd
+      service:
+        name: docker
+        state: restarted
+      when: docker_default.changed

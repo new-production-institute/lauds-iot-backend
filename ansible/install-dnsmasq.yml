@@ -1,8 +1,41 @@
 ---
-- name: Install wireguard & Tools
+- name: Install dnsmasq
   hosts: all
   tags: packages
   tasks:
     - name: Install dnsmasq
       apt:
         name: dnsmasq
+
+    - name: Configure dnsmasq to load from /etc/dnsmasq.d/
+      lineinfile: dest=/etc/dnsmasq.conf regexp='^#?conf-dir=/etc/dnsmasq.d/,*.conf' line='conf-dir=/etc/dnsmasq.d/,*.conf'
+      register: dnsmasq_configured
+ 
+    - name: Restart dnsmasq
+      service:
+        name: dnsmasq
+        state: restarted
+      when: dnsmasq_configured.changed
+
+    - name: Create /etc/boot.d directory
+      file:
+        path: /etc/boot.d
+        state: directory
+
+# add new /etc/boot.d/mdns2dnsmasq
+#
+    - name: Copy new /etc/boot.d/10mdns2dnsmasq
+      ansible.builtin.copy:
+        src:  templates/etc-boot.d-10mdns2dnsmasq
+        dest: /etc/boot.d/10mdns2dnsmasq
+        owner: root
+        group: root
+        mode: o+rwx,go+rx
+        force: yes
+      register: mdns2dnsmasq_config
+
+    - name: run /etc/boot.d/10mdns2dnsmasq
+      ansible.builtin.shell: source /etc/boot.d/10mdns2dnsmasq
+      args:
+        executable: /bin/bash
+      when: mdns2dnsmasq_config.changed

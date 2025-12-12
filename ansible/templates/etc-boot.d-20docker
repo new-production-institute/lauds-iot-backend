@@ -1,0 +1,3 @@
+#!/bin/bash
+# only restart docker if not running or running & does not contain dns redirection option
+[[ -n  $(ps auwxx | grep "/dockerd " | grep dns) ]] || service docker restart

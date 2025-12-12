@@ -12,8 +12,9 @@
         group: devuan
 
     - name: Updating local repository
+      become: yes
+      become_user: devuan
       ansible.builtin.git:
         repo: 'https://github.com/dyne/lauds-iot-backend.git'
         dest: /home/devuan/src/lauds-iot-backend
         update: yes
-      become_user: devuan
