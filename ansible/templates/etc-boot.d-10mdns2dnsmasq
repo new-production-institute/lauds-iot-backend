@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# clear stale entries
+echo >/etc/dnsmasq.d/mdns.conf
+
+# this script calls avahi-browse & reflects mDNS into unicast via dnsmasq
+# only restart if not running or running
+if [ -n  "$(ps auwxx | grep '/mdns2dnsmasq.py')" ]; then
+       /usr/bin/python3 /home/devuan/src/lauds-iot-backend/ansible/templates/mdns2dnsmasq.py >/dev/null &
+fi
