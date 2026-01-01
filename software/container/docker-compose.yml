@@ -116,6 +116,7 @@ services:
       - INFLUXDB_TOKEN=REMOVED
       - INFLUXDB_ORG=Microfactory
       - INFLUXDB_BUCKET=microfactory
+      - API_KEY=${API_KEY}
     volumes:
       - ../backend:/app
 
