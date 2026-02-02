@@ -1,6 +1,7 @@
 ---
 - import_playbook: set-hostname.yml
 - import_playbook: install-dnsmasq.yml 
+- import_playbook: install-zenroom.yml 
 - import_playbook: deploy-sshd.yml 
 - import_playbook: deploy-sshd-keys.yml
 - import_playbook: deploy-docker.yml 
