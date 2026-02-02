@@ -1,0 +1,63 @@
+---
+- name: Install Zenroom components
+  hosts: all
+  tags: packages
+- name: Install Caddy for HTTPS & LE
+  hosts: all
+  tags: packages
+  tasks:
+    - name: Install unzip
+      apt:
+        name: unzip
+
+#    - name: Download ZIP of Zenroom ARM binaries
+#   ansible.builtin.get_url:
+#        url: "https://github.com/dyne/Zenroom/releases/latest/download/zenroom-arm_64-linux.zip"
+#        dest: /home/root
+#      when:
+#        - ansible_distribution == "Devuan"
+#        - ansible_distribution_release == "daedalus"
+
+    - name: Download & extract ARM binaries from ZIP file
+      ansible.builtin.unarchive:
+        src: "https://github.com/dyne/Zenroom/releases/latest/download/zenroom-arm_64-linux.zip"
+        dest: "/root"
+        remote_src: yes
+      when:
+        - ansible_distribution == "Devuan"
+        - ansible_distribution_release == "daedalus"
+
+    - name: Install ARM zenroom binaries
+      ansible.builtin.copy:
+        src: "/root/zenroom-arm_64-linux/zenroom"
+        dest: "/usr/local/bin"
+        remote_src: yes
+      when:
+        - ansible_distribution == "Devuan"
+        - ansible_distribution_release == "daedalus"
+
+    - name: Install ARM zenroom binaries
+      ansible.builtin.copy:
+        src: "/root/zenroom-arm_64-linux/zencode-exec"
+        dest: "/usr/local/bin"
+        remote_src: yes
+      when:
+        - ansible_distribution == "Devuan"
+        - ansible_distribution_release == "daedalus"
+
+    - name: Download zenroom AMD binary
+      ansible.builtin.get_url:
+        url: "https://github.com/dyne/Zenroom/releases/latest/download/zenroom"
+        dest: /usr/local/bin
+        mode: u+rwx,go+rx
+      when:
+        - ansible_architecture == "x86_64"
+
+    - name: Download zencode-exec AMD binary
+      ansible.builtin.get_url:
+        url: "https://github.com/dyne/Zenroom/releases/latest/download/zencode-exec"
+        dest: /usr/local/bin
+        mode: u+rwx,go+rx
+      when:
+        - ansible_architecture == "x86_64"
+
