@@ -2,9 +2,6 @@
 - name: Install Zenroom components
   hosts: all
   tags: packages
-- name: Install Caddy for HTTPS & LE
-  hosts: all
-  tags: packages
   tasks:
     - name: Install unzip
       apt:
@@ -24,6 +21,7 @@
         dest: "/root"
         remote_src: yes
       when:
+        - ansible_architecture == "aarch64"
         - ansible_distribution == "Devuan"
         - ansible_distribution_release == "daedalus"
 
@@ -32,7 +30,9 @@
         src: "/root/zenroom-arm_64-linux/zenroom"
         dest: "/usr/local/bin"
         remote_src: yes
+        mode: u+rwx,go+rx
       when:
+        - ansible_architecture == "aarch64"
         - ansible_distribution == "Devuan"
         - ansible_distribution_release == "daedalus"
 
@@ -41,7 +41,9 @@
         src: "/root/zenroom-arm_64-linux/zencode-exec"
         dest: "/usr/local/bin"
         remote_src: yes
+        mode: u+rwx,go+rx
       when:
+        - ansible_architecture == "aarch64"
         - ansible_distribution == "Devuan"
         - ansible_distribution_release == "daedalus"
 
@@ -60,4 +62,47 @@
         mode: u+rwx,go+rx
       when:
         - ansible_architecture == "x86_64"
+#
+#   Insert zenroom & zencode-exec into cloned copy of LAUDS repo to be picked up by Dockerfiles
+#
+    - name: Create a zenroom directory for jupyter dockerfile if it does not exist
+      ansible.builtin.file:
+        path: /home/devuan/src/lauds-iot-backend/software/jupyter/zenroom
+        state: directory
+        owner: devuan
+        group: devuan
 
+    - name: Copy zenroom into cloned repo for jupyter
+      ansible.builtin.copy:
+        src: "/usr/local/bin/zenroom"
+        dest: "/home/devuan/src/lauds-iot-backend/software/jupyter/zenroom"
+        remote_src: yes
+        mode: u+rwx,go+rx
+
+    - name: Copy zencode-exce into cloned repo
+      ansible.builtin.copy:
+        src: "/usr/local/bin/zencode-exec"
+        dest: "/home/devuan/src/lauds-iot-backend/software/jupyter/zenroom"
+        remote_src: yes
+        mode: u+rwx,go+rx
+
+    - name: Create a zenroom directory for server (InterfacerNotebook) if it does not exist
+      ansible.builtin.file:
+        path: /home/devuan/src/lauds-iot-backend/software/server/zenroom
+        state: directory
+        owner: devuan
+        group: devuan
+
+    - name: Copy zenroom into cloned repo for server (InterfacerNotebook)
+      ansible.builtin.copy:
+        src: "/usr/local/bin/zenroom"
+        dest: "/home/devuan/src/lauds-iot-backend/software/server/zenroom"
+        remote_src: yes
+        mode: u+rwx,go+rx
+
+    - name: Copy zencode-exce into cloned repo for server (InterfacerNotebook)
+      ansible.builtin.copy:
+        src: "/usr/local/bin/zencode-exec"
+        dest: "/home/devuan/src/lauds-iot-backend/software/server/zenroom"
+        remote_src: yes
+        mode: u+rwx,go+rx

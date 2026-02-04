@@ -4,9 +4,9 @@ FROM python:3.11
 # Install git
 RUN apt-get update && apt-get install -y git
 
-# Copy zenroom executables from /usr/local/bin
-COPY /usr/local/bin/zenroom /usr/local/bin
-COPY /usr/local/bin/zencode-exec /usr/local/bin
+# Copy zenroom executables from zenroom subdirectory placed by ansible
+COPY zenroom/zenroom /usr/local/bin
+COPY zenroom/zencode-exec /usr/local/bin
 
 # Clone repository
 RUN git clone https://github.com/interfacerproject/Interfacer-notebook.git /app
