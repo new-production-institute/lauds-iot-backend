@@ -7,14 +7,6 @@
       apt:
         name: unzip
 
-#    - name: Download ZIP of Zenroom ARM binaries
-#   ansible.builtin.get_url:
-#        url: "https://github.com/dyne/Zenroom/releases/latest/download/zenroom-arm_64-linux.zip"
-#        dest: /home/root
-#      when:
-#        - ansible_distribution == "Devuan"
-#        - ansible_distribution_release == "daedalus"
-
     - name: Download & extract ARM binaries from ZIP file
       ansible.builtin.unarchive:
         src: "https://github.com/dyne/Zenroom/releases/latest/download/zenroom-arm_64-linux.zip"
@@ -27,82 +19,63 @@
 
     - name: Install ARM zenroom binaries
       ansible.builtin.copy:
-        src: "/root/zenroom-arm_64-linux/zenroom"
+        src: "/root/zenroom-arm_64-linux/{{ item }}"
         dest: "/usr/local/bin"
         remote_src: yes
         mode: u+rwx,go+rx
+      loop:
+        - zenroom
+        - zencode-exec
       when:
         - ansible_architecture == "aarch64"
         - ansible_distribution == "Devuan"
         - ansible_distribution_release == "daedalus"
 
-    - name: Install ARM zenroom binaries
-      ansible.builtin.copy:
-        src: "/root/zenroom-arm_64-linux/zencode-exec"
-        dest: "/usr/local/bin"
-        remote_src: yes
-        mode: u+rwx,go+rx
-      when:
-        - ansible_architecture == "aarch64"
-        - ansible_distribution == "Devuan"
-        - ansible_distribution_release == "daedalus"
-
-    - name: Download zenroom AMD binary
+    - name: Download zenroom AMD64/x86_64 binaries
       ansible.builtin.get_url:
-        url: "https://github.com/dyne/Zenroom/releases/latest/download/zenroom"
+        url: "https://github.com/dyne/Zenroom/releases/latest/download/{{ item }"
         dest: /usr/local/bin
         mode: u+rwx,go+rx
+      loop:
+        - zenroom
+        - zencode-exec
       when:
         - ansible_architecture == "x86_64"
 
-    - name: Download zencode-exec AMD binary
-      ansible.builtin.get_url:
-        url: "https://github.com/dyne/Zenroom/releases/latest/download/zencode-exec"
-        dest: /usr/local/bin
-        mode: u+rwx,go+rx
-      when:
-        - ansible_architecture == "x86_64"
 #
 #   Insert zenroom & zencode-exec into cloned copy of LAUDS repo to be picked up by Dockerfiles
 #
-    - name: Create a zenroom directory for jupyter dockerfile if it does not exist
+    - name: Loop over container directories and create a zenroom directory if it does not exist
       ansible.builtin.file:
-        path: /home/devuan/src/lauds-iot-backend/software/jupyter/zenroom
+        path: "/home/devuan/src/lauds-iot-backend/software/{{ item }}/zenroom"
         state: directory
         owner: devuan
         group: devuan
+      loop:
+        - jupyter
+        - server        
 
-    - name: Copy zenroom into cloned repo for jupyter
+    - name: Copy zenroom binaries into cloned repo for jupyter
       ansible.builtin.copy:
         src: "/usr/local/bin/zenroom"
-        dest: "/home/devuan/src/lauds-iot-backend/software/jupyter/zenroom"
+        dest: "/home/devuan/src/lauds-iot-backend/software/jupyter/{{ item }}"
         remote_src: yes
-        mode: u+rwx,go+rx
-
-    - name: Copy zencode-exce into cloned repo
-      ansible.builtin.copy:
-        src: "/usr/local/bin/zencode-exec"
-        dest: "/home/devuan/src/lauds-iot-backend/software/jupyter/zenroom"
-        remote_src: yes
-        mode: u+rwx,go+rx
-
-    - name: Create a zenroom directory for server (InterfacerNotebook) if it does not exist
-      ansible.builtin.file:
-        path: /home/devuan/src/lauds-iot-backend/software/server/zenroom
-        state: directory
         owner: devuan
         group: devuan
+        mode: u+rwx,go+rx
+      loop:
+        - zenroom
+        - zencode-exec
 
-    - name: Copy zenroom into cloned repo for server (InterfacerNotebook)
+    - name: Copy zenroom binaries into cloned repo for server (InterfacerNotebook)
       ansible.builtin.copy:
         src: "/usr/local/bin/zenroom"
-        dest: "/home/devuan/src/lauds-iot-backend/software/server/zenroom"
+        dest: "/home/devuan/src/lauds-iot-backend/software/server/{{ item }}"
         remote_src: yes
+        owner: devuan
+        group: devuan
         mode: u+rwx,go+rx
+      loop:
+        - zenroom
+        - zencode-exec
 
-    - name: Copy zencode-exce into cloned repo for server (InterfacerNotebook)
-      ansible.builtin.copy:
-        src: "/usr/local/bin/zencode-exec"
-        dest: "/home/devuan/src/lauds-iot-backend/software/server/zenroom"
-        remote_src: yes
-        mode: u+rwx,go+rx
