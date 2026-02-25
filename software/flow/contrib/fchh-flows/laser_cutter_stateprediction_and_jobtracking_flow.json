@@ -1,0 +1,140 @@
+[
+    {
+        "id": "ecc2bdf2410e8471",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "68d3057a1e982907",
+        "type": "inject",
+        "z": "ecc2bdf2410e8471",
+        "name": "idle",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{   \"apower\": 116.821930,   \"current\": 0.588779,   \"voltage\": 232.637914 ,\"aenergy\":100.10}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 140,
+        "wires": [
+            [
+                "d42b3df0bf7b4906"
+            ]
+        ]
+    },
+    {
+        "id": "d42b3df0bf7b4906",
+        "type": "python3-function",
+        "z": "ecc2bdf2410e8471",
+        "name": "State prediction node",
+        "func": "import time\nimport joblib\nimport pandas as pd\nimport numpy as np\n\n# ==== Process Node-RED input ====\ndata = msg['payload']\n# node.warn(f\"Received payload: {data}\")\nmodel = joblib.load('/data/models/decision_tree_model_lasercutter_state_prediction.pkl') \nstate_labels = np.array([ 'closed idle', 'engrave 10%', 'engrave 100%', 'lasercut', 'lasercut 100%', 'off', 'open moving' ])\n# Convert input to DataFrame\ninput_df = pd.DataFrame([[data['apower'], data['current'], data['voltage']]],\n                        columns=['apower', 'current', 'voltage'])\n\ncurrent_energy = data[\"aenergy\"]\n\n# Predict state\npredicted_index = model.predict(input_df)\npredicted_state_label = state_labels[int(predicted_index[0])]\n# node.warn(f\"Predicted state: {predicted_state_label}\")\n\n\n# Build output message\nmsg['payload'] = {\n    \"apower\":data['apower'],\n    \"current\":data['current'],\n    \"voltage\":data['voltage'],\n    \"aenergy\":data[\"aenergy\"],\n    \"Predicted_state\": predicted_state_label}\n\nreturn msg\n",
+        "outputs": 1,
+        "x": 420,
+        "y": 240,
+        "wires": [
+            [
+                "0db270e9cb787622"
+            ]
+        ]
+    },
+    {
+        "id": "9c1667c12d92c7bc",
+        "type": "debug",
+        "z": "ecc2bdf2410e8471",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "a7326e3579a36760",
+        "type": "inject",
+        "z": "ecc2bdf2410e8471",
+        "name": "Lasercut",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{   \"apower\": 203.335355,   \"current\": 1.003574,   \"voltage\": 232.001531 ,\"aenergy\":100.10}",
+        "payloadType": "json",
+        "x": 200,
+        "y": 240,
+        "wires": [
+            [
+                "d42b3df0bf7b4906"
+            ]
+        ]
+    },
+    {
+        "id": "0db270e9cb787622",
+        "type": "function",
+        "z": "ecc2bdf2410e8471",
+        "name": "Job tracker",
+        "func": "// Initialize context variables if they don't exist\nlet job_active = context.get('job_active') || false;\nlet job_start_time = context.get('job_start_time') || null;\nlet job_start_energy = context.get('job_start_energy') || null;\nlet non_job_count = context.get('non_job_count') || 0;\n\nconst JOB_STATES = new Set([\"engrave 10%\", \"engrave 100%\", \"lasercut\", \"lasercut 100%\"]);\nconst NON_JOB_THRESHOLD = 5; // consecutive non-job messages before ending\n\n// Input from previous node\nconst current_state = msg.payload.Predicted_state;\nconst current_energy = msg.payload.aenergy;\nconst current_time = Date.now() / 1000; // seconds\n\nlet result = null;\n\n// CASE 1: Machine in job state\nif (JOB_STATES.has(current_state)) {\n\n    if (!job_active) {\n        job_active = true;\n        job_start_time = current_time;\n        job_start_energy = current_energy;\n        node.warn(`Job Started: ${current_state} at energy ${current_energy}`);\n    } else {\n        node.warn(`Job ongoing: ${current_state} at energy ${current_energy}`);\n    }\n\n    // Reset non-job counter\n    non_job_count = 0;\n\n} else {\n    // Machine NOT in job state\n    if (job_active) {\n        non_job_count += 1;\n        node.warn(`Non-job state detected (${current_state}), count=${non_job_count}/${NON_JOB_THRESHOLD}`);\n\n        if (non_job_count >= NON_JOB_THRESHOLD) {\n            // End job\n            let total_time = current_time - job_start_time;\n            let total_energy = current_energy - job_start_energy;\n\n            node.warn(`Job Finished after ${NON_JOB_THRESHOLD} consecutive non-job states!`);\n            node.warn(`Total Time: ${total_time.toFixed(2)} sec, Total Energy: ${total_energy.toFixed(3)} kWh`);\n\n            result = {\n                total_time_sec: Number(total_time.toFixed(2)),\n                total_energy: Number(total_energy.toFixed(3))\n            };\n\n            // Reset tracker\n            job_active = false;\n            job_start_time = null;\n            job_start_energy = null;\n            non_job_count = 0;\n        }\n    } else {\n        node.warn(`Machine idle, no active job: ${current_state}`);\n    }\n}\n\n// Save context\ncontext.set('job_active', job_active);\ncontext.set('job_start_time', job_start_time);\ncontext.set('job_start_energy', job_start_energy);\ncontext.set('non_job_count', non_job_count);\n\n// Output job summary if finished, otherwise pass input through\nmsg.payload = result || msg.payload;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 320,
+        "wires": [
+            [
+                "9c1667c12d92c7bc"
+            ]
+        ]
+    },
+    {
+        "id": "11e67ebbb720405b",
+        "type": "comment",
+        "z": "ecc2bdf2410e8471",
+        "name": "State prediction logic",
+        "info": "\"\"\"\nProcess incoming Node-RED payload to predict the state of a laser cutter.\n\nLogic:\n1. Extract power, current, voltage, and energy data from the incoming payload.\n2. Load a pre-trained decision tree model for laser cutter state prediction.\n3. Convert the relevant input features into a DataFrame suitable for the model.\n4. Use the model to predict the machine's current state as an index.\n5. Map the predicted index to a human-readable state label.\n6. Construct an output payload including the original measurements and the predicted state.\n\nReturns:\n    dict: The original payload with an added \"Predicted_state\" field.\n\"\"\"",
+        "x": 530,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "a333464f4a062aba",
+        "type": "comment",
+        "z": "ecc2bdf2410e8471",
+        "name": "job tracking logic",
+        "info": "/**\n * Track and summarize laser cutter jobs based on predicted states.\n *\n * Logic:\n * 1. Initialize context variables to track whether a job is active, its start time,\n *    start energy, and consecutive non-job state count.\n * 2. Define job states (engraving or lasercutting) and a threshold for ending a job.\n * 3. Read the current predicted state and energy from the input message.\n * 4. If the machine is in a job state:\n *      - Start a new job if none is active, recording start time and energy.\n *      - Otherwise, continue the job and reset the non-job counter.\n * 5. If the machine is not in a job state and a job is active:\n *      - Increment the non-job counter.\n *      - If the counter reaches the threshold, mark the job as finished,\n *        calculate total time and energy consumed, and reset tracking variables.\n * 6. Save updated context variables for next execution.\n * 7. Output the job summary if a job finished, otherwise pass the original payload.\n *\n * Returns:\n *    Object: Updated message payload including total_time_sec and total_energy\n *            if a job completed, otherwise the original payload.\n */\n",
+        "x": 640,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "912f1ba3e41fd341",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-python3-function": "0.0.4"
+        }
+    }
+]
