@@ -75,7 +75,6 @@ services:
       - lauds_gw_network
     ports:
       - 8080:8080
-      - 8050:8050
     volumes:
       - jupyter-notebook-data:/data
     build: ../jupyter
@@ -88,18 +87,41 @@ services:
       - DPP_PATH=${DPP_PATH}
       - DPP_QUERY=${DPP_QUERY}
 
-  server:
-    depends_on:
-      - influxdb
-    restart: always
-    container_name: interfacer_api
-    networks:
-      - lauds_gw_network
-    ports:
-      - 8000:8000
-    volumes:
-      - server-data:/data
-    build: ../server
+  # voila:
+  #   restart: always
+  #   container_name: self-assessment-voila
+  #   networks:
+  #     - lauds_gw_network
+  #   ports:
+  #     - 8050:8050
+  #   build:
+  #     context: ../self-assessment
+  #     dockerfile: Dockerfile
+  #   command:
+  #     - voila
+  #     - /opt/self-assessment/lauds_tech-infra-read_self-assessment_questionnaire_weighted.ipynb
+  #     - --Voila.ip=0.0.0.0
+  #     - --port=8050
+  #     - --no-browser
+  #     - --show_tracebacks=True
+  #     - --VoilaConfiguration.file_allowlist=.*
+  #   environment:
+  #     - JUPYTER_TOKEN=${JUPYTER_TOKEN}
+  #   volumes:
+  #     - voila-data:/data
+
+  # server:
+  #   depends_on:
+  #     - influxdb
+  #   restart: always
+  #   container_name: interfacer_api
+  #   networks:
+  #     - lauds_gw_network
+  #   ports:
+  #     - 8000:8000
+  #   volumes:
+  #     - server-data:/data
+  #   build: ../server
 
   # fastapi:
   #   build: ../backend
@@ -139,7 +161,8 @@ volumes:
   grafana-data:
   nodered-data:
   jupyter-notebook-data:
-  server-data:
+  # voila-data:
+  # server-data:
 
 
 networks:
