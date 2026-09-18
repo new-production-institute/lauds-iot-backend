@@ -136,8 +136,8 @@ services:
   #   environment:
   #     - INFLUXDB_URL=http://influxdb:8086
   #     - INFLUXDB_TOKEN=your_api_key
-  #     - INFLUXDB_ORG=Microfactory
-  #     - INFLUXDB_BUCKET=microfactory
+  #     - INFLUXDB_ORG=your_org_name
+  #     - INFLUXDB_BUCKET=your_bucket_name
   #     - API_KEY=${API_KEY}
   #   volumes:
   #     - ../backend:/app
