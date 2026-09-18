@@ -135,7 +135,7 @@ services:
   #     - 9000:9000
   #   environment:
   #     - INFLUXDB_URL=http://influxdb:8086
-  #     - INFLUXDB_TOKEN=REMOVED
+  #     - INFLUXDB_TOKEN=your_api_key
   #     - INFLUXDB_ORG=Microfactory
   #     - INFLUXDB_BUCKET=microfactory
   #     - API_KEY=${API_KEY}
