@@ -117,6 +117,45 @@ Assuming required credentials above are set in `.env`
 source .env && docker compose --file software/container/docker-compose.yml up --force-recreate --build
 ```
 
+#### Configure Docker services
+
+Docker Compose starts the services defined in [`software/container/docker-compose.yml`](./software/container/docker-compose.yml). You can start the complete stack with the command above ( you can comment or uncomment them ), or start only the services you need by naming them after the Compose file:
+
+```sh
+# Start only the data and visualization services
+source .env && docker compose --file software/container/docker-compose.yml up -d influxdb grafana
+
+# Start the self-assessment questionnaire in Voila
+source .env && docker compose --file software/container/docker-compose.yml up -d --build voila
+```
+
+The available services are `mosquitto`, `influxdb`, `grafana`, `nodered`, `jupyter`, `voila`, and `server`. Use `-d` to run them in the background. Use `--build` after changing a Dockerfile or application dependencies, and use `--force-recreate` when the service configuration or environment variables have changed.
+
+Useful commands for managing the services:
+
+```sh
+# Show running containers
+docker compose --file software/container/docker-compose.yml ps
+
+# Follow logs for one service
+docker compose --file software/container/docker-compose.yml logs --follow voila
+
+# Stop and remove the containers (named volumes are preserved)
+docker compose --file software/container/docker-compose.yml down
+```
+
+The services are available at:
+
+| Service | Address |
+| --- | --- |
+| Mosquitto MQTT | `localhost:1883` |
+| InfluxDB | <http://localhost:8086> |
+| Grafana | <http://localhost:3000> |
+| Node-RED | <http://localhost:1880> |
+| Jupyter Notebook | <http://localhost:8080> |
+| Voila self-assessment | <http://localhost:8050> |
+| Interfacer API | <http://localhost:8000> |
+
 ## Usage
 
 ### Mosquitto

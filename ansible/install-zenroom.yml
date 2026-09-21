@@ -15,7 +15,7 @@
       when:
         - ansible_architecture == "aarch64"
         - ansible_distribution == "Devuan"
-        - ansible_distribution_release == "daedalus" or ansible_distribution_release == "excalibur"
+        - ansible_distribution_release == "daedalus"
 
     - name: Install ARM zenroom binaries
       ansible.builtin.copy:
@@ -29,7 +29,7 @@
       when:
         - ansible_architecture == "aarch64"
         - ansible_distribution == "Devuan"
-        - ansible_distribution_release == "daedalus" or ansible_distribution_release == "excalibur"
+        - ansible_distribution_release == "daedalus"
 
     - name: Download zenroom AMD64/x86_64 binaries
       ansible.builtin.get_url:
@@ -58,7 +58,7 @@
     - name: Copy zenroom binaries into cloned repo for jupyter
       ansible.builtin.copy:
         src: "/usr/local/bin/zenroom"
-        dest: "/home/devuan/src/lauds-iot-backend/software/jupyter/zenroom/{{ item }}"
+        dest: "/home/devuan/src/lauds-iot-backend/software/jupyter/{{ item }}"
         remote_src: yes
         owner: devuan
         group: devuan
@@ -70,7 +70,7 @@
     - name: Copy zenroom binaries into cloned repo for server (InterfacerNotebook)
       ansible.builtin.copy:
         src: "/usr/local/bin/zenroom"
-        dest: "/home/devuan/src/lauds-iot-backend/software/server/zenroom/{{ item }}"
+        dest: "/home/devuan/src/lauds-iot-backend/software/server/{{ item }}"
         remote_src: yes
         owner: devuan
         group: devuan
